@@ -31,5 +31,21 @@ const loginValidation = (data) => {
     return;
 }
 
+// validation for article
+const articleValidation = (data) => {
+    const schema = Joi.object({
+        title: Joi.string().required(),
+        text: Joi.string().required()
+    });
+
+    const { error } = schema.validate(data);
+
+    if (error) {
+        return error.details[0].message;
+    }
+    return;
+}
+
 module.exports.registerValidation = registerValidation;
-module.exports.loginValidation =loginValidation;
+module.exports.loginValidation = loginValidation;
+module.exports.articleValidation = articleValidation;

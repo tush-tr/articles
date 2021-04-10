@@ -3,6 +3,6 @@ const verifyToken = require("../middlewares/verifyToken.js");
 const ArticleController = require("../controllers/ArticleController");
 
 // only to test if verifyToken middleware is working
-router.get("/", verifyToken, ArticleController.test);
+router.post("/", verifyToken, ArticleController.saveArticle);
 
 module.exports = router;
