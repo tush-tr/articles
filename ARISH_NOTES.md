@@ -12,4 +12,8 @@
 ## 11 APR, 2021
 * Added bootstrap link in the index.html
 * Added initial Header and Footer from template in frontend
-* Setup the routes for navigation
+* Setup the routes for navigation in frontend
+* Added EditorJs react component that creates the article
+
+## 12 APR, 2021
+* Added api endpoint that saves article images in the backend
