@@ -24,3 +24,17 @@ npm install
 ```
 npm start
 ```
+
+### Steps to setup the frontend.
+* cd into frontent folder
+```
+cd frontend
+```
+* Install the dependencies
+```
+npm install
+```
+* Run the frontend
+```
+npm start
+```
