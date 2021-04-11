@@ -50,3 +50,13 @@ exports.unauthorizedResponse = function (res, msg) {
 	};
 	return res.status(401).json(data);
 };
+
+exports.imageUploadResponse = function (res, url) {
+	var data = {
+		success : 1,
+		file: {
+			url : url
+		}
+	}
+	return res.status(200).json(data);
+}

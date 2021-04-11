@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 require("dotenv").config();
 const apiRouter = require("./routes/api");
 const apiResponse = require("./helpers/apiResponse");
@@ -14,6 +15,8 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+app.use(cors());
+app.use(express.static("./public")); // to expose uploaded images
 
 // Route prefixes
 app.use("/api", apiRouter);
