@@ -20,6 +20,12 @@ cd backend
 ```
 npm install
 ```
+* Make .env file similar to .env.example
+```
+cp .env.example .env
+```
+* Change the constants of .env
+
 * Run the backend
 ```
 npm start
