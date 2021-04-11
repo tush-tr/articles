@@ -1,5 +1,4 @@
 import React from "react";
-import {Link} from "react-router-dom";
 
 // this is not a final footer, need to be changed
 function Footer () {
