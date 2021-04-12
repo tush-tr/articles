@@ -412,3 +412,32 @@ footer .copyright {
 .main-container {
   margin-top: 60px;
 }
+
+#title {
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+#title input {
+  border: 0;
+  font-size: 40px;
+  width: 650px
+}
+
+#title input:focus {
+  outline: none;
+}
+
+#article-buttons-container {
+  max-width: 650px;
+  margin: 10px auto;
+}
+
+#submit-button, #save-button {
+  float: right;
+  margin: 10px;
+  border-radius: 25px;
+  padding: 8px 16px;
+  font-size: 10px;
+  font-weight: 600;
+}

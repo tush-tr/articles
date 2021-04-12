@@ -2,19 +2,34 @@ import React from "react";
 import EditorJs from "react-editor-js";
 import Paragraph from "@editorjs/paragraph"
 import Image from "@editorjs/image";
+import Header from "@editorjs/header"
+import TitleInput from "./TitleInput"
+import ArticleButtons from "./ArticleButtons";
 
-// currently we are using Paragraph and Image tool
+// currently we are using Paragraph, Image and Header tools
 // we can add more later
 const EDITOR_JS_TOOLS = {
-    paragraph: Paragraph,
+    paragraph: {
+      class: Paragraph,
+      inlineToolbar: true
+    },
     image: {
-        class: Image,
-        config: {
-          endpoints: {
-            byFile: 'http://localhost:5000/api/imageUpload', // backend file uploader endpoint
-          }
+      class: Image,
+      inlineToolbar: true,
+      config: {
+        endpoints: {
+          byFile: 'http://localhost:5000/api/image-upload', // backend file uploader endpoint
         }
       }
+    },
+    header: {
+      class: Header,
+      config: {
+        placeholder: 'Heading',
+        levels: [2, 3, 4, 5],
+        defaultLevel: 3,
+      }
+    },
     // embed: Embed,
     // table: Table,
     // list: List,
@@ -35,8 +50,9 @@ const EDITOR_JS_TOOLS = {
 function ArticleCreate() {
     return (
         <div id="editor">
-            <h3>Write a story</h3>
-            <EditorJs tools={ EDITOR_JS_TOOLS } />
+          <ArticleButtons />
+          <TitleInput />
+          <EditorJs placeholder="Tell your story..." tools={ EDITOR_JS_TOOLS } />
         </div>
     );
 }
