@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ArticleContext } from "../contexts/ArticleContext";
 
 function TitleInput() {
+
+    const [article, setArticle] = useContext(ArticleContext);
+
+    const onChange = (e) => {
+        setArticle({
+            title: e.target.value,
+            text: article.text
+        })
+    }
+
     return (
         <div id="title">
-            <input type="text" placeholder="Title..." />
+            <input type="text" placeholder="Title..." value={article.title} onChange={onChange} />
         </div>
     );
 }
