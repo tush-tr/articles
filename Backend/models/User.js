@@ -23,7 +23,10 @@ const userSchema = new mongoose.Schema({
     },
     pic: {
         type: String
-    }
+    },
+    bookmarks: [{
+        articleid: Schema.Types.ObjectId,
+    }, {timestamps: true}],
 }, {timestamps: true});
 
 module.exports = mongoose.model('User', userSchema);
