@@ -23,7 +23,27 @@ const articleSchema = new mongoose.Schema({
     publishDate: {
         type: Date,
         default: Date.now
-    }
+    },
+    likes: [{
+        userid: Schema.Types.ObjectId,
+    }, {timestamps: true}],
+    comments: [{
+        userid: Schema.Types.ObjectId,
+        comment: {
+            type: String,
+            required: true,
+            max: 255,
+            min: 1
+        },
+    }, {timestamps: true}],
+    report: [{
+        userid: Schema.Types.ObjectId,
+        problem: {
+            type: String,
+            required: true,
+            max: 255,
+        },
+    }, {timestamps: true}],
 }, {timestamps: true});
 
 module.exports = mongoose.model('Article', articleSchema);
