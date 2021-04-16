@@ -54,7 +54,6 @@ const saveImage = (req, res) => {
             filePath = filePath.substring(6);
             // url of image returned to EditorJs
             const url = "http://localhost:5000/" + filePath;
-            console.log(url);
             apiResponse.imageUploadResponse(res, url);
         }
     });

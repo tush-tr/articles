@@ -17,7 +17,7 @@ const register = async (req, res) => {
     const emailExists = await User.findOne({email: req.body.email});
 
     if (emailExists) {
-        return apiResponse.errorResponse(res, "Email Already exists");
+        return apiResponse.errorResponse(res, "Email Already exists.");
     }
 
     // hash password
