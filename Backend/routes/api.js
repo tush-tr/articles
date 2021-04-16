@@ -7,6 +7,6 @@ app.use("/user", userRouter);
 app.use("/article", articleRouter);
 
 // For EditorJs image upload
-app.post("/imageUpload", ImageUploadController.saveImage);
+app.post("/image-upload", ImageUploadController.saveImage);
 
 module.exports = app;

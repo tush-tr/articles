@@ -17,3 +17,12 @@
 
 ## 12 APR, 2021
 * Added api endpoint that saves article images in the backend
+* Added title field on article create page
+* Added header tool to EditorJs
+
+## 14 APR, 2021
+* Added Article Context to ArticleCreate Component, context will help in sharing state between components
+
+## 16 APR, 2021
+* Added functions to save and submit the articles
+* Added toast messages using react-toastify module
