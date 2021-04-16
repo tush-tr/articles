@@ -5,6 +5,8 @@ import Footer from "./components/Footer";
 import Home from "./components/Home";
 import ArticleCreate from "./components/ArticleCreate";
 import "./styles/custom.css";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
           </div>
         <Footer />
       </BrowserRouter>
+      <ToastContainer />
     </div>
   );
 }
