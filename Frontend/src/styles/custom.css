@@ -428,7 +428,7 @@ footer .copyright {
   outline: none;
 }
 
-#editor #article-buttons-container {
+#editor .article-buttons-container {
   max-width: 650px;
   margin: 10px auto;
 }
@@ -442,8 +442,22 @@ footer .copyright {
   font-weight: 600;
 }
 
+#editor .tags-container {
+  max-width: 650px;
+  margin: 10px auto;
+}
+
+#editor .tag {
+  float: left;
+  margin-top: 8px;
+}
+
 .article {
   max-width: 650px;
   margin: 0 auto;
   margin-top: 100px;
+}
+
+.react-tagsinput-input {
+  font-size: 16px;
 }

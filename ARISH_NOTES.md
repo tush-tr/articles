@@ -31,3 +31,4 @@
 * Changed type of article text in Article schema, it will now store the JS object
 * Added /article/:id endpoint to get article by id
 * Added Article component in frontend to view the article using editorjs-react-renderer module
+* Added tags input in the article create page using react-tagsinput module

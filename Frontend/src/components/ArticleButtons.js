@@ -40,7 +40,7 @@ function ArticleButtons() {
     }
 
     return (
-        <div id="article-buttons-container">
+        <div className="article-buttons-container">
             <button className="btn btn-success" id="submit-button" onClick={submitArticle}> Submit </button>
             <button className="btn btn-primary" id="save-button" onClick={saveArticle}> Save </button>
         </div>
