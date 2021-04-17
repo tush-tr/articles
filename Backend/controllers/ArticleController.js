@@ -2,13 +2,14 @@ const User = require("../models/User");
 const Article = require("../models/Article");
 const readingTime = require("reading-time");
 const apiResponse = require("../helpers/apiResponse");
-const { articleValidation } = require("../helpers/validation");
+// const { articleValidation } = require("../helpers/validation");
+const articleValidation = require("../helpers/validation");
 
 // only to test if verifyToken middleware is working
 const saveArticle = async (req, res) => {
-    
+
     // Validate article
-    const validationError = articleValidation(req.body.article);
+    const validationError = articleValidation.articleValidation(req.body.article);
 
     if (validationError) {
         return apiResponse.validationErrorWithData(res, "Validation error!", validationError);
@@ -31,7 +32,7 @@ const saveArticle = async (req, res) => {
 
         try {
             const savedArticle = await article.save();
-            apiResponse.successResponseWithData(res, "Article saved.", {article_id: savedArticle._id});
+            apiResponse.successResponseWithData(res, "Article saved.", { article_id: savedArticle._id });
         } catch (err) {
             apiResponse.errorResponse(res, err);
         }
@@ -40,11 +41,67 @@ const saveArticle = async (req, res) => {
         // submit article for verification
         try {
             const savedArticle = await article.save();
-            apiResponse.successResponseWithData(res, "Article submitted for verification.", {article_id: savedArticle._id});
+            apiResponse.successResponseWithData(res, "Article submitted for verification.", { article_id: savedArticle._id });
         } catch (err) {
             apiResponse.errorResponse(res, err);
         }
     }
 }
 
+const like = async (req, res) => {
+    // incomming datas
+    var articleId = req.query._id;
+    var userid = req.query.userid;
+    // Validate data
+    const validationError = articleValidation.validateLikeData(req.query);
+
+    if (validationError) {
+        apiResponse.validationErrorWithData(res, "Validation error!", validationError);
+    }
+
+    Article.findOne({ '_id': articleId }, function (errors, result) {
+
+        if (errors) {
+            apiResponse.errorResponse(res, "Error in fetching data to the database!");
+        }
+        // if everything ok
+        if (result == null) {
+            apiResponse.errorResponse(res, "Data not found with this article id to the database!");
+        }
+        article.likes.push({
+            'userid': userid,
+            // 'time': new Date(),
+        });
+
+        result.save().then(function (result) {
+            apiResponse.successResponse(res, "Liked successfully.");
+        });
+
+        apiResponse.errorResponse(res, "Error in storing data to database!");
+    });
+
+    // try {
+    //     const article = await Article.find({ '_id': articleId });
+
+    //     if (!article) {
+    //         return apiResponse.errorResponse(res, "Article not found!");
+    //     }
+
+    //     // it will insert the userid into article.likes.userid
+    //     article.likes.push({
+    //         'userid': userid,
+    //         // 'time': new Date(),
+    //     });
+    //     const result = await article.save();
+    //     if (result) {
+    //         apiResponse.successResponse(res, "Liked successfully.");
+    //     } else {
+    //         apiResponse.errorResponse(res, "Error in storing data to database!");
+    //     }
+    // } catch (err) {
+    //     console.log(err);
+    // }
+
+}
+module.exports.like = like;
 module.exports.saveArticle = saveArticle;
