@@ -24,6 +24,7 @@ const EDITOR_JS_TOOLS = {
     header: {
       class: Header,
       config: {
+        inlineToolbar: true,
         placeholder: 'Heading',
         levels: [2, 3, 4, 5],
         defaultLevel: 3,
