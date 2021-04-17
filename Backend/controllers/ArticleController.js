@@ -51,12 +51,18 @@ const like = async (req, res) => {
     // incomming datas
     var articleId = req.query._id;
     var userid = req.query.userid;
-    // Validate data
-    const validationError = articleValidation.validateLikeData(req.query);
 
-    if (validationError) {
-        apiResponse.validationErrorWithData(res, "Validation error!", validationError);
-    }
+    // article id in my db, you need to change it
+    articleId = "607b2cb4d3d4140134cede23";
+    userid = "1";
+
+    // commented out the validation 
+    // Validate data
+    // const validationError = articleValidation.validateLikeData(req.query);
+
+    // if (validationError) {
+    //     apiResponse.validationErrorWithData(res, "Validation error!", validationError);
+    // }
 
     Article.findOne({ '_id': articleId }, function (errors, result) {
 
@@ -67,14 +73,17 @@ const like = async (req, res) => {
         if (result == null) {
             apiResponse.errorResponse(res, "Data not found with this article id to the database!");
         }
-        article.likes.push({
-            'userid': userid,
-            // 'time': new Date(),
-        });
 
-        result.save().then(function (result) {
-            apiResponse.successResponse(res, "Liked successfully.");
-        });
+        // result is not null, it is working on my machine
+        console.log(JSON.stringify(result));
+        // article.likes.push({
+        //     'userid': userid,
+        //     // 'time': new Date(),
+        // });
+
+        // result.save().then(function (result) {
+        //     apiResponse.successResponse(res, "Liked successfully.");
+        // });
 
         apiResponse.errorResponse(res, "Error in storing data to database!");
     });
