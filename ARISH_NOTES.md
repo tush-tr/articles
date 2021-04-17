@@ -26,3 +26,9 @@
 ## 16 APR, 2021
 * Added functions to save and submit the articles
 * Added toast messages using react-toastify module
+
+## 17 APR, 2021
+* Changed type of article text in Article schema, it will now store the JS object
+* Added /article/:id endpoint to get article by id
+* Added Article component in frontend to view the article using editorjs-react-renderer module
+* Added tags input in the article create page using react-tagsinput module

@@ -5,7 +5,6 @@ const apiResponse = require("../helpers/apiResponse");
 // const { articleValidation } = require("../helpers/validation");
 const articleValidation = require("../helpers/validation");
 
-// only to test if verifyToken middleware is working
 const saveArticle = async (req, res) => {
 
     // Validate article
@@ -22,7 +21,7 @@ const saveArticle = async (req, res) => {
 
     const article = new Article({
         title: req.body.article.title,
-        text: JSON.stringify(req.body.article.text),
+        text: req.body.article.text,
         readTime: readTimeText
     });
 
@@ -103,5 +102,21 @@ const like = async (req, res) => {
     // }
 
 }
-module.exports.like = like;
+
+const getArticle = async (req, res) => {
+    
+    const articleId = req.params.id;
+    
+    try {
+        const article = await Article.find({_id: articleId});
+        apiResponse.successResponseWithData(res, "Article found", {article});
+    } catch (err) {
+        apiResponse.errorResponse(res, err);
+        console.log(err);
+    }
+
+}
+
 module.exports.saveArticle = saveArticle;
+module.exports.like = like;
+module.exports.getArticle = getArticle;
