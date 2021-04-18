@@ -473,3 +473,13 @@ footer .copyright {
   color: rgba(117, 117, 117, 1);
   margin: 0px 10px;
 }
+
+.article .like-btn-layout {
+  margin-left: -25px;
+}
+
+.article .like-count {
+  margin-top: -73px;
+  margin-left: 73px;
+  color: rgba(117, 117, 117, 1);
+}

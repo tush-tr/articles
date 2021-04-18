@@ -18,9 +18,8 @@ function App() {
         <Header />
           <div className="container main-container">
             <Switch>
-               
-                <Route exact path="/Login" component={Login} />
                 <Route exact path="/" component={Home} />
+                <Route exact path="/login" component={Login} />
                 <Route path="/article/create" component={ArticleCreate} />
                 <Route path="/article/:id" component={Article} />
             </Switch>

@@ -3,12 +3,16 @@ import { useParams } from 'react-router'
 import api from "../helpers/api";
 import Moment from "react-moment";
 import Output from 'editorjs-react-renderer';
+import Heart from "react-animated-heart";
+
 
 const Article = () => {
 
     const { id } = useParams();
 
     const [article, setArticle] = useState("");
+
+    const [isClick, setClick] = useState(false);
 
     useEffect(() => {
         getArticle();
@@ -33,6 +37,10 @@ const Article = () => {
                 {article.tags && article.tags.map((tag) => {
                     return <span key={tag} className="tag">{tag}</span>;
                 })}
+            </div>
+            <div className="like-btn-layout">
+                <Heart isClick={isClick} onClick={() => setClick(!isClick)}  />
+                <div className="like-count">20</div>
             </div>
         </div>
     )
