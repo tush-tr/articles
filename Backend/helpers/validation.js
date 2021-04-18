@@ -1,6 +1,6 @@
 const Joi = require("@hapi/joi");
 
-// Validation for register
+// Validation for liked data
 const validateLikeData = (data) => {
     const schema = Joi.object({
         _id: Joi.string().required(),
@@ -14,7 +14,21 @@ const validateLikeData = (data) => {
     }
     return;
 }
+// Validation for Commented data
+const validateCommentData = (data) => {
+    const schema = Joi.object({
+        _id: Joi.string().required(),
+        userid: Joi.string().required(),
+        comment: Joi.string().required()
+    });
 
+    const { error } = schema.validate(data);
+
+    if (error) {
+        return error.details[0].message;
+    }
+    return;
+}
 // Validation for register
 const registerValidation = (data) => {
     const schema = Joi.object({
@@ -66,3 +80,4 @@ module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
 module.exports.articleValidation = articleValidation;
 module.exports.validateLikeData = validateLikeData;
+module.exports.validateCommentData = validateCommentData;

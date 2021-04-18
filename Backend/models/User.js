@@ -27,7 +27,11 @@ const userSchema = new Schema({
     },
     bookmarks: [{
         articleid: Schema.Types.ObjectId,
-    }, {timestamps: true}],
+        time: {
+            type: Date,
+            default: Date.now,
+        }
+    }],
 }, {timestamps: true});
 
 module.exports = mongoose.model('User', userSchema);

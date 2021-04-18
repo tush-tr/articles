@@ -8,6 +8,8 @@ import Article from "./components/Article";
 import "./styles/custom.css";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Login from "./components/Login";
+
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Header />
           <div className="container main-container">
             <Switch>
+               
+                <Route exact path="/Login" component={Login} />
                 <Route exact path="/" component={Home} />
                 <Route path="/article/create" component={ArticleCreate} />
                 <Route path="/article/:id" component={Article} />

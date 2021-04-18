@@ -30,7 +30,11 @@ const articleSchema = new Schema({
     },
     likes: [{
         userid: Schema.Types.ObjectId,
-    }, {timestamps: true}],
+        time: {
+            type: Date,
+            default: Date.now,
+        }
+    }],
     comments: [{
         userid: Schema.Types.ObjectId,
         comment: {
@@ -39,7 +43,11 @@ const articleSchema = new Schema({
             max: 255,
             min: 1
         },
-    }, {timestamps: true}],
+        time: {
+            type: Date,
+            default: Date.now,
+        }
+    }],
     report: [{
         userid: Schema.Types.ObjectId,
         problem: {
@@ -47,7 +55,11 @@ const articleSchema = new Schema({
             required: true,
             max: 255,
         },
-    }, {timestamps: true}],
+        time: {
+            type: Date,
+            default: Date.now,
+        }
+    }],
 }, {timestamps: true});
 
 module.exports = mongoose.model('Article', articleSchema);

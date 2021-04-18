@@ -49,24 +49,21 @@ const saveArticle = async (req, res) => {
 }
 
 const like = async (req, res) => {
-    // incomming datas
-    var articleId = req.query._id;
-    var userid = req.query.userid;
 
-    // article id in my db, you need to change it
-    articleId = "607b2cb4d3d4140134cede23";
-    userid = "1";
-
-    // commented out the validation 
     // Validate data
-    // const validationError = articleValidation.validateLikeData(req.query);
+    const validationError = articleValidation.validateLikeData(req.body);
 
-    // if (validationError) {
-    //     apiResponse.validationErrorWithData(res, "Validation error!", validationError);
-    // }
+    if (validationError) {
+        apiResponse.validationErrorWithData(res, "Validation error!", validationError);
+    }
 
+    // incomming datas
+    var articleId = req.body._id;
+    var userid = req.body.userid;
+
+    // fetching particular article by id
     Article.findOne({ '_id': articleId }, function (errors, result) {
-
+        // checking if there is error in fetching data to database
         if (errors) {
             apiResponse.errorResponse(res, "Error in fetching data to the database!");
         }
@@ -75,48 +72,24 @@ const like = async (req, res) => {
             apiResponse.errorResponse(res, "Data not found with this article id to the database!");
         }
 
-        // result is not null, it is working on my machine
-        console.log(JSON.stringify(result));
-        // article.likes.push({
-        //     'userid': userid,
-        //     // 'time': new Date(),
-        // });
+        // here inserting like to  the particular article
+        result.likes.push({
+            'userid': userid,
+        });
 
-        // result.save().then(function (result) {
-        //     apiResponse.successResponse(res, "Liked successfully.");
-        // });
-
-        apiResponse.errorResponse(res, "Error in storing data to database!");
+        result.save().then(function (result) {
+            apiResponse.successResponse(res, "Liked successfully.");
+        }).catch(function (error) {
+            apiResponse.errorResponse(res, "error occured while storing data to database!");
+        });
     });
-
-    // try {
-    //     const article = await Article.find({ '_id': articleId });
-
-    //     if (!article) {
-    //         return apiResponse.errorResponse(res, "Article not found!");
-    //     }
-
-    //     // it will insert the userid into article.likes.userid
-    //     article.likes.push({
-    //         'userid': userid,
-    //         // 'time': new Date(),
-    //     });
-    //     const result = await article.save();
-    //     if (result) {
-    //         apiResponse.successResponse(res, "Liked successfully.");
-    //     } else {
-    //         apiResponse.errorResponse(res, "Error in storing data to database!");
-    //     }
-    // } catch (err) {
-    //     console.log(err);
-    // }
 
 }
 
 const getArticle = async (req, res) => {
-    
+
     const articleId = req.params.id;
-    
+
     try {
         const article = await Article.find({_id: articleId});
         if (article.length == 0) {
@@ -131,6 +104,47 @@ const getArticle = async (req, res) => {
 
 }
 
+const comment = async (req, res) => {
+
+    // Validate data
+    const validationError = articleValidation.validateCommentData(req.body);
+
+    if (validationError) {
+        apiResponse.validationErrorWithData(res, "Validation error!", validationError);
+    }
+
+    // incomming datas
+    var articleId = req.body._id;
+    var userid = req.body.userid;
+    var commentData = req.body.comment;
+
+    // fetching particular article by id
+    Article.findOne({ '_id': articleId }, function (errors, result) {
+        // checking if there is error in fetching data to database
+        if (errors) {
+            apiResponse.errorResponse(res, "Error in fetching data to the database!");
+        }
+        // if everything ok
+        if (result == null) {
+            apiResponse.errorResponse(res, "Data not found with this article id to the database!");
+        }
+
+        // here inserting comment to  the particular article
+        result.comments.push({
+            'userid': userid,
+            'comment': commentData,
+        });
+
+        result.save().then(function (result) {
+            apiResponse.successResponse(res, "Commented successfully.");
+        }).catch(function (error) {
+            apiResponse.errorResponse(res, "error occured while storing data to database!");
+        });
+    });
+
+}
 module.exports.saveArticle = saveArticle;
 module.exports.like = like;
+module.exports.comment = comment;
 module.exports.getArticle = getArticle;
+
