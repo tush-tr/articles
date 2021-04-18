@@ -22,7 +22,8 @@ const saveArticle = async (req, res) => {
     const article = new Article({
         title: req.body.article.title,
         text: req.body.article.text,
-        readTime: readTimeText
+        readTime: readTimeText,
+        tags: req.body.article.tags
     });
 
     if (req.body.action == "save") {
@@ -118,7 +119,11 @@ const getArticle = async (req, res) => {
     
     try {
         const article = await Article.find({_id: articleId});
-        apiResponse.successResponseWithData(res, "Article found", {article});
+        if (article.length == 0) {
+            apiResponse.successResponse(res, "Article not found");
+        } else {
+            apiResponse.successResponseWithData(res, "Article found", {article});
+        }
     } catch (err) {
         apiResponse.errorResponse(res, err);
         console.log(err);
