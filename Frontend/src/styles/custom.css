@@ -461,3 +461,15 @@ footer .copyright {
 .react-tagsinput-input {
   font-size: 16px;
 }
+
+.article .tags {
+  margin-top: 20px;
+}
+
+.article .tag {
+  background: rgba(242, 242, 242, 1);
+  padding: 5px 10px;
+  border-radius: 3px;
+  color: rgba(117, 117, 117, 1);
+  margin: 0px 10px;
+}

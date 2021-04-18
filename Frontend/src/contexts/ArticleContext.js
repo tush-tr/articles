@@ -6,7 +6,8 @@ export const ArticleProvider = (props) => {
 
     const [article, setArticle] = useState({
         title: "",
-        text: ""
+        text: "",
+        tags: []
     });
 
     return (

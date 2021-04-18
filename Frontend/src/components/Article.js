@@ -18,6 +18,7 @@ const Article = () => {
         api.get(`/article/${id}`).then((res) => {
             // set state
             setArticle(res.data.data.article[0]);
+            console.log(article.tags);
         })
     };
 
@@ -28,6 +29,11 @@ const Article = () => {
             <span> <Moment fromNow>{ article.publishDate }</Moment> </span> &#183;
             <span> { article.readTime } </span>
             <div> <Output data={article.text} /> </div>
+            <div className="tags">
+                {article.tags && article.tags.map((tag) => {
+                    return <span key={tag} className="tag">{tag}</span>;
+                })}
+            </div>
         </div>
     )
 }

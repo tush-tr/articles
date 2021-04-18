@@ -59,7 +59,8 @@ const Editor = () => {
         // console.log('Article data: ', outputData);
         setArticle({
             title: article.title,
-            text: outputData
+            text: outputData,
+            tags: article.tags
         });
       } catch (e) {
         // console.log('Saving failed: ', e);
