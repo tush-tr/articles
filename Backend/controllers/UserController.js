@@ -17,7 +17,7 @@ const register = async (req, res) => {
     const emailExists = await User.findOne({email: req.body.email});
 
     if (emailExists) {
-        return apiResponse.errorResponse(res, "Email Already exists.");
+        return apiResponse.validationErrorWithData(res, "Email Already exists.", {});
     }
 
     // hash password
@@ -33,7 +33,7 @@ const register = async (req, res) => {
     try {
         // save user and return response with user id
         const savedUser = await user.save();
-        apiResponse.successResponseWithData(res, "User registered.", {user_id: savedUser._id});
+        apiResponse.successResponseWithData(res, "Registration successful.", {user_id: savedUser._id});
     } catch (err) {
         apiResponse.errorResponse(res, err);
     }
