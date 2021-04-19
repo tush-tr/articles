@@ -17,9 +17,28 @@ function ArticleButtons() {
             article: article,
             action: "submit"
         }
-        await api.post("/article", body).then((res) => {
-            toast(res.data.message);
-            history.push("/");
+        
+        if (article.title === "") {
+            toast.warning("Please provide a title.");
+            return;
+        }
+
+        if (article.text === "") {
+            toast.warning("Please write some text");
+            return;
+        }
+
+        await api.post("/article", body)
+        .then((res) => {
+            const status = res.data.status;
+            if (status === 0) {
+                toast(res.data.message);
+                toast(res.data.data);
+            } else {
+                console.log(res);
+                toast(res.data.message);
+                history.push("/");
+            }
         }).catch((err) => {
             console.log(err);
         });
@@ -31,9 +50,28 @@ function ArticleButtons() {
             article: article,
             action: "save"
         };
-        await api.post("/article", body).then((res) => {
-            toast(res.data.message);
-            history.push("/");
+        
+        if (article.title === "") {
+            toast.warning("Please provide a title.");
+            return;
+        }
+
+        if (article.text === "") {
+            toast.warning("Please write some text");
+            return;
+        }
+
+        await api.post("/article", body)
+        .then((res) => {
+            const status = res.data.status;
+            if (status === 0) {
+                toast(res.data.message);
+                toast(res.data.data);
+            } else {
+                console.log(res);
+                toast(res.data.message);
+                history.push("/");
+            }
         }).catch((err) => {
             console.log(err);
         });

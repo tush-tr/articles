@@ -25,7 +25,6 @@ body {
   background-color: hsla(201, 100%, 6%, 0.6);
   padding: 50px 30px;
   min-width: 400px;
-  width: 50%;
   max-width: 600px;
 }
 
@@ -33,7 +32,6 @@ body {
   background-color: hsla(201, 100%, 6%, 0.6);
   padding: 50px 30px;
   min-width: 400px;
-  width: 50%;
   max-width: 600px;
 }
 .login-title {
@@ -41,7 +39,6 @@ body {
   text-align: center;
   margin: 0;
   margin-bottom: 40px;
-  font-size: 2.5em;
   font-weight: normal;
 }
 .signup-title {
@@ -49,7 +46,6 @@ body {
   text-align: center;
   margin: 0;
   margin-bottom: 40px;
-  font-size: 2.5em;
   font-weight: normal;
 }
 .input-group {
@@ -61,12 +57,10 @@ body {
 .input-group label {
   color: #fff;
   font-weight: lighter;
-  font-size: 1.5em;
   margin-bottom: 7px;
 }
 
 .input-group input {
-  font-size: 1.5em;
   padding: 0.1em 0.25em;
   background-color: hsla(201, 100%, 91%, 0.3);
   border: 1px solid hsl(201, 100%, 6%);
@@ -87,7 +81,6 @@ body {
   background: hsla(201, 100%, 50%, 0.1);
   border: 1px solid hsl(201, 100%, 50%);
   outline: none;
-  font-size: 1.5em;
   color: #fff;
   font-weight: lighter;
   margin-top: 20px;
@@ -100,7 +93,6 @@ body {
   background: hsla(201, 100%, 50%, 0.1);
   border: 1px solid hsl(201, 100%, 50%);
   outline: none;
-  font-size: 1.5em;
   color: #fff;
   font-weight: lighter;
   margin-top: 20px;
@@ -120,31 +112,14 @@ body {
   font-size: large;
   color: #fff;
 }
-.a {
+
+.login-to-register {
   text-align: center;
-  padding: 10px 10px;
-  width: 40%;
-  border-radius: 5px;
-  background: hsla(201, 100%, 50%, 0.1);
-  border: 1px solid hsl(201, 100%, 50%);
-  outline: none;
-  font-size: 1.5em;
-  color: #fff;
-  font-weight: lighter;
   margin-top: 20px;
-  cursor: pointer;
-  text-decoration:none;
-  appearance: button;
-  display: block;
-  margin: auto;
- 
-}
-.a:hover {
-  background-color: hsla(201, 100%, 50%, 0.3);
-  text-decoration:none;
+  color: white;
 }
 
-.a:focus {
-  background-color: hsla(201, 100%, 50%, 0.5);
-  text-decoration:none;
+.login-to-register a {
+  color: cornflowerblue;
+  text-decoration: none;
 }
