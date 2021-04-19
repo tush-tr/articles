@@ -5,6 +5,7 @@ const ArticleController = require("../controllers/ArticleController");
 router.post("/", ArticleController.saveArticle);
 router.post("/like", ArticleController.like);
 router.post("/comment", ArticleController.comment);
+router.post("/report", ArticleController.report);
 router.get("/:id", ArticleController.getArticle);
 router.post("/like", ArticleController.like);
 module.exports = router;
