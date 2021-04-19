@@ -113,3 +113,49 @@ body {
 .login-button:focus {
   background-color: hsla(201, 100%, 50%, 0.5);
 }
+.h1{
+  text-align: center;
+  padding-top: 10%;
+  padding-bottom: 5%;
+  font-size: large;
+  color: #fff;
+}
+/* .a {
+  text-align: center;
+  padding: 10px 10px;
+  width: 40%;
+  border-radius: 5px;
+  background: hsla(201, 100%, 50%, 0.1);
+  border: 1px solid hsl(201, 100%, 50%);
+  outline: none;
+  font-size: 1.5em;
+  color: #fff;
+  font-weight: lighter;
+  margin-top: 20px;
+  cursor: pointer;
+  text-decoration:none;
+  appearance: button;
+  display: block;
+  margin: auto;
+ 
+}
+.a:hover {
+  background-color: hsla(201, 100%, 50%, 0.3);
+  text-decoration:none;
+}
+
+.a:focus {
+  background-color: hsla(201, 100%, 50%, 0.5);
+  text-decoration:none;
+} */
+
+.login-to-register {
+  text-align: center;
+  margin-top: 20px;
+  color: white;
+}
+
+.login-to-register a {
+  color: cornflowerblue;
+  text-decoration: none;
+}
