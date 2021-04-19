@@ -138,8 +138,48 @@ const comment = async (req, res) => {
     });
 
 }
+
+const report = async (req, res) => {
+
+    // Validate data
+    const validationError = articleValidation.validateReportData(req.body);
+
+    if (validationError) {
+        apiResponse.validationErrorWithData(res, "Validation error!", validationError);
+    }
+
+    // incomming datas
+    var articleId = req.body._id;
+    var userid = req.body.userid;
+    var problem = req.body.problem;
+
+    // fetching particular article by id
+    Article.findOne({ '_id': articleId }, function (errors, result) {
+        // checking if there is error in fetching data to database
+        if (errors) {
+            apiResponse.errorResponse(res, "Error in fetching data to the database!");
+        }
+        // if everything ok
+        if (result == null) {
+            apiResponse.errorResponse(res, "Data not found with this article id to the database!");
+        }
+        // here inserting comment to  the particular article
+        result.report.push({
+            'userid': userid,
+            'problem': problem,
+        });
+
+        result.save().then(function (result) {
+            apiResponse.successResponse(res, "Reported successfully.");
+        }).catch(function (error) {
+            apiResponse.errorResponse(res, "error occured while storing data to database!");
+        });
+    });
+
+}
 module.exports.saveArticle = saveArticle;
 module.exports.like = like;
 module.exports.comment = comment;
+module.exports.report = report;
 module.exports.getArticle = getArticle;
 
