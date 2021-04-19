@@ -81,7 +81,8 @@ const loginValidation = (data) => {
 const articleValidation = (data) => {
     const schema = Joi.object({
         title: Joi.string().required(),
-        text: Joi.required()
+        text: Joi.required(),
+        tags: Joi.array().items(Joi.string())
     });
 
     const { error } = schema.validate(data);

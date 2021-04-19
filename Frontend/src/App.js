@@ -9,6 +9,7 @@ import "./styles/custom.css";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from "./components/Login";
+import Signup from "./components/Signup";
 
 
 function App() {
@@ -18,9 +19,9 @@ function App() {
         <Header />
           <div className="container main-container">
             <Switch>
-               
-                <Route exact path="/Login" component={Login} />
                 <Route exact path="/" component={Home} />
+                <Route exact path="/login" component={Login} />
+		<Route exact path="/Signup" component={Signup} />
                 <Route path="/article/create" component={ArticleCreate} />
                 <Route path="/article/:id" component={Article} />
             </Switch>

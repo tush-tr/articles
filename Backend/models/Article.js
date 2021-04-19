@@ -17,6 +17,9 @@ const articleSchema = new Schema({
     readTime: {
         type: String
     },
+    tags: {
+        type: [String]
+    },
     submissionDate: {
         type: Date,
         default: Date.now

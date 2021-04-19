@@ -32,3 +32,7 @@
 * Added /article/:id endpoint to get article by id
 * Added Article component in frontend to view the article using editorjs-react-renderer module
 * Added tags input in the article create page using react-tagsinput module
+
+## 18 APR, 2021
+* Added tags to context, for sending it to backend
+* Added tags to Article schema and changed the ArticleController accordingly

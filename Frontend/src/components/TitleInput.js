@@ -8,7 +8,8 @@ function TitleInput() {
     const onChange = (e) => {
         setArticle({
             title: e.target.value,
-            text: article.text
+            text: article.text,
+            tags: article.tags
         })
     }
 
