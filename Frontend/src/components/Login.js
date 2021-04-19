@@ -15,6 +15,7 @@ function Login() {
                 <input type="password" />
               </div>
               <button type="submit" className="login-button">Sign In</button>
+              <h1 className="h1">Do not have an account?</h1> <a className="a" href="/Signup">Sign Up</a>
             </form>
           </div>
         </div>
