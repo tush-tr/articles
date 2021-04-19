@@ -368,9 +368,39 @@ form .form-group:first-child .floating-label-form-group {
   border-top: 1px solid #dee2e6;
 }
 
+
+
 footer {
-  padding: 50px 0 65px;
+  background: #16222A;
+  
+  color: white;
+  margin-top:100px;
+  bottom: 0px;
 }
+
+
+footer a {
+  color: rgb(80, 72, 72);
+  font-size: 14px;
+  transition-duration: 0.2s;
+}
+
+footer a:hover {
+  
+  text-decoration: none;
+}
+
+
+.footer-middle {
+  padding-top: 2em;
+  
+  color: white;
+}
+
+
+
+
+
 
 footer .list-inline {
   margin: 0;
@@ -378,8 +408,8 @@ footer .list-inline {
 }
 
 footer .copyright {
-  font-size: 14px;
-  margin-bottom: 0;
+  font-size: 20px;
+  margin-bottom: 5;
   text-align: center;
 }
 
