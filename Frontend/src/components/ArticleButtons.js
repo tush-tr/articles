@@ -17,7 +17,8 @@ function ArticleButtons() {
             article: article,
             action: "submit"
         }
-        await api.post("/article", body).then((res) => {
+        await api.post("/article", body)
+        .then((res) => {
             toast(res.data.message);
             history.push("/");
         }).catch((err) => {
@@ -31,7 +32,8 @@ function ArticleButtons() {
             article: article,
             action: "save"
         };
-        await api.post("/article", body).then((res) => {
+        await api.post("/article", body)
+        .then((res) => {
             toast(res.data.message);
             history.push("/");
         }).catch((err) => {

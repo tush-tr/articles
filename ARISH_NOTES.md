@@ -36,3 +36,8 @@
 ## 18 APR, 2021
 * Added tags to context, for sending it to backend
 * Added tags to Article schema and changed the ArticleController accordingly
+* Added Like button on Article page
+
+## 19 APR, 2021
+* Changed style of Login and Signup page
+* Connected signup page to backend
