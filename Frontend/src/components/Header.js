@@ -1,21 +1,26 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
+import { useHistory } from "react-router-dom";
 
 // this is not a final header, need to be changed
 function Header() {
 
     const [ user, setUser ] = useContext(UserContext);
 
+    const history = useHistory();
+
     const logout = () => {
         setUser({
             isLoggedIn: false,
             name: "",
+            email: "",
             token: ""
         });
         localStorage.removeItem("token");
         localStorage.removeItem("name");
         localStorage.removeItem("email");
+        history.push("/");
     }
 
     return (

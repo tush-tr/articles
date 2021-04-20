@@ -72,7 +72,7 @@ const login = async (req, res) => {
         email: user.email,
     }
 
-    apiResponse.successResponseWithData(res, "You are logged in.", {user: userDetails, token: token});
+    apiResponse.successResponseWithData(res, "You are now logged in.", {user: userDetails, token: token});
 }
 
 module.exports.register = register;

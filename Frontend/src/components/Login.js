@@ -30,7 +30,7 @@ function Login() {
         if (status === 0) {
           toast.warning(res.data.data);
         } else {
-          toast(res.data.message);
+          toast.success(res.data.message);
           setUser({
             isLoggedIn: true,
             name: res.data.data.user.name,

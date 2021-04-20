@@ -512,3 +512,7 @@ footer .copyright {
   margin-left: 73px;
   color: rgba(117, 117, 117, 1);
 }
+
+.Toastify__toast-container--top-right {
+  top: 4em !important;
+}
