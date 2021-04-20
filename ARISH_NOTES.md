@@ -45,4 +45,5 @@
 ## 20 APR, 2021
 * Connected login component to backend
 * Save token in localstorage on login and remove it on logout
-* Protect ArticleCreate component, only logged in use can access
+* Protect ArticleCreate component, only logged in user can access
+* Protect login and signup components, only a logged off user can access

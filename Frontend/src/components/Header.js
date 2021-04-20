@@ -47,9 +47,9 @@ function Header() {
                         </li>
                         { user.isLoggedIn?
                             <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div className="nav-link dropdown-toggle" id="navbar-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     { user.name }
-                                </a>
+                                </div>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <Link className="dropdown-item" to="/profile">Profile</Link>
                                     <button className="dropdown-item" onClick={logout}>Logout</button>

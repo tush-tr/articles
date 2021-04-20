@@ -15,6 +15,10 @@ function Login() {
 
   const [ user, setUser ] = useContext(UserContext);
 
+  if (user.isLoggedIn) {
+    history.push("/");
+  }
+
   const loginUser = (e) => {
     e.preventDefault();
 

@@ -516,3 +516,10 @@ footer .copyright {
 .Toastify__toast-container--top-right {
   top: 4em !important;
 }
+
+#navbar-dropdown{
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
