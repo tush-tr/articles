@@ -25,11 +25,8 @@ const userSchema = new Schema({
         type: String
     },
     bookmarks: [{
-        articleid: Schema.Types.ObjectId,
-        time: {
-            type: Date,
-            default: Date.now,
-        }
+        type: Schema.Types.ObjectId,
+        ref: 'Article'
     }],
 }, {timestamps: true});
 

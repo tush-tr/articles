@@ -20,6 +20,10 @@ const articleSchema = new Schema({
     tags: {
         type: [String]
     },
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    },
     submissionDate: {
         type: Date,
         default: Date.now
@@ -29,14 +33,11 @@ const articleSchema = new Schema({
         default: Date.now
     },
     likes: [{
-        userid: Schema.Types.ObjectId,
-        time: {
-            type: Date,
-            default: Date.now,
-        }
+        type: Schema.Types.ObjectId,
+        ref: "User"
     }],
     comments: [{
-        userid: Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         comment: {
             type: String,
             required: true,
@@ -46,10 +47,11 @@ const articleSchema = new Schema({
         time: {
             type: Date,
             default: Date.now,
-        }
+        },
+        ref: "User"
     }],
-    report: [{
-        userid: Schema.Types.ObjectId,
+    reports: [{
+        type: Schema.Types.ObjectId,
         problem: {
             type: String,
             required: true,
@@ -58,7 +60,8 @@ const articleSchema = new Schema({
         time: {
             type: Date,
             default: Date.now,
-        }
+        },
+        ref: "User"
     }],
 }, {timestamps: true});
 
