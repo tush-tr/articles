@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const {registerValidation, loginValidation} = require("../helpers/validation");
+const { registerValidation, loginValidation } = require("../helpers/validation");
 const apiResponse = require("../helpers/apiResponse");
 
 const register = async (req, res) => {

@@ -7,6 +7,9 @@ import Tags from "./Tags";
 
 // component for creating new article
 function ArticleCreate() {
+
+
+
   return (
     <ArticleProvider>
       <div id="editor">

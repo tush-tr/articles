@@ -44,3 +44,4 @@
 
 ## 20 APR, 2021
 * Connected login component to backend
+* Save token in localstorage on login and remove it on logout

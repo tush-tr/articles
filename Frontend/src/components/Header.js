@@ -7,7 +7,16 @@ function Header() {
 
     const [ user, setUser ] = useContext(UserContext);
 
-    
+    const logout = () => {
+        setUser({
+            isLoggedIn: false,
+            name: "",
+            token: ""
+        });
+        localStorage.removeItem("token");
+        localStorage.removeItem("name");
+        localStorage.removeItem("email");
+    }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -38,7 +47,7 @@ function Header() {
                                 </a>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <Link className="dropdown-item" to="/profile">Profile</Link>
-                                    <Link className="dropdown-item" to="/logout">Logout</Link>
+                                    <button className="dropdown-item" onClick={logout}>Logout</button>
                                 </div>
                             </li> 
                             :

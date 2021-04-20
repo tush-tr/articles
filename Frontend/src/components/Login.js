@@ -37,6 +37,9 @@ function Login() {
             email: res.data.data.user.email,
             token: res.data.data.token
           });
+          localStorage.setItem("token", res.data.data.token);
+          localStorage.setItem("name", res.data.data.user.name);
+          localStorage.setItem("email", res.data.data.user.email);
           history.push("/");
         }
       }).catch((err) => {
