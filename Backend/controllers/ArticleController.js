@@ -5,7 +5,7 @@ const apiResponse = require("../helpers/apiResponse");
 // const { articleValidation } = require("../helpers/validation");
 const articleValidation = require("../helpers/validation");
 
-const saveArticle = async (req, res) => {
+const save = async (req, res) => {
 
     // Validate article
     const validationError = articleValidation.articleValidation(req.body.article);
@@ -87,7 +87,7 @@ const like = async (req, res) => {
 
 }
 
-const getArticle = async (req, res) => {
+const getOne = async (req, res) => {
 
     const articleId = req.params.id;
 
@@ -183,9 +183,27 @@ const report = async (req, res) => {
     });
 
 }
-module.exports.saveArticle = saveArticle;
+
+const getRecent = async (req, res) => {
+
+    try {
+        const articles = await Article.find().select('_id title text tags readTime likes comments publishDate', ).sort({ publishDate: -1 }).limit(10).populate('author', '_id name');
+        if (articles.length == 0) {
+            apiResponse.successResponse(res, "Articles not found");
+        } else {
+            apiResponse.successResponseWithData(res, "Articles found", {articles});
+        }
+    } catch (err) {
+        apiResponse.errorResponse(res, err);
+        console.log(err);
+    }
+
+}
+
+module.exports.save = save;
 module.exports.like = like;
 module.exports.comment = comment;
 module.exports.report = report;
-module.exports.getArticle = getArticle;
+module.exports.getOne = getOne;
+module.exports.getRecent = getRecent;
 

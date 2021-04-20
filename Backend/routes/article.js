@@ -2,10 +2,10 @@ const router = require("express").Router();
 const verifyToken = require("../middlewares/verifyToken.js");
 const ArticleController = require("../controllers/ArticleController");
 
-router.post("/", verifyToken, ArticleController.saveArticle);
+router.post("/", verifyToken, ArticleController.save);
 router.post("/like", ArticleController.like);
 router.post("/comment", ArticleController.comment);
 router.post("/report", ArticleController.report);
-router.get("/:id", ArticleController.getArticle);
-router.post("/like", ArticleController.like);
+router.get("/recent", ArticleController.getRecent);
+router.get("/:id", ArticleController.getOne);
 module.exports = router;

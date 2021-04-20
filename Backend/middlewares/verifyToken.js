@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken");
 const apiResponse = require("../helpers/apiResponse");
 
+// Restrics Unauthorized access
+// saves user id in the request object if token is valid else respond with 'Access Denied'
 module.exports = function(req, res, next) {
 
     // take token from header
@@ -16,7 +18,6 @@ module.exports = function(req, res, next) {
         // store the user id in the request object
         req.userId = verified._id;
 
-        // move to next
         next();
     } catch (err) {
         apiResponse.unauthorizedResponse(res, "Access Denied!");
