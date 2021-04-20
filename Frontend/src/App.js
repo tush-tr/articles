@@ -10,25 +10,27 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-
+import { UserProvider } from "./contexts/UserContext";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Header />
-          <div className="container main-container">
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/login" component={Login} />
-		            <Route exact path="/Signup" component={Signup} />
-                <Route path="/article/create" component={ArticleCreate} />
-                <Route path="/article/:id" component={Article} />
-            </Switch>
-          </div>
-        <Footer />
-      </BrowserRouter>
-      <ToastContainer />
+      <UserProvider>
+        <BrowserRouter>
+          <Header />
+            <div className="container main-container">
+              <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route exact path="/login" component={Login} />
+                  <Route exact path="/Signup" component={Signup} />
+                  <Route path="/article/create" component={ArticleCreate} />
+                  <Route path="/article/:id" component={Article} />
+              </Switch>
+            </div>
+          <Footer />
+        </BrowserRouter>
+        <ToastContainer />
+      </UserProvider>
     </div>
   );
 }

@@ -41,3 +41,6 @@
 ## 19 APR, 2021
 * Changed style of Login and Signup page
 * Connected signup page to backend
+
+## 20 APR, 2021
+* Connected login component to backend

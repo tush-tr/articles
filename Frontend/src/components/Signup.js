@@ -27,19 +27,18 @@ function Signup() {
     }
     
     api.post("/user/register", { name, email, password })
-    .then((res) => {
-      const status = res.data.status;
-      // if there is some error in validation
-      if (status === 0) {
-        toast.warning(res.data.message);
-        toast.warning(res.data.data);
-      } else {
-        toast(res.data.message);
-        history.push("/login");
-      }
-    }).catch((err) => {
-      console.log(err.message);
-    });
+      .then((res) => {
+        const status = res.data.status;
+        // if there is some error in validation
+        if (status === 0) {
+          toast.warning(res.data.data);
+        } else {
+          toast(res.data.message);
+          history.push("/login");
+        }
+      }).catch((err) => {
+        console.log(err.message);
+      });
 
   }
 

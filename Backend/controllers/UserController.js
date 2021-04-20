@@ -66,11 +66,13 @@ const login = async (req, res) => {
     // create token
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
     res.header("auth-token", token)
+    
+    const userDetails = {
+        name: user.name,
+        email: user.email,
+    }
 
-    // remove password from user object before sending response
-    user["password"] = null;
-
-    apiResponse.successResponseWithData(res, "Login successful.", {user: user, token: token});
+    apiResponse.successResponseWithData(res, "You are logged in.", {user: userDetails, token: token});
 }
 
 module.exports.register = register;

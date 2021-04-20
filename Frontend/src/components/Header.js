@@ -1,8 +1,14 @@
-import React from "react";
-import { Link } from 'react-router-dom';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
 
 // this is not a final header, need to be changed
 function Header() {
+
+    const [ user, setUser ] = useContext(UserContext);
+
+    
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div className="container">
@@ -25,9 +31,21 @@ function Header() {
                         <li className="nav-item">
                             <Link className="nav-link" to="/">Contact</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/login">Login</Link>
-                        </li>
+                        { user.isLoggedIn?
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    { user.name }
+                                </a>
+                                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <Link className="dropdown-item" to="/profile">Profile</Link>
+                                    <Link className="dropdown-item" to="/logout">Logout</Link>
+                                </div>
+                            </li> 
+                            :
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/login">Login</Link>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
