@@ -47,3 +47,7 @@
 * Save token in localstorage on login and remove it on logout
 * Protect ArticleCreate component, only logged in user can access
 * Protect login and signup components, only a logged off user can access
+
+## 21 APR, 2021
+* fixed models of Article and User
+* made backend to save article only when the auth-token is received

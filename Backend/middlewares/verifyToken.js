@@ -14,7 +14,7 @@ module.exports = function(req, res, next) {
         // verified is of the form {_id: ..., iat: ...}
 
         // store the user id in the request object
-        req.user_id = verified._id;
+        req.userId = verified._id;
 
         // move to next
         next();

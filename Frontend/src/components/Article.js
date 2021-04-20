@@ -10,7 +10,7 @@ const Article = () => {
 
     const { id } = useParams();
 
-    const [article, setArticle] = useState("");
+    const [article, setArticle] = useState(false);
 
     const [isClick, setClick] = useState(false);
 
@@ -22,14 +22,13 @@ const Article = () => {
         api.get(`/article/${id}`).then((res) => {
             // set state
             setArticle(res.data.data.article[0]);
-            console.log(article.tags);
         })
     };
 
     return (
         <div className="article">
             <h1> { article.title } </h1>
-            <span> Author's name </span> &#183;
+            <span> { article ? article.author.name : '' } </span> &#183;
             <span> <Moment fromNow>{ article.publishDate }</Moment> </span> &#183;
             <span> { article.readTime } </span>
             <div> <Output data={article.text} /> </div>

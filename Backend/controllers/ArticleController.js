@@ -23,7 +23,8 @@ const saveArticle = async (req, res) => {
         title: req.body.article.title,
         text: req.body.article.text,
         readTime: readTimeText,
-        tags: req.body.article.tags
+        tags: req.body.article.tags,
+        author: req.userId
     });
 
     if (req.body.action == "save") {
@@ -91,7 +92,7 @@ const getArticle = async (req, res) => {
     const articleId = req.params.id;
 
     try {
-        const article = await Article.find({_id: articleId});
+        const article = await Article.find({_id: articleId}).populate('author', '_id name');
         if (article.length == 0) {
             apiResponse.successResponse(res, "Article not found");
         } else {
