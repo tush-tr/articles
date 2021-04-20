@@ -44,7 +44,7 @@ function Login() {
           localStorage.setItem("token", res.data.data.token);
           localStorage.setItem("name", res.data.data.user.name);
           localStorage.setItem("email", res.data.data.user.email);
-          history.push("/");
+          history.goBack();
         }
       }).catch((err) => {
         console.log(err.message);

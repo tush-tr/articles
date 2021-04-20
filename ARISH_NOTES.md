@@ -49,5 +49,7 @@
 * Protect login and signup components, only a logged off user can access
 
 ## 21 APR, 2021
-* fixed models of Article and User
-* made backend to save article only when the auth-token is received
+* Fixed models of Article and User
+* Made backend to save article only when the auth-token is received
+* Added get recent articles endpoint in backend
+* Added recent articles section on home page

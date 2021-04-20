@@ -22,6 +22,7 @@ const Article = () => {
         api.get(`/article/${id}`).then((res) => {
             // set state
             setArticle(res.data.data.article[0]);
+            console.log(article);
         })
     };
 

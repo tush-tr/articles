@@ -1,9 +1,13 @@
 import React from "react";
+import ArticleList from "./ArticleList";
 
-// compoenent for Home Page
 function Home() {
     return (
-        <h1>Home</h1>
+        <div>
+            <h1>Home</h1>
+            <h2>Recent Articles</h2>
+            <ArticleList />
+        </div>
     );
 }
 
