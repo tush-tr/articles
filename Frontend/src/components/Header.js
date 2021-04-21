@@ -13,11 +13,13 @@ function Header() {
     const logout = () => {
         setUser({
             isLoggedIn: false,
+            id: "",
             name: "",
             email: "",
             token: ""
         });
         localStorage.removeItem("token");
+        localStorage.removeItem("id");
         localStorage.removeItem("name");
         localStorage.removeItem("email");
         history.push("/");

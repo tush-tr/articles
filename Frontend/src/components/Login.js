@@ -37,11 +37,13 @@ function Login() {
           toast.success(res.data.message);
           setUser({
             isLoggedIn: true,
+            id: res.data.data.user.id,
             name: res.data.data.user.name,
             email: res.data.data.user.email,
             token: res.data.data.token
           });
           localStorage.setItem("token", res.data.data.token);
+          localStorage.setItem("id", res.data.data.user.id);
           localStorage.setItem("name", res.data.data.user.name);
           localStorage.setItem("email", res.data.data.user.email);
           history.goBack();

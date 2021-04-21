@@ -1,9 +1,17 @@
 import React from 'react'
 import Moment from "react-moment";
+import { useHistory } from 'react-router';
 
 const ArticleListItem = ({article}) => {
+
+    const history = useHistory();
+
+    const openArticle = () => {
+        history.push("/article/" + article._id);
+    }
+
     return (
-        <div className="article-list-item">
+        <div className="article-list-item" onClick={openArticle}>
             <div className="card-body">
                 <img className="card-img-top" src="https://picsum.photos/200/200" alt="Random pic" />
                 <div className="card-content">
