@@ -52,7 +52,7 @@ const articleSchema = new Schema({
     }],
     reports: [{
         type: Schema.Types.ObjectId,
-        problem: {
+        message: {
             type: String,
             required: true,
             max: 255,

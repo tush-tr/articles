@@ -53,3 +53,6 @@
 * Made backend to save article only when the auth-token is received
 * Added get recent articles endpoint in backend
 * Added recent articles section on home page
+* Changed article like controller to like as well as unlike article in the backend
+* Protected article like controller, only logged in user can like or unlike.
+

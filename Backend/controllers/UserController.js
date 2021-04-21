@@ -68,6 +68,7 @@ const login = async (req, res) => {
     res.header("auth-token", token)
     
     const userDetails = {
+        id: user._id,
         name: user.name,
         email: user.email,
     }

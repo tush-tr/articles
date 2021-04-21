@@ -49,7 +49,7 @@ const save = async (req, res) => {
     }
 }
 
-const like = async (req, res) => {
+const likeUnlike = async (req, res) => {
 
     // Validate data
     const validationError = articleValidation.validateLikeData(req.body);
@@ -58,32 +58,29 @@ const like = async (req, res) => {
         apiResponse.validationErrorWithData(res, "Validation error!", validationError);
     }
 
-    // incomming datas
-    var articleId = req.body._id;
-    var userid = req.body.userid;
+    var articleId = req.body.articleId;
+    var userId = req.userId;
 
-    // fetching particular article by id
-    Article.findOne({ '_id': articleId }, function (errors, result) {
-        // checking if there is error in fetching data to database
-        if (errors) {
-            apiResponse.errorResponse(res, "Error in fetching data to the database!");
-        }
-        // if everything ok
-        if (result == null) {
-            apiResponse.errorResponse(res, "Data not found with this article id to the database!");
+    try {
+        var article = await Article.findOne({'_id': articleId});
+        // check if the user has already liked the article, unlike it
+        if (article.likes.includes(userId)) {
+            // remove the userId from like array
+            article.likes = article.likes.filter(item => item != userId);
+        } else {
+            article.likes.push(userId);
         }
 
-        // here inserting like to  the particular article
-        result.likes.push({
-            'userid': userid,
-        });
+        const {likes} = await article.save();
 
-        result.save().then(function (result) {
-            apiResponse.successResponse(res, "Liked successfully.");
-        }).catch(function (error) {
-            apiResponse.errorResponse(res, "error occured while storing data to database!");
-        });
-    });
+        apiResponse.successResponseWithData(res, "Article Liked", { likes:likes} );
+
+    } catch(err) {
+        apiResponse.errorResponse(res, err);
+        console.log(err);
+    }
+    
+
 
 }
 
@@ -201,7 +198,7 @@ const getRecent = async (req, res) => {
 }
 
 module.exports.save = save;
-module.exports.like = like;
+module.exports.likeUnlike = likeUnlike;
 module.exports.comment = comment;
 module.exports.report = report;
 module.exports.getOne = getOne;

@@ -3,8 +3,7 @@ const Joi = require("@hapi/joi");
 // Validation for liked data
 const validateLikeData = (data) => {
     const schema = Joi.object({
-        _id: Joi.string().required(),
-        userid: Joi.string().required()
+        articleId: Joi.string().required()
     });
 
     const { error } = schema.validate(data);
@@ -17,8 +16,8 @@ const validateLikeData = (data) => {
 // Validation for Commented data
 const validateCommentData = (data) => {
     const schema = Joi.object({
-        _id: Joi.string().required(),
-        userid: Joi.string().required(),
+        articleId: Joi.string().required(),
+        userId: Joi.string().required(),
         comment: Joi.string().required()
     });
 
@@ -33,9 +32,9 @@ const validateCommentData = (data) => {
 // Validation for report data
 const validateReportData = (data) => {
     const schema = Joi.object({
-        _id: Joi.string().required(),
-        userid: Joi.string().required(),
-        problem: Joi.string().required()
+        articleId: Joi.string().required(),
+        userId: Joi.string().required(),
+        message: Joi.string().required()
     });
 
     const { error } = schema.validate(data);
