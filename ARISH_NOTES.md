@@ -54,5 +54,10 @@
 * Added get recent articles endpoint in backend
 * Added recent articles section on home page
 * Changed article like controller to like as well as unlike article in the backend
-* Protected article like controller, only logged in user can like or unlike.
+* Protected article like controller, only logged in user can like or unlike
+* Connect like button of article page to backend
+
+## 22 APR, 2021
+* Protected the article comment controller , only logged in user can comment
+* Made the comment controller to send the current comment in response
 

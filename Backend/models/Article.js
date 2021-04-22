@@ -37,7 +37,6 @@ const articleSchema = new Schema({
         ref: "User"
     }],
     comments: [{
-        type: Schema.Types.ObjectId,
         comment: {
             type: String,
             required: true,
@@ -48,7 +47,10 @@ const articleSchema = new Schema({
             type: Date,
             default: Date.now,
         },
-        ref: "User"
+        postedBy: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        }
     }],
     reports: [{
         type: Schema.Types.ObjectId,

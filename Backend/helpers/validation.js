@@ -17,7 +17,6 @@ const validateLikeData = (data) => {
 const validateCommentData = (data) => {
     const schema = Joi.object({
         articleId: Joi.string().required(),
-        userId: Joi.string().required(),
         comment: Joi.string().required()
     });
 

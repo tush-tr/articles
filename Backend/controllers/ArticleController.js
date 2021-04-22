@@ -89,7 +89,7 @@ const getOne = async (req, res) => {
     const articleId = req.params.id;
 
     try {
-        const article = await Article.find({_id: articleId}).populate('author', '_id name');
+        const article = await Article.find({_id: articleId}).populate('author', '_id name').populate('comments.postedBy', '_id name');
         if (article.length == 0) {
             apiResponse.successResponse(res, "Article not found");
         } else {
@@ -112,33 +112,24 @@ const comment = async (req, res) => {
     }
 
     // incomming datas
-    var articleId = req.body._id;
-    var userid = req.body.userid;
-    var commentData = req.body.comment;
+    var articleId = req.body.articleId;
+    var userId = req.userId;
+    var comment = req.body.comment;
 
-    // fetching particular article by id
-    Article.findOne({ '_id': articleId }, function (errors, result) {
-        // checking if there is error in fetching data to database
-        if (errors) {
-            apiResponse.errorResponse(res, "Error in fetching data to the database!");
-        }
-        // if everything ok
-        if (result == null) {
-            apiResponse.errorResponse(res, "Data not found with this article id to the database!");
-        }
-
-        // here inserting comment to  the particular article
-        result.comments.push({
-            'userid': userid,
-            'comment': commentData,
+    try {
+        var article = await Article.findOne({_id: articleId});
+        
+        article.comments.push({
+           comment:  comment,
+           postedBy: userId
         });
+        const {comments} = await article.save();
 
-        result.save().then(function (result) {
-            apiResponse.successResponse(res, "Commented successfully.");
-        }).catch(function (error) {
-            apiResponse.errorResponse(res, "error occured while storing data to database!");
-        });
-    });
+        apiResponse.successResponseWithData(res, "Comment successful", { lastComment: comments[comments.length - 1]} );
+    } catch(err) {
+        apiResponse.errorResponse(res, err);
+        console.log(err);
+    }
 
 }
 
@@ -184,7 +175,12 @@ const report = async (req, res) => {
 const getRecent = async (req, res) => {
 
     try {
-        const articles = await Article.find().select('_id title text tags readTime likes comments publishDate', ).sort({ publishDate: -1 }).limit(10).populate('author', '_id name');
+        const articles = await Article.find()
+        .select('_id title text tags readTime likes comments publishDate', )
+        .sort({ publishDate: -1 })
+        .limit(10)
+        .populate('author', '_id name')
+        .populate('comments.postedBy', '_id name')
         if (articles.length == 0) {
             apiResponse.successResponse(res, "Articles not found");
         } else {
