@@ -505,11 +505,13 @@ footer .copyright {
 
 .article .like-btn-layout {
   margin-left: -25px;
+  position: relative;
 }
 
 .article .like-count {
-  margin-top: -70px;
-  margin-left: 73px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);;
   color: rgba(117, 117, 117, 1);
 }
 
@@ -566,4 +568,16 @@ footer .copyright {
 
 .article-list-item .card-content .card-title {
   margin-top: 10px;
+}
+
+.comment-box .new-comment .comment-textarea {
+  width: 100%;
+}
+
+.comment-box .new-comment .comment-submit-btn {
+  margin: 10px;
+  border-radius: 25px;
+  padding: 8px 16px;
+  font-size: 10px;
+  font-weight: 600;
 }

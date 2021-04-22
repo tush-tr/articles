@@ -6,7 +6,7 @@ import Output from 'editorjs-react-renderer';
 import Heart from "react-animated-heart";
 import {UserContext} from "../contexts/UserContext";
 import { toast } from 'react-toastify';
-
+import CommentBox from "./CommentBox"
 
 const Article = () => {
 
@@ -70,8 +70,9 @@ const Article = () => {
             </div>
             <div className="like-btn-layout">
                 <Heart isClick={isLiked} onClick={likeArticle}  />
-                <div className="like-count">{ likesCount }</div>
+                <span className="like-count">{ likesCount } { likesCount !== 1 ? "Likes" : "Like" }</span>
             </div>
+            <CommentBox comments={article.comments} articleId={article._id} />
         </div>
     )
 }

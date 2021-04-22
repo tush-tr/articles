@@ -60,4 +60,5 @@
 ## 22 APR, 2021
 * Protected the article comment controller , only logged in user can comment
 * Made the comment controller to send the current comment in response
+* Created a CommentBox component and added it to the Article page, styling of the component is remaining
 
