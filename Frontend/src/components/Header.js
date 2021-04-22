@@ -39,7 +39,7 @@ function Header() {
                             <Link className="nav-link" to="/">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/">About</Link>
+                            <Link className="nav-link" to="/About">About</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/article/create">Write</Link>

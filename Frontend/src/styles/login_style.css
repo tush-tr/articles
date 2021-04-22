@@ -123,3 +123,27 @@ body {
   color: cornflowerblue;
   text-decoration: none;
 }
+
+.about-container {
+  background-image: url('https://64.media.tumblr.com/b91f1aa9ef50cdd5f1307b6b87074d17/tumblr_oxjsx5KWQ91u9ooogo1_540.gifv');
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+ 
+}
+.about-container h1,h3{
+  text-align: center;
+  color: rgba(248, 245, 245, 0.815);
+  padding: 20px;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+.about-container p{
+  text-align: center;
+  color: rgba(248, 245, 245, 0.815);
+  padding: 10px;
+  font-size: large;
+  padding-left: 4cm;
+  padding-right: 4cm;
+}

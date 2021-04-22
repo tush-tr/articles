@@ -10,6 +10,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import About from "./components/About";
 import { UserProvider } from "./contexts/UserContext";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/Signup" component={Signup} />
                   <Route path="/article/create" component={ArticleCreate} />
+                  <Route path="/About" component={About} />
                   <Route path="/article/:id" component={Article} />
               </Switch>
             </div>
