@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
+  align-items: center;
+  align-content: center;
+  
+}
+
+.Contact-screen {
+    background-image: url('https://cdn.dribbble.com/users/1892398/screenshots/10759724/media/ceeb42b2560ab0ea16ca465bb3acd478.jpg');
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;   
+    align-items: center;
+    justify-content: center;
+    
+  }
+  .heading-contact {
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .Contact-screen-1 {
+    padding-top: 30px;
+    Padding:30px;   
+    background-color:hsla(0, 4%, 15%, 0.6);    
+    min-width: 400px;
+    max-width: 600px;
+    margin-top: 80px;
+    padding-bottom: 30px;
+    border: 2px solid black;
+    color:white;  
+}
+
+.input-group-contact {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    color:black;
+  }
+  .input-group-contact label {
+    color: white;
+    
+    margin-bottom: 7px;
+  }
+  .input-group-contact input {
+    padding: 0.1em 0.25em;
+    background-color: white;    
+    border: 1px solid hsl(201, 100%, 6%);
+    outline: none;
+    border-radius: 5px;
+    color: white;    
+    width: 400px;
+  }
+  .contact-button {
+    padding: 10px 30px;
+    
+    width: 400px;
+    border-radius: 5px;
+    background: hsla(201, 100%, 50%, 0.1);
+    border: 1px solid black;
+    outline: none;
+    color: white;
+    
+    margin-top: 20px;
+    cursor: pointer;
+  }

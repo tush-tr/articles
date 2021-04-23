@@ -43,7 +43,7 @@ function Header() {
                             <Link className="nav-link" to="/article/create">Write</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/">Contact</Link>
+                            <Link className="nav-link" to="/contact">Contact</Link>
                         </li>
                         { user.isLoggedIn?
                             <li className="nav-item dropdown">
