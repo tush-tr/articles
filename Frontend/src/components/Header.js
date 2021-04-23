@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import { useHistory } from "react-router-dom";
@@ -52,6 +52,7 @@ function Header() {
                                 </div>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <Link className="dropdown-item" to="/profile">Profile</Link>
+                                    <Link className="dropdown-item" to="/settings">Settings</Link>
                                     <button className="dropdown-item" onClick={logout}>Logout</button>
                                 </div>
                             </li> 

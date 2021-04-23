@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { registerValidation, loginValidation } = require("../helpers/validation");
+const {registerValidation, loginValidation} = require("../helpers/validation");
 const apiResponse = require("../helpers/apiResponse");
 
 const register = async (req, res) => {
@@ -33,7 +33,7 @@ const register = async (req, res) => {
     try {
         // save user and return response with user id
         const savedUser = await user.save();
-        apiResponse.successResponseWithData(res, "Registration successful.", {user_id: savedUser._id});
+        apiResponse.successResponseWithData(res, "Registration successful.", {user_id: savedUser._id}); 
     } catch (err) {
         apiResponse.errorResponse(res, err);
     }
@@ -66,14 +66,17 @@ const login = async (req, res) => {
     // create token
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
     res.header("auth-token", token)
-    
-    const userDetails = {
-        name: user.name,
-        email: user.email,
-    }
 
-    apiResponse.successResponseWithData(res, "You are now logged in.", {user: userDetails, token: token});
+    // remove password from user object before sending response
+    user["password"] = null;
+
+    apiResponse.successResponseWithData(res, "Login successful.", {user: user, token: token});
+}
+//save details of user(Settings)
+const savedetails = async (req, res) => {
+
 }
 
 module.exports.register = register;
 module.exports.login = login;
+module.exports.savedetails = savedetails;

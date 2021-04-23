@@ -11,7 +11,7 @@ body {
 }
 
 .full-screen-container {
-  background-image: url('https://images.unsplash.com/photo-1573496782646-e8d943a4bdd1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1650&q=80');
+  background-image: url('https://cdn.dribbble.com/users/1355613/screenshots/12585865/media/5bb86f4446b33a7a4624db3660398cd8.jpg?compress=1&resize=1000x750');
   height: 100vh;
   width: 100%;
   background-size: cover;
@@ -68,6 +68,7 @@ body {
   border-radius: 5px;
   color: #fff;
   font-weight: lighter;
+  width:400px;
 }
 
 .input-group input:focus {
