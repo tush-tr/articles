@@ -66,6 +66,12 @@ const login = async (req, res) => {
     // create token
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
     res.header("auth-token", token)
+    
+    const userDetails = {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+    }
 
     // remove password from user object before sending response
     user["password"] = null;

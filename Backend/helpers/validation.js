@@ -3,8 +3,7 @@ const Joi = require("@hapi/joi");
 // Validation for liked data
 const validateLikeData = (data) => {
     const schema = Joi.object({
-        _id: Joi.string().required(),
-        userid: Joi.string().required()
+        articleId: Joi.string().required()
     });
 
     const { error } = schema.validate(data);
@@ -17,8 +16,7 @@ const validateLikeData = (data) => {
 // Validation for Commented data
 const validateCommentData = (data) => {
     const schema = Joi.object({
-        _id: Joi.string().required(),
-        userid: Joi.string().required(),
+        articleId: Joi.string().required(),
         comment: Joi.string().required()
     });
 
@@ -33,9 +31,9 @@ const validateCommentData = (data) => {
 // Validation for report data
 const validateReportData = (data) => {
     const schema = Joi.object({
-        _id: Joi.string().required(),
-        userid: Joi.string().required(),
-        problem: Joi.string().required()
+        articleId: Joi.string().required(),
+        userId: Joi.string().required(),
+        message: Joi.string().required()
     });
 
     const { error } = schema.validate(data);
@@ -93,9 +91,24 @@ const articleValidation = (data) => {
     return;
 }
 
+const adminLoginValidation = (data) => {
+    const schema = Joi.object({
+        username: Joi.string().min(6).required(),
+        password: Joi.string().min(6).required()
+    });
+
+    const { error } = schema.validate(data);
+
+    if (error) {
+        return error.details[0].message;
+    }
+    return;
+}
+
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
 module.exports.articleValidation = articleValidation;
 module.exports.validateLikeData = validateLikeData;
 module.exports.validateCommentData = validateCommentData;
 module.exports.validateReportData = validateReportData;
+module.exports.adminLoginValidation = adminLoginValidation;

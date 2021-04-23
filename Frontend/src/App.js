@@ -13,6 +13,8 @@ import Signup from "./components/Signup";
 import Profile from "./components/Profile";
 import Settings from "./components/Settings";
 import Contact from "./components/Contact";
+import About from "./components/About";
+
 import { UserProvider } from "./contexts/UserContext";
 
 function App() {
@@ -30,6 +32,7 @@ function App() {
                   <Route exact path="/settings" component={Settings} />               
                   <Route exact path="/Signup" component={Signup} />
                   <Route path="/article/create" component={ArticleCreate} />
+                  <Route path="/About" component={About} />
                   <Route path="/article/:id" component={Article} />
               </Switch>
             </div>

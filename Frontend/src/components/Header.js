@@ -13,11 +13,13 @@ function Header() {
     const logout = () => {
         setUser({
             isLoggedIn: false,
+            id: "",
             name: "",
             email: "",
             token: ""
         });
         localStorage.removeItem("token");
+        localStorage.removeItem("id");
         localStorage.removeItem("name");
         localStorage.removeItem("email");
         history.push("/");
@@ -37,7 +39,7 @@ function Header() {
                             <Link className="nav-link" to="/">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/">About</Link>
+                            <Link className="nav-link" to="/About">About</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/article/create">Write</Link>
@@ -45,7 +47,7 @@ function Header() {
                         <li className="nav-item">
                             <Link className="nav-link" to="/contact">Contact</Link>
                         </li>
-                        { user.isLoggedIn?
+                        { user.isLoggedIn ?
                             <li className="nav-item dropdown">
                                 <div className="nav-link dropdown-toggle" id="navbar-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     { user.name }

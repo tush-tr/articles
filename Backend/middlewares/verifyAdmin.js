@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const apiResponse = require("../helpers/apiResponse");
 
 // Restricts Unauthorized access
-// saves user id in the request object if token is valid else respond with 'Access Denied'
+// checks if token contain role as admin
 module.exports = function(req, res, next) {
 
     // take token from header
@@ -13,11 +13,9 @@ module.exports = function(req, res, next) {
     try {
         // check if token is valid, throws error for invalid token
         const verified = jwt.verify(token, process.env.TOKEN_SECRET);
-        // verified is of the form {_id: ..., iat: ...}
-
-        // store the user id in the request object
-        req.userId = verified._id;
+        // verified is of the form {role: ..., iat: ...}
         
+        if (verified.role != 'admin') return apiResponse.unauthorizedResponse(res, "Access Denied!");
 
         next();
     } catch (err) {

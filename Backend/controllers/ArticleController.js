@@ -5,7 +5,7 @@ const apiResponse = require("../helpers/apiResponse");
 // const { articleValidation } = require("../helpers/validation");
 const articleValidation = require("../helpers/validation");
 
-const saveArticle = async (req, res) => {
+const save = async (req, res) => {
 
     // Validate article
     const validationError = articleValidation.articleValidation(req.body.article);
@@ -23,7 +23,8 @@ const saveArticle = async (req, res) => {
         title: req.body.article.title,
         text: req.body.article.text,
         readTime: readTimeText,
-        tags: req.body.article.tags
+        tags: req.body.article.tags,
+        author: req.userId
     });
 
     if (req.body.action == "save") {
@@ -48,7 +49,7 @@ const saveArticle = async (req, res) => {
     }
 }
 
-const like = async (req, res) => {
+const likeUnlike = async (req, res) => {
 
     // Validate data
     const validationError = articleValidation.validateLikeData(req.body);
@@ -57,41 +58,38 @@ const like = async (req, res) => {
         apiResponse.validationErrorWithData(res, "Validation error!", validationError);
     }
 
-    // incomming datas
-    var articleId = req.body._id;
-    var userid = req.body.userid;
+    var articleId = req.body.articleId;
+    var userId = req.userId;
 
-    // fetching particular article by id
-    Article.findOne({ '_id': articleId }, function (errors, result) {
-        // checking if there is error in fetching data to database
-        if (errors) {
-            apiResponse.errorResponse(res, "Error in fetching data to the database!");
-        }
-        // if everything ok
-        if (result == null) {
-            apiResponse.errorResponse(res, "Data not found with this article id to the database!");
+    try {
+        var article = await Article.findOne({'_id': articleId});
+        // check if the user has already liked the article, unlike it
+        if (article.likes.includes(userId)) {
+            // remove the userId from like array
+            article.likes = article.likes.filter(item => item != userId);
+        } else {
+            article.likes.push(userId);
         }
 
-        // here inserting like to  the particular article
-        result.likes.push({
-            'userid': userid,
-        });
+        const {likes} = await article.save();
 
-        result.save().then(function (result) {
-            apiResponse.successResponse(res, "Liked successfully.");
-        }).catch(function (error) {
-            apiResponse.errorResponse(res, "error occured while storing data to database!");
-        });
-    });
+        apiResponse.successResponseWithData(res, "Article Liked", { likes:likes} );
+
+    } catch(err) {
+        apiResponse.errorResponse(res, err);
+        console.log(err);
+    }
+    
+
 
 }
 
-const getArticle = async (req, res) => {
+const getOne = async (req, res) => {
 
     const articleId = req.params.id;
 
     try {
-        const article = await Article.find({_id: articleId});
+        const article = await Article.find({_id: articleId}).populate('author', '_id name').populate('comments.postedBy', '_id name');
         if (article.length == 0) {
             apiResponse.successResponse(res, "Article not found");
         } else {
@@ -114,33 +112,24 @@ const comment = async (req, res) => {
     }
 
     // incomming datas
-    var articleId = req.body._id;
-    var userid = req.body.userid;
-    var commentData = req.body.comment;
+    var articleId = req.body.articleId;
+    var userId = req.userId;
+    var comment = req.body.comment;
 
-    // fetching particular article by id
-    Article.findOne({ '_id': articleId }, function (errors, result) {
-        // checking if there is error in fetching data to database
-        if (errors) {
-            apiResponse.errorResponse(res, "Error in fetching data to the database!");
-        }
-        // if everything ok
-        if (result == null) {
-            apiResponse.errorResponse(res, "Data not found with this article id to the database!");
-        }
-
-        // here inserting comment to  the particular article
-        result.comments.push({
-            'userid': userid,
-            'comment': commentData,
+    try {
+        var article = await Article.findOne({_id: articleId});
+        
+        article.comments.push({
+           comment:  comment,
+           postedBy: userId
         });
+        const {comments} = await article.save();
 
-        result.save().then(function (result) {
-            apiResponse.successResponse(res, "Commented successfully.");
-        }).catch(function (error) {
-            apiResponse.errorResponse(res, "error occured while storing data to database!");
-        });
-    });
+        apiResponse.successResponseWithData(res, "Comment successful", { lastComment: comments[comments.length - 1]} );
+    } catch(err) {
+        apiResponse.errorResponse(res, err);
+        console.log(err);
+    }
 
 }
 
@@ -182,9 +171,32 @@ const report = async (req, res) => {
     });
 
 }
-module.exports.saveArticle = saveArticle;
-module.exports.like = like;
+
+const getRecent = async (req, res) => {
+
+    try {
+        const articles = await Article.find()
+        .select('_id title text tags readTime likes comments publishDate', )
+        .sort({ publishDate: -1 })
+        .limit(10)
+        .populate('author', '_id name')
+        .populate('comments.postedBy', '_id name')
+        if (articles.length == 0) {
+            apiResponse.successResponse(res, "Articles not found");
+        } else {
+            apiResponse.successResponseWithData(res, "Articles found", {articles});
+        }
+    } catch (err) {
+        apiResponse.errorResponse(res, err);
+        console.log(err);
+    }
+
+}
+
+module.exports.save = save;
+module.exports.likeUnlike = likeUnlike;
 module.exports.comment = comment;
 module.exports.report = report;
-module.exports.getArticle = getArticle;
+module.exports.getOne = getOne;
+module.exports.getRecent = getRecent;
 
