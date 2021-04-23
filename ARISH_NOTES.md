@@ -62,3 +62,6 @@
 * Made the comment controller to send the current comment in response
 * Created a CommentBox component and added it to the Article page, styling of the component is remaining
 
+## 23 APR, 2021
+* add endpoint /admin/login for admin login in backend
+

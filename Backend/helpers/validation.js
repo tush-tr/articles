@@ -91,9 +91,24 @@ const articleValidation = (data) => {
     return;
 }
 
+const adminLoginValidation = (data) => {
+    const schema = Joi.object({
+        username: Joi.string().min(6).required(),
+        password: Joi.string().min(6).required()
+    });
+
+    const { error } = schema.validate(data);
+
+    if (error) {
+        return error.details[0].message;
+    }
+    return;
+}
+
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
 module.exports.articleValidation = articleValidation;
 module.exports.validateLikeData = validateLikeData;
 module.exports.validateCommentData = validateCommentData;
 module.exports.validateReportData = validateReportData;
+module.exports.adminLoginValidation = adminLoginValidation;

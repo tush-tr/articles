@@ -1,9 +1,11 @@
 const app = require("express")();
 const userRouter = require("./user");
+const adminRouter = require("./admin");
 const articleRouter = require("./article");
 const ImageUploadController = require("../controllers/ImageUploadController");
 
 app.use("/user", userRouter);
+app.use("/admin", adminRouter);
 app.use("/article", articleRouter);
 
 // For EditorJs image upload
