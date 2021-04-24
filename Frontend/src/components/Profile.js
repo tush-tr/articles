@@ -7,7 +7,11 @@ import { useHistory } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 
 function Profile(){
-
+    return (
+        <div>
+            Profile
+        </div>
+    );
 }
 
 export default Profile;

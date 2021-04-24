@@ -76,7 +76,7 @@ const login = async (req, res) => {
     // remove password from user object before sending response
     user["password"] = null;
 
-    apiResponse.successResponseWithData(res, "Login successful.", {user: user, token: token});
+    apiResponse.successResponseWithData(res, "Login successful.", {user: userDetails, token: token});
 }
 //save details of user(Settings)
 const savedetails = async (req, res) => {

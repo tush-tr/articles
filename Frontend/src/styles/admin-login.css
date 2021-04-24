@@ -1,0 +1,16 @@
+.form-signin {
+    text-align: center;
+    width: 30%;
+    margin: 50px auto;
+}
+
+.form-signin input {
+    margin-bottom: 30px;
+    border-radius: 20px;
+    padding: 10px
+}
+
+.form-signin button {
+    border-radius: 20px;
+    padding: 10px
+}
