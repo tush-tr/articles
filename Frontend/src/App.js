@@ -14,18 +14,22 @@ import Profile from "./components/Profile";
 import Settings from "./components/Settings";
 import Contact from "./components/Contact";
 import About from "./components/About";
-
 import { UserProvider } from "./contexts/UserContext";
+import { AdminProvider } from "./contexts/AdminContext";
 import AdminLogin from "./components/AdminLogin";
+import AdminDashboard from "./components/AdminDashboard";
 
 function App(props) {
   return (
     <div className="App">
-      <UserProvider>
-        <BrowserRouter>
-          <Switch>
-            <Route path="/admin/login" component={AdminLogin} />
-            <div>
+      <BrowserRouter>
+        <Switch>
+          <AdminProvider>
+          <Route path="/admin/login" component={AdminLogin} />
+          <Route path="/admin/dashboard" component={AdminDashboard} />
+          </AdminProvider>
+          <div>
+            <UserProvider>
               <div className="container main-container">
                 <Header />
                 <Route exact path="/" component={Home} />
@@ -38,12 +42,12 @@ function App(props) {
                 <Route path="/About" component={About} />
                 <Route path="/article/:id" component={Article} />
               </div>
-              <Footer />
-            </div>
-          </Switch>
-        </BrowserRouter>
-        <ToastContainer />
-      </UserProvider>
+            </UserProvider> 
+            <Footer />
+          </div>
+        </Switch>
+      </BrowserRouter>
+      <ToastContainer />
     </div>
   );
 }

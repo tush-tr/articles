@@ -63,5 +63,9 @@
 * Created a CommentBox component and added it to the Article page, styling of the component is remaining
 
 ## 23 APR, 2021
-* add endpoint /admin/login for admin login in backend
+* Added endpoint /admin/login for admin login in backend
+
+## 24 APR, 2021
+* Added Admin Login component to frontend
+* Connected Admin Login with backend
 
