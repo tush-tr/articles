@@ -41,11 +41,11 @@ const Article = () => {
 
     const likeArticle = () => {
 
-        if (user.isLoggedIn) {
+        if (user.isUserLoggedIn) {
             const body = {
                 articleId: article._id
             }
-            api.post("/article/like-unlike", body, { headers: { "auth-token": user.token }})
+            api.post("/article/like-unlike", body, { headers: { "auth-token": user.user_token }})
             .then((res) => {
                 setIsLiked(!isLiked);
                 setLikesCount(res.data.data.likes.length);

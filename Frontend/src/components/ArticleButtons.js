@@ -31,7 +31,7 @@ function ArticleButtons() {
             return;
         }
 
-        await api.post("/article", body, { headers: { "auth-token": user.token }})
+        await api.post("/article", body, { headers: { "auth-token": user.user_token }})
         .then((res) => {
             const status = res.data.status;
             if (status === 0) {
@@ -64,7 +64,7 @@ function ArticleButtons() {
             return;
         }
 
-        await api.post("/article", body, { headers: { "auth-token": user.token }})
+        await api.post("/article", body, { headers: { "auth-token": user.user_token }})
         .then((res) => {
             const status = res.data.status;
             if (status === 0) {

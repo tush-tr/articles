@@ -69,3 +69,6 @@
 * Added Admin Login component to frontend
 * Connected Admin Login with backend
 
+## 25 APR, 2021
+* Added template for admin dashboard
+

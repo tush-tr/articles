@@ -4,17 +4,20 @@ export const UserContext = createContext();
 
 export const UserProvider = (props) => {
 
-    const token = localStorage.getItem("token");
+    const admin_token = localStorage.getItem("admin_token");
+    const user_token = localStorage.getItem("user_token");
     const name = localStorage.getItem("name");
     const email = localStorage.getItem("email");
     const id = localStorage.getItem("id");
 
     const [user, setUser] = useState({
-        isLoggedIn: token ? true : false,
+        isUserLoggedIn: user_token ? true : false,
+        isAdminLoggedIn: admin_token ? true : false,
         id: id,
         name: name,
         email: email,
-        token: token
+        user_token: user_token,
+        admin_token: admin_token
     });
 
     return (

@@ -15,12 +15,12 @@ const CommentBox = ({ articleId, comments }) => {
         if (newComment === undefined|| newComment === "")
             return;
 
-            if (user.isLoggedIn) {
+            if (user.isUserLoggedIn) {
                 const body = {
                     articleId: articleId,
                     comment: newComment
                 }
-                api.post("/article/comment", body, { headers: { "auth-token": user.token }})
+                api.post("/article/comment", body, { headers: { "auth-token": user.user_token }})
                 .then((res) => {
                     const lastComment = res.data.data.lastComment;
                     lastComment.postedBy = {

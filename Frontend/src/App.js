@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route, withRouter } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
@@ -15,21 +15,18 @@ import Settings from "./components/Settings";
 import Contact from "./components/Contact";
 import About from "./components/About";
 import { UserProvider } from "./contexts/UserContext";
-import { AdminProvider } from "./contexts/AdminContext";
 import AdminLogin from "./components/AdminLogin";
 import AdminDashboard from "./components/AdminDashboard";
 
 function App(props) {
   return (
     <div className="App">
+    <UserProvider>
       <BrowserRouter>
         <Switch>
-          <AdminProvider>
-          <Route path="/admin/login" component={AdminLogin} />
-          <Route path="/admin/dashboard" component={AdminDashboard} />
-          </AdminProvider>
+              <Route exact path="/admin/login" component={AdminLogin} />
+              <Route exact path="/admin/dashboard" component={AdminDashboard} />
           <div>
-            <UserProvider>
               <div className="container main-container">
                 <Header />
                 <Route exact path="/" component={Home} />
@@ -42,12 +39,12 @@ function App(props) {
                 <Route path="/About" component={About} />
                 <Route path="/article/:id" component={Article} />
               </div>
-            </UserProvider> 
             <Footer />
           </div>
         </Switch>
       </BrowserRouter>
       <ToastContainer />
+            </UserProvider> 
     </div>
   );
 }

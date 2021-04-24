@@ -15,7 +15,7 @@ function Login() {
 
   const [ user, setUser ] = useContext(UserContext);
 
-  if (user.isLoggedIn) {
+  if (user.isUserLoggedIn) {
     history.push("/");
   }
 
@@ -36,13 +36,13 @@ function Login() {
         } else {
           toast.success(res.data.message);
           setUser({
-            isLoggedIn: true,
+            isUserLoggedIn: true,
             id: res.data.data.user.id,
             name: res.data.data.user.name,
             email: res.data.data.user.email,
-            token: res.data.data.token
+            user_token: res.data.data.token
           });
-          localStorage.setItem("token", res.data.data.token);
+          localStorage.setItem("user_token", res.data.data.token);
           localStorage.setItem("id", res.data.data.user.id);
           localStorage.setItem("name", res.data.data.user.name);
           localStorage.setItem("email", res.data.data.user.email);

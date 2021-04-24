@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&display=swap');
 
+/* Styles should not be applied to whole website, it messes the current website styles */
 * {
-  box-sizing: border-box;
+  /* box-sizing: border-box;
   font-family: 'Quicksand', sans-serif;
   align-items: center;
-  align-content: center;
+  align-content: center; */
 }
   .full-screen {
     background-image: url('Images/1.png');

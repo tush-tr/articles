@@ -17,7 +17,7 @@ function Signup() {
 
   const [ user, setUser ] = useContext(UserContext);
 
-  if (user.isLoggedIn) {
+  if (user.isUserLoggedIn) {
     history.push("/");
   }
 

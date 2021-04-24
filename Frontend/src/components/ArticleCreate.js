@@ -15,7 +15,7 @@ function ArticleCreate() {
 
   const history = useHistory();
 
-  if (!user.isLoggedIn) {
+  if (!user.isUserLoggedIn) {
     toast.warning("Please login to write a article.");
     history.push("/login");
   }

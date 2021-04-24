@@ -3,16 +3,20 @@ import "../styles/admin-login.css";
 import { toast } from "react-toastify";
 import api from "../helpers/api";
 import { useHistory } from "react-router-dom";
-import { AdminContext } from "../contexts/AdminContext";
+import { UserContext } from "../contexts/UserContext";
 
 const AdminLogin = () => {
 
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
 
-  const [ admin, setAdmin] = useContext(AdminContext);
+  const [ user, setUser] = useContext(UserContext);
 
   const history = useHistory();
+
+  if (user.isAdminLoggedIn) {
+      history.push("/admin/dashboard");
+  }
 
   const loginAdmin = (e) => {
     e.preventDefault();
@@ -25,16 +29,11 @@ const AdminLogin = () => {
           toast.warning(res.data.data);
         } else {
           toast.success(res.data.message);
-          setAdmin({
-            isLoggedIn: true,
-            token: res.data.data.token
+          setUser({
+            isAdminLoggedIn: true,
+            admin_token: res.data.data.token
           });
           localStorage.setItem("admin_token", res.data.data.token);
-          // logout normal user if logged in
-          localStorage.removeItem("token");
-          localStorage.removeItem("id");
-          localStorage.removeItem("name");
-          localStorage.removeItem("email");
           // go to admin dashboard
           history.push("/admin/dashboard");
         }
