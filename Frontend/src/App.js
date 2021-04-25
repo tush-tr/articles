@@ -16,7 +16,7 @@ import Contact from "./components/Contact";
 import About from "./components/About";
 import { UserProvider } from "./contexts/UserContext";
 import AdminLogin from "./components/AdminLogin";
-import AdminDashboard from "./components/AdminDashboard";
+import Admin from "./components/Admin";
 
 function App(props) {
   return (
@@ -25,7 +25,9 @@ function App(props) {
       <BrowserRouter>
         <Switch>
               <Route exact path="/admin/login" component={AdminLogin} />
-              <Route exact path="/admin/dashboard" component={AdminDashboard} />
+              <Route path="/admin">
+                <Admin />
+              </Route>
           <div>
               <div className="container main-container">
                 <Header />

@@ -72,3 +72,4 @@
 ## 25 APR, 2021
 * Added template for admin dashboard
 * Added route /admin/dashboard to get dashboard data from backend
+* Connected AdminDashbaord component to backend

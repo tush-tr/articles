@@ -43,9 +43,9 @@ const AdminSidebar = () => {
         <hr class="sidebar-divider" />
         <div class="sidebar-heading">Interface</div>
         <li class="nav-item">
-          <Link class="nav-link" to="/admin/all-articles">
+          <Link class="nav-link" to="/admin/published-articles">
             <i class="fas fa-fw fa-scroll"></i>
-            <span>All Articles</span>
+            <span>Published Articles</span>
           </Link>
         </li>
         <li class="nav-item">
@@ -54,12 +54,12 @@ const AdminSidebar = () => {
             <span>To be verified</span>
           </Link>
         </li>
-        <li class="nav-item">
+        {/* <li class="nav-item">
           <Link class="nav-link" to="/admin/reports">
             <i class="fas fa-fw fa-flag"></i>
             <span>Reports</span>
           </Link>
-        </li>
+        </li> */}
         <li class="nav-item">
           <div class="nav-link" to="/admin/reports" onClick={logout}>
             <i class="fas fa-fw fa-sign-out-alt"></i>
