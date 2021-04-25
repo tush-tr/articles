@@ -21,48 +21,48 @@ const AdminSidebar = () => {
   return (
     <div>
       <ul
-        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
         id="accordionSidebar"
       >
         <Link
-          class="sidebar-brand d-flex align-items-center justify-content-center"
+          className="sidebar-brand d-flex align-items-center justify-content-center"
           to="/admin/dashboard"
         >
-          <div class="sidebar-brand-icon">
-            <i class="fas fa-users-cog"></i>
+          <div className="sidebar-brand-icon">
+            <i className="fas fa-users-cog"></i>
           </div>
-          <div class="sidebar-brand-text mx-3">ReaderSpot Admin</div>
+          <div className="sidebar-brand-text mx-3">ReaderSpot Admin</div>
         </Link>
-        <hr class="sidebar-divider my-0" />
-        <li class="nav-item active">
-          <Link class="nav-link" to="/admin/dashboard">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+        <hr className="sidebar-divider my-0" />
+        <li className="nav-item active">
+          <Link className="nav-link" to="/admin/dashboard">
+            <i className="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
           </Link>
         </li>
-        <hr class="sidebar-divider" />
-        <div class="sidebar-heading">Interface</div>
-        <li class="nav-item">
-          <Link class="nav-link" to="/admin/published-articles">
-            <i class="fas fa-fw fa-scroll"></i>
+        <hr className="sidebar-divider" />
+        <div className="sidebar-heading">Interface</div>
+        <li className="nav-item">
+          <Link className="nav-link" to="/admin/published-articles">
+            <i className="fas fa-fw fa-scroll"></i>
             <span>Published Articles</span>
           </Link>
         </li>
-        <li class="nav-item">
-          <Link class="nav-link" to="/admin/to-be-verified-articles">
-            <i class="fas fa-fw fa-user-check"></i>
+        <li className="nav-item">
+          <Link className="nav-link" to="/admin/to-be-verified-articles">
+            <i className="fas fa-fw fa-user-check"></i>
             <span>To be verified</span>
           </Link>
         </li>
-        {/* <li class="nav-item">
-          <Link class="nav-link" to="/admin/reports">
-            <i class="fas fa-fw fa-flag"></i>
+        {/* <li className="nav-item">
+          <Link className="nav-link" to="/admin/reports">
+            <i className="fas fa-fw fa-flag"></i>
             <span>Reports</span>
           </Link>
         </li> */}
-        <li class="nav-item">
-          <div class="nav-link" to="/admin/reports" onClick={logout}>
-            <i class="fas fa-fw fa-sign-out-alt"></i>
+        <li className="nav-item">
+          <div className="nav-link" to="/admin/reports" onClick={logout}>
+            <i className="fas fa-fw fa-sign-out-alt"></i>
             <span>Logout</span>
           </div>
         </li>
