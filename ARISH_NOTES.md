@@ -76,3 +76,4 @@
 * Added controller to get published articles by admin
 * connected AdminPublishArticles component to backend
 * Added controller to get articles for verification by admin
+* connected AdminToBeVerifiedArticles component to backend

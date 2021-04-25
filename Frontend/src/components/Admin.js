@@ -5,6 +5,7 @@ import "../styles/Admin/sb-admin-2.css";
 import AdminSidebar from "./AdminSidebar";
 import AdminDashbaord from "./AdminDashboard";
 import AdminPublishedArticles from "./AdminPublishedArticles";
+import AdminToBeVerifiedArticles from "./AdminToBeVerifiedArticles";
 
 const AdminDashboard = () => {
 
@@ -23,7 +24,8 @@ const AdminDashboard = () => {
             <AdminSidebar />
             <Switch>
                 <Route exact path={`${path}/dashboard`} component={ AdminDashbaord }/>
-                <Route path={`${path}/published-articles`} component={ AdminPublishedArticles } />
+                <Route exact path={`${path}/published-articles`} component={ AdminPublishedArticles } />
+                <Route exact path={`${path}/to-be-verified-articles`} component={ AdminToBeVerifiedArticles } />
             </Switch>
         </div>
     )
