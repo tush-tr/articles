@@ -193,10 +193,29 @@ const getRecent = async (req, res) => {
 
 }
 
+const saved = async (req, res) => {
+
+    const userId = req.userId;
+
+    try {
+        const articles = await Article.find({author: userId, status: "draft"}).populate('author', '_id name pic');
+        if (articles.length == 0) {
+            apiResponse.successResponse(res, "Articles not found");
+        } else {
+            apiResponse.successResponseWithData(res, "Articles found", {articles});
+        }
+    } catch (err) {
+        apiResponse.errorResponse(res, err);
+        console.log(err);
+    }
+
+}
+
 module.exports.save = save;
 module.exports.likeUnlike = likeUnlike;
 module.exports.comment = comment;
 module.exports.report = report;
 module.exports.getOne = getOne;
 module.exports.getRecent = getRecent;
+module.exports.saved = saved;
 

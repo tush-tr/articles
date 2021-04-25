@@ -82,3 +82,6 @@
 * Connected changeArticleStatus and deleteArticle controllers to frontend
 * Added default profile pic of user in User schema
 * Added profile pic of author in Article component and CommentBox component 
+
+## 26 APR, 2021
+* Added controller to get saved articles of a user

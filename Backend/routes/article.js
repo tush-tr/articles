@@ -7,5 +7,6 @@ router.post("/like-unlike", verifyToken, ArticleController.likeUnlike);
 router.post("/comment", verifyToken, ArticleController.comment);
 router.post("/report", ArticleController.report);
 router.get("/recent", ArticleController.getRecent);
+router.get("/saved", verifyToken, ArticleController.saved);
 router.get("/:id", ArticleController.getOne);
 module.exports = router;
