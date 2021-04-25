@@ -64,7 +64,24 @@ const toBeVerifiedArticles = async (req, res) => {
     }
 }
 
+const changeArticleStatus = async (req, res) => {
+    const articleId = req.body.articleId;
+    const newStatus = req.body.newStatus;
+    try {
+        const modified = await Article.updateOne({_id: articleId}, {status: newStatus});
+        if (modified.n == 1) {
+            apiResponse.successResponse(res, "Status changed");
+        } else {
+            apiResponse.errorResponse(res, "Some error occurred");
+        }
+    } catch(err) {
+        console.log(err);
+        apiResponse.errorResponse(res, err);
+    }
+}
+
 module.exports.login = login;
 module.exports.dashboard = dashboard;
 module.exports.publishedArticles = publishedArticles;
 module.exports.toBeVerifiedArticles = toBeVerifiedArticles;
+module.exports.changeArticleStatus = changeArticleStatus;

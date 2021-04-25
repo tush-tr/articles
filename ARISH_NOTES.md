@@ -77,3 +77,4 @@
 * connected AdminPublishArticles component to backend
 * Added controller to get articles for verification by admin
 * connected AdminToBeVerifiedArticles component to backend
+* Added changeArticleStatus controller to admin routes in backend
