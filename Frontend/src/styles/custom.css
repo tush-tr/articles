@@ -487,7 +487,7 @@ footer .copyright {
   margin-top: 100px;
 }
 
-.article .author-pic {
+.author-pic {
   height: 40px;
   width: 40px;
   border-radius: 50%;
@@ -601,4 +601,12 @@ footer .copyright {
 
 .comment-box .comment-text {
   margin: 10px;
+}
+
+.edit-btn {
+  position: absolute;
+  margin-left: -40px;
+  margin-top: 4px;
+  font-size: 2em;
+  color: black;
 }

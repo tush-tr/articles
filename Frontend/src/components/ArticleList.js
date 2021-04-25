@@ -1,20 +1,7 @@
-import React, { useState, useEffect } from "react"
-import api from "../helpers/api";
+import React from "react"
 import ArticleListItem from "./ArticleListItem";
 
-const ArticleList = () => {
-
-    const [articles, setArticles] = useState();
-
-    useEffect(() => {
-        getArticles();
-    }, []);
-
-    const getArticles = async () => {
-        const res = await api.get(`/article/recent`);
-        if (res.data.status === 1 && res.data.data)
-            setArticles(res.data.data.articles)
-    };
+const ArticleList = ({articles}) => {
 
     return (
         <div className='article-list'>

@@ -17,6 +17,7 @@ import About from "./components/About";
 import { UserProvider } from "./contexts/UserContext";
 import AdminLogin from "./components/AdminLogin";
 import Admin from "./components/Admin";
+import SavedArticles from "./components/SavedArticles";
 
 function App(props) {
   return (
@@ -34,6 +35,7 @@ function App(props) {
                 <Route exact path="/" component={Home} />
                 <Route path="/article-create" component={ArticleCreate} />
                 <Route path="/login" component={Login} />
+                <Route path="/saved-articles" component={SavedArticles} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/contact" component={Contact} />
                 <Route path="/settings" component={Settings} />

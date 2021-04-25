@@ -85,3 +85,4 @@
 
 ## 26 APR, 2021
 * Added controller to get saved articles of a user
+* Added SavedArticles component to show saved articles of a user

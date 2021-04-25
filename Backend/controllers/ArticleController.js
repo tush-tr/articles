@@ -179,7 +179,7 @@ const getRecent = async (req, res) => {
         .select('_id title text tags readTime likes comments publishDate', )
         .sort({ publishDate: -1 })
         .limit(10)
-        .populate('author', '_id name')
+        .populate('author', '_id name pic')
         .populate('comments.postedBy', '_id name')
         if (articles.length == 0) {
             apiResponse.successResponse(res, "Articles not found");
