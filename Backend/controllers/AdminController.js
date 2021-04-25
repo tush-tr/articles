@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const apiResponse = require("../helpers/apiResponse");
 const { adminLoginValidation } = require("../helpers/validation");
+const Article = require("../models/Article.js");
 
 const login = (req, res) => {
 
@@ -24,4 +25,22 @@ const login = (req, res) => {
     apiResponse.successResponseWithData(res, "You are now logged in.", {token: token});
 }
 
+const dashboard = async (req, res) => {
+    try {
+        const totalPublished = await Article.find({status: "published"}).countDocuments();
+        const toBeVerified = await Article.find({status: "unpublished"}).countDocuments();
+
+        const response = {
+            totalPublished: totalPublished,
+            toBeVerified: toBeVerified
+        }
+
+        apiResponse.successResponseWithData(res, "Success", response);
+    } catch (err){
+        console.log(err);
+        apiResponse.errorResponse(res, err);
+    }
+}
+
 module.exports.login = login;
+module.exports.dashboard = dashboard;

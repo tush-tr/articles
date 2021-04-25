@@ -15,7 +15,7 @@ module.exports = function(req, res, next) {
         const verified = jwt.verify(token, process.env.TOKEN_SECRET);
         // verified is of the form {role: ..., iat: ...}
         
-        if (verified.role != 'admin') return apiResponse.unauthorizedResponse(res, "Access Denied!");
+        if (verified._id != 'admin') return apiResponse.unauthorizedResponse(res, "Access Denied!");
 
         next();
     } catch (err) {
