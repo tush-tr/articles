@@ -73,4 +73,6 @@
 * Added template for admin dashboard
 * Added route /admin/dashboard to get dashboard data from backend
 * Connected AdminDashbaord component to backend
-* Added contoller to get published articles by admin
+* Added controller to get published articles by admin
+* connected AdminPublishArticles component to backend
+* Added controller to get articles for verification by admin

@@ -51,9 +51,20 @@ const publishedArticles = async (req, res) => {
         console.log(err);
         apiResponse.errorResponse(res, err);
     }
+}
 
+const toBeVerifiedArticles = async (req, res) => {
+    try {
+        const to_be_verified_articles = await Article.find({status: "unpublished"});
+
+        apiResponse.successResponseWithData(res, "Success", to_be_verified_articles);
+    } catch (err){
+        console.log(err);
+        apiResponse.errorResponse(res, err);
+    }
 }
 
 module.exports.login = login;
 module.exports.dashboard = dashboard;
 module.exports.publishedArticles = publishedArticles;
+module.exports.toBeVerifiedArticles = toBeVerifiedArticles;
