@@ -80,8 +80,24 @@ const changeArticleStatus = async (req, res) => {
     }
 }
 
+const deleteArticle = async (req, res) => {
+    const articleId = req.body.articleId;
+    try {
+        const deleted = await Article.deleteOne({_id: articleId});
+        if (deleted.n == 1) {
+            apiResponse.successResponse(res, "Article deleted");
+        } else {
+            apiResponse.errorResponse(res, "Some error occurred");
+        }
+    } catch(err) {
+        console.log(err);
+        apiResponse.errorResponse(res, err);
+    }
+}
+
 module.exports.login = login;
 module.exports.dashboard = dashboard;
 module.exports.publishedArticles = publishedArticles;
 module.exports.toBeVerifiedArticles = toBeVerifiedArticles;
 module.exports.changeArticleStatus = changeArticleStatus;
+module.exports.deleteArticle = deleteArticle;
