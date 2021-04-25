@@ -80,3 +80,4 @@
 * Added changeArticleStatus controller to admin routes in backend
 * Added deleteArticle controller to admin routes in backend
 * Connected changeArticleStatus and deleteArticle controllers to frontend
+* Added default profile pic of user in User schema

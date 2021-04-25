@@ -71,6 +71,7 @@ const login = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        pic: user.pic
     }
 
     // remove password from user object before sending response

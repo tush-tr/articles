@@ -22,7 +22,8 @@ const userSchema = new Schema({
         min: 6
     },
     pic: {
-        type: String
+        type: String,
+        default: "http://localhost:5000/uploads/images/profile/default.png"
     },
     bookmarks: [{
         type: Schema.Types.ObjectId,

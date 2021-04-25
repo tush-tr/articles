@@ -89,7 +89,7 @@ const getOne = async (req, res) => {
     const articleId = req.params.id;
 
     try {
-        const article = await Article.find({_id: articleId}).populate('author', '_id name').populate('comments.postedBy', '_id name');
+        const article = await Article.find({_id: articleId}).populate('author', '_id name pic').populate('comments.postedBy', '_id name pic');
         if (article.length == 0) {
             apiResponse.successResponse(res, "Article not found");
         } else {
