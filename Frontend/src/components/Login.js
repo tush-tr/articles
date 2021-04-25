@@ -34,18 +34,21 @@ function Login() {
         if (status === 0) {
           toast.warning(res.data.data);
         } else {
+          console.log(res.data.data.user);
           toast.success(res.data.message);
           setUser({
             isUserLoggedIn: true,
             id: res.data.data.user.id,
             name: res.data.data.user.name,
             email: res.data.data.user.email,
-            user_token: res.data.data.token
+            user_token: res.data.data.token,
+            pic: res.data.data.user.pic
           });
           localStorage.setItem("user_token", res.data.data.token);
           localStorage.setItem("id", res.data.data.user.id);
           localStorage.setItem("name", res.data.data.user.name);
           localStorage.setItem("email", res.data.data.user.email);
+          localStorage.setItem("pic", res.data.data.user.pic);
           history.goBack();
         }
       }).catch((err) => {
@@ -69,7 +72,7 @@ function Login() {
           <button type="submit" className="login-button">Sign In</button>
           <div className="login-to-register">
             <span>Do not have an account?</span> 
-            <Link to="/Signup"> Register Here</Link>
+            <Link to="/signup"> Register Here</Link>
           </div>
         </form>
       </div>

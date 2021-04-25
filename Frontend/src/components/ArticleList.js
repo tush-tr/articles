@@ -12,7 +12,7 @@ const ArticleList = () => {
 
     const getArticles = async () => {
         const res = await api.get(`/article/recent`);
-        if (res.data.status === 1)
+        if (res.data.status === 1 && res.data.data)
             setArticles(res.data.data.articles)
     };
 

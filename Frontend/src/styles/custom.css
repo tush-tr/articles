@@ -487,6 +487,19 @@ footer .copyright {
   margin-top: 100px;
 }
 
+.article .author-pic {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 1px solid black;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.article .author-name {
+  cursor: pointer;
+}
+
 .react-tagsinput-input {
   font-size: 16px;
 }
@@ -580,4 +593,12 @@ footer .copyright {
   padding: 8px 16px;
   font-size: 10px;
   font-weight: 600;
+}
+
+.comment-box .time {
+  float: right;
+}
+
+.comment-box .comment-text {
+  margin: 10px;
 }

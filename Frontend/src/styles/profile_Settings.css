@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&display=swap");
 
 /* Styles should not be applied to whole website, it messes the current website styles */
 * {
@@ -7,93 +7,87 @@
   align-items: center;
   align-content: center; */
 }
-  .full-screen {
-    background-image: url('Images/1.png');
-    height: 100vh;
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    display: flex;   
-   
-  }
-  .settings-title {
-    color:black;
-    text-align: center;
-    margin: 0;
-    margin-bottom: 40px;
-    font-weight: normal;
-  }
+.full-screen {
+  background-image: url("Images/1.png");
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+}
+.settings-title {
+  color: black;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 40px;
+  font-weight: normal;
+}
 
-  .full-screen-1 {
-    padding-top: 30px;   
-    background-color: hsla(61, 62%, 81%, 0.6);
-    
-    min-width: 400px;
-    max-width: 600px;
-    margin-top: 80px;
-   padding-bottom: 30px;
-    border: 2px solid black;
-    align-content: center;
-    justify-content: center;
-    
-  }
-  .hr-rule {
-    color: black;
-  }
-  .image-button {
-    text-align: center;
-    justify-content: center;
-  }
-  .detail-container {
-   text-align: center;
-  }
+.full-screen-1 {
+  padding-top: 30px;
+  background-color: hsla(61, 62%, 81%, 0.6);
 
-  .choose-file {
-    border: 2px solid black;
-  }
-  .user-image {    
-   margin-left: 45%;
-    background-image: url('Images/avatar.png');
-    background-repeat:no-repeat;
-   background-size:contain;
-   height:60px;
-   width:60px;
-   border-radius: 50%;
-   border: 2px solid black;
-  
-  
-  }
-  .input-group-settings {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-    color:black;
-  }
-  .input-group-settings label {
-    color:black;
-    
-    margin-bottom: 7px;
-  }
-  .input-group-settings input {
-    padding: 0.1em 0.25em;
-    background-color: white;    
-    border: 1px solid hsl(201, 100%, 6%);
-    outline: none;
-    border-radius: 5px;
-    color: black;
-    
-    width: 400px;
-  }
-  .details-button {
-    padding: 10px 30px;
-    
-    width: 400px;
-    border-radius: 5px;
-    background: hsla(201, 100%, 50%, 0.1);
-    border: 1px solid black;
-    outline: none;
-    color:black;
-    
-    margin-top: 20px;
-    cursor: pointer;
-  }
+  min-width: 400px;
+  max-width: 600px;
+  margin-top: 80px;
+  padding-bottom: 30px;
+  border: 2px solid black;
+  align-content: center;
+  justify-content: center;
+}
+.hr-rule {
+  color: black;
+}
+.image-button {
+  text-align: center;
+  justify-content: center;
+}
+.detail-container {
+  text-align: center;
+}
+
+.choose-file {
+  border: 2px solid black;
+}
+.user-image {
+  margin-left: 45%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+.input-group-settings {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  color: black;
+}
+.input-group-settings label {
+  color: black;
+
+  margin-bottom: 7px;
+}
+.input-group-settings input {
+  padding: 0.1em 0.25em;
+  background-color: white;
+  border: 1px solid hsl(201, 100%, 6%);
+  outline: none;
+  border-radius: 5px;
+  color: black;
+  margin: 0 auto;
+  width: 400px;
+}
+.details-button {
+  padding: 10px 30px;
+
+  width: 400px;
+  border-radius: 5px;
+  background: hsla(201, 100%, 50%, 0.1);
+  border: 1px solid black;
+  outline: none;
+  color: black;
+
+  margin-top: 20px;
+  cursor: pointer;
+}

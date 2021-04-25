@@ -37,8 +37,8 @@ function App(props) {
                 <Route path="/profile" component={Profile} />
                 <Route path="/contact" component={Contact} />
                 <Route path="/settings" component={Settings} />
-                <Route path="/Signup" component={Signup} />
-                <Route path="/About" component={About} />
+                <Route path="/signup" component={Signup} />
+                <Route path="/about" component={About} />
                 <Route path="/article/:id" component={Article} />
               </div>
             <Footer />

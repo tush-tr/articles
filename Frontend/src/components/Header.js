@@ -16,12 +16,14 @@ function Header() {
             id: "",
             name: "",
             email: "",
-            user_token: ""
+            user_token: "",
+            pic: ""
         });
         localStorage.removeItem("user_token");
         localStorage.removeItem("id");
         localStorage.removeItem("name");
         localStorage.removeItem("email");
+        localStorage.removeItem("pic");
         history.push("/");
     }
 
@@ -39,7 +41,7 @@ function Header() {
                             <Link className="nav-link" to="/">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/About">About</Link>
+                            <Link className="nav-link" to="/about">About</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/article-create">Write</Link>

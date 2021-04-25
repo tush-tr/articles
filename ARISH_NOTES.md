@@ -81,3 +81,4 @@
 * Added deleteArticle controller to admin routes in backend
 * Connected changeArticleStatus and deleteArticle controllers to frontend
 * Added default profile pic of user in User schema
+* Added profile pic of author in Article component and CommentBox component 

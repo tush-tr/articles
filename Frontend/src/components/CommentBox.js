@@ -9,6 +9,8 @@ const CommentBox = ({ articleId, comments }) => {
     const [ newComment, setNewComment ] = useState();
     const [ user, setUser ] = useContext(UserContext);
 
+    console.log(comments);
+
     const [, forceUpdate] = useReducer(x => x + 1, 0);
 
     const submitNewComment = () => {
@@ -24,7 +26,8 @@ const CommentBox = ({ articleId, comments }) => {
                 .then((res) => {
                     const lastComment = res.data.data.lastComment;
                     lastComment.postedBy = {
-                        name: user.name
+                        name: user.name,
+                        pic: user.pic
                     }
                     comments.push(lastComment);
                     forceUpdate();
@@ -50,9 +53,10 @@ const CommentBox = ({ articleId, comments }) => {
                 comments && comments.slice(0).reverse().map((comment) => {
                     return (
                         <div className="comment" key={comment._id}>
-                            <span>{comment.postedBy.name}</span>
-                            <span> - <Moment fromNow>{comment.time}</Moment></span>
-                            <p>{comment.comment}</p>
+                            <img class="author-pic" src={ comment && comment.postedBy.pic } alt="author pic" />
+                            <span class="author-name"><b>{comment.postedBy.name}</b></span>
+                            <span class="time"><Moment fromNow>{comment.time}</Moment></span>
+                            <p class="comment-text">{comment.comment}</p>
                             <hr></hr>
                         </div>
                     )

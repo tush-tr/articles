@@ -12,7 +12,7 @@ const Article = () => {
 
     const { id } = useParams();
 
-    const [article, setArticle] = useState(false);
+    const [article, setArticle] = useState('');
 
     var [isLiked, setIsLiked] = useState(false);
 
@@ -27,14 +27,16 @@ const Article = () => {
     const getArticle = async () => {
         api.get(`/article/${id}`)
         .then((res) => {
-            const articleFromResponse = res.data.data.article[0];
-            console.log(articleFromResponse);
-            setArticle(articleFromResponse);
-            setLikesCount(articleFromResponse.likes.length);
-            if (articleFromResponse.likes && articleFromResponse.likes.includes(user.id)) {
-                setIsLiked(true);
-            } else {
-                setIsLiked(false);
+            const articleFromResponse = res.data.data && res.data.data.article[0];
+            if (articleFromResponse) {
+                console.log(articleFromResponse);
+                setArticle(articleFromResponse);
+                setLikesCount(articleFromResponse.likes.length);
+                if (articleFromResponse.likes && articleFromResponse.likes.includes(user.id)) {
+                    setIsLiked(true);
+                } else {
+                    setIsLiked(false);
+                }
             }
         })
     };
@@ -58,13 +60,14 @@ const Article = () => {
 
     return (
         <div className="article">
-            <h1> { article.title } </h1>
-            <span> By { article ? article.author.name : '' } </span> &#183;
-            <span> <Moment fromNow>{ article.publishDate }</Moment> </span> &#183;
-            <span> { article.readTime } </span>
-            <div> <Output data={article.text} /> </div>
+            <h1> { article && article.title } </h1>
+            <img class="author-pic" src={ article && article.author.pic } alt="author pic" />
+            <span class="author-name"> <b> By { article && article.author && article.author.name } </b> </span> &#183;
+            <span> <Moment fromNow>{ article && article.publishDate }</Moment> </span> &#183;
+            <span> { article && article.readTime } </span>
+            <div> <Output data={ article && article.text} /> </div>
             <div className="tags">
-                {article.tags && article.tags.map((tag) => {
+                {article && article.tags && article.tags.map((tag) => {
                     return <span key={tag} className="tag">{tag}</span>;
                 })}
             </div>
@@ -72,7 +75,7 @@ const Article = () => {
                 <Heart isClick={isLiked} onClick={likeArticle}  />
                 <span className="like-count">{ likesCount } { likesCount !== 1 ? "Likes" : "Like" }</span>
             </div>
-            <CommentBox comments={article.comments} articleId={article._id} />
+            <CommentBox comments={article && article.comments} articleId={article && article._id} />
         </div>
     )
 }
