@@ -86,3 +86,6 @@
 ## 26 APR, 2021
 * Added controller to get saved articles of a user
 * Added SavedArticles component to show saved articles of a user
+
+## 27, APR, 2021
+* Added route /article/edit to save the edited articles

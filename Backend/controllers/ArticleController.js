@@ -49,6 +49,47 @@ const save = async (req, res) => {
     }
 }
 
+const edit = async (req, res) => {
+
+    // Validate article
+    const validationError = articleValidation.articleValidation(req.body.article);
+
+    if (validationError) {
+        return apiResponse.validationErrorWithData(res, "Validation error!", validationError);
+    }
+
+    // calculate reading time
+    // res.body.text is the editorJs data object, so we have to convert it to string
+    // for calculating reading time and storing it in Database.
+    const readTimeText = readingTime(JSON.stringify(req.body.article.text)).text;
+
+    try {
+
+        const article = await Article.findOne({_id: req.body.articleId, author: req.userId});
+    
+        if (article) {
+            article.title = req.body.article.title
+            article.text = req.body.article.text,
+            article.readTime = readTimeText,
+            article.tags = req.body.article.tags
+
+            if (req.body.action == "save") {
+                article.status = "draft";
+                await article.save();
+                apiResponse.successResponseWithData(res, "Article saved.", { article_id: article._id });
+            } else {
+                await article.save();
+                article.status = "unpublished";
+                apiResponse.successResponseWithData(res, "Article submitted for verification.", { article_id: article._id });
+            }
+        }
+
+    } catch (err) {
+        console.log(err);
+        apiResponse.errorResponse(res, err);
+    }
+}
+
 const likeUnlike = async (req, res) => {
 
     // Validate data
@@ -218,4 +259,5 @@ module.exports.report = report;
 module.exports.getOne = getOne;
 module.exports.getRecent = getRecent;
 module.exports.saved = saved;
+module.exports.edit = edit;
 
