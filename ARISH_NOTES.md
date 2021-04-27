@@ -89,3 +89,4 @@
 
 ## 27, APR, 2021
 * Added route /article/edit to save the edited articles
+* Added ArticleEdit Component to edit the articles

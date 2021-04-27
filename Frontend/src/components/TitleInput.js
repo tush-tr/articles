@@ -10,12 +10,12 @@ function TitleInput() {
             title: e.target.value,
             text: article.text,
             tags: article.tags
-        })
+        });
     }
 
     return (
         <div id="title">
-            <input type="text" placeholder="Title..." value={article.title} onChange={onChange} />
+            <input type="text" placeholder="Title..." value={ article.title } onChange={onChange} />
         </div>
     );
 }

@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 
 const ArticleListItem = ({article}) => {
 
-    const [ hideEditButton, setHideEditButton ] = useState(true);
-
     const history = useHistory();
     const location = useLocation();
 
@@ -14,20 +12,19 @@ const ArticleListItem = ({article}) => {
         history.push("/article/" + article._id);
     }
 
-    // if (location.pathname === "/saved-articles") {
-    //     setHideEditButton(false);
-    // }
-
     return (
         <div className="article-list-item">
             <div className="card-body">
                 <img className="card-img-top" src="https://picsum.photos/200/200" alt="Random pic" onClick={openArticle} />
-                <Link to={`/article-create/${article._id}`}><i className="edit-btn fa fa-edit"></i></Link>
+                {
+                    location.pathname === "/saved-articles" ? <Link to={`/article-edit/${article._id}`}><i className="edit-btn fa fa-edit"></i></Link> : ''
+                }
+                
                 <div className="card-content">
                     <span className="tags">
                         {
                             article.tags.map((tag) => {
-                                return <span className="tag">{tag}</span>
+                                return <span key={tag} className="tag">{tag}</span>
                             })
                         }
                     </span>

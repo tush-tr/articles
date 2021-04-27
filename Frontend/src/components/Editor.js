@@ -47,7 +47,7 @@ const EDITOR_JS_TOOLS = {
 }
 
 
-const Editor = () => {
+const Editor = ({data}) => {
 
     const [article, setArticle] = useContext(ArticleContext);
   
@@ -66,10 +66,11 @@ const Editor = () => {
         // console.log('Saving failed: ', e);
       }
     }
-  
     return (
         <div>
             <EditorJs 
+            enableReInitialize
+            data={data}
             placeholder="Tell your story..." 
             tools={ EDITOR_JS_TOOLS }
             onChange={onChange}

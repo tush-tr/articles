@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from "react-router-dom";
 
-function ArticleButtons() {
+function ArticleButtons({edit, id}) {
 
     const [article] = useContext(ArticleContext);
 
@@ -14,44 +14,12 @@ function ArticleButtons() {
 
     const history = useHistory();
 
-    // submit article for verification
-    const submitArticle = async () => {
-        const body = {
-            article: article,
-            action: "submit"
-        }
-        
-        if (article.title === "") {
-            toast.warning("Please provide a title.");
-            return;
-        }
-
-        if (article.text === "") {
-            toast.warning("Please write some text");
-            return;
-        }
-
-        await api.post("/article", body, { headers: { "auth-token": user.user_token }})
-        .then((res) => {
-            const status = res.data.status;
-            if (status === 0) {
-                toast(res.data.message);
-                toast(res.data.data);
-            } else {
-                console.log(res);
-                toast(res.data.message);
-                history.push("/");
-            }
-        }).catch((err) => {
-            console.log(err);
-        });
-    }
-
     // save article
-    const saveArticle = async () => {
-        const body = {
+    const saveArticle = async (action) => {
+
+        var body = {
             article: article,
-            action: "save"
+            action: action
         };
         
         if (article.title === "") {
@@ -64,26 +32,47 @@ function ArticleButtons() {
             return;
         }
 
-        await api.post("/article", body, { headers: { "auth-token": user.user_token }})
-        .then((res) => {
-            const status = res.data.status;
-            if (status === 0) {
-                toast(res.data.message);
-                toast(res.data.data);
-            } else {
-                console.log(res);
-                toast(res.data.message);
-                history.push("/");
+        if (edit) {
+            body = {
+                ...body,
+                articleId: id
             }
-        }).catch((err) => {
-            console.log(err);
-        });
+            await api.post("/article/edit", body, { headers: { "auth-token": user.user_token }})
+            .then((res) => {
+                const status = res.data.status;
+                if (status === 0) {
+                    toast(res.data.message);
+                    toast(res.data.data);
+                } else {
+                    console.log(res);
+                    toast(res.data.message);
+                    history.push("/");
+                }
+            }).catch((err) => {
+                console.log(err);
+            });
+        } else {
+            await api.post("/article", body, { headers: { "auth-token": user.user_token }})
+            .then((res) => {
+                const status = res.data.status;
+                if (status === 0) {
+                    toast(res.data.message);
+                    toast(res.data.data);
+                } else {
+                    console.log(res);
+                    toast(res.data.message);
+                    history.push("/");
+                }
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
     }
 
     return (
         <div className="article-buttons-container">
-            <button className="btn btn-success" id="submit-button" onClick={submitArticle}> Submit </button>
-            <button className="btn btn-primary" id="save-button" onClick={saveArticle}> Save </button>
+            <button className="btn btn-success" id="submit-button" onClick={() => saveArticle("submit")}> Submit </button>
+            <button className="btn btn-primary" id="save-button" onClick={() => saveArticle("save")}> Save </button>
         </div>
     );
 }

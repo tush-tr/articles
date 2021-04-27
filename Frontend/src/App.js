@@ -14,26 +14,31 @@ import Profile from "./components/Profile";
 import Settings from "./components/Settings";
 import Contact from "./components/Contact";
 import About from "./components/About";
-import { UserProvider } from "./contexts/UserContext";
 import AdminLogin from "./components/AdminLogin";
+import { UserProvider } from "./contexts/UserContext";
+import { ArticleProvider } from "./contexts/ArticleContext";
 import Admin from "./components/Admin";
 import SavedArticles from "./components/SavedArticles";
+import ArticleEdit from "./components/ArticleEdit";
 
 function App(props) {
   return (
     <div className="App">
-    <UserProvider>
-      <BrowserRouter>
-        <Switch>
-              <Route exact path="/admin/login" component={AdminLogin} />
-              <Route path="/admin">
-                <Admin />
-              </Route>
-          <div>
+      <UserProvider>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/admin/login" component={AdminLogin} />
+            <Route path="/admin">
+              <Admin />
+            </Route>
+            <div>
               <div className="container main-container">
                 <Header />
                 <Route exact path="/" component={Home} />
-                <Route path="/article-create" component={ArticleCreate} />
+                <ArticleProvider>
+                  <Route path="/article-create" component={ArticleCreate} />
+                  <Route path="/article-edit/:id" component={ArticleEdit} />
+                </ArticleProvider>
                 <Route path="/login" component={Login} />
                 <Route path="/saved-articles" component={SavedArticles} />
                 <Route path="/profile" component={Profile} />
@@ -43,12 +48,12 @@ function App(props) {
                 <Route path="/about" component={About} />
                 <Route path="/article/:id" component={Article} />
               </div>
-            <Footer />
-          </div>
-        </Switch>
-      </BrowserRouter>
-      <ToastContainer />
-            </UserProvider> 
+              <Footer />
+            </div>
+          </Switch>
+        </BrowserRouter>
+        <ToastContainer />
+      </UserProvider>
     </div>
   );
 }
