@@ -9,7 +9,7 @@ const SavedArticles = () => {
 
     const [ user, ] = useContext(UserContext);
 
-    const [savedArticles, setSavedArticles] = useState();
+    const [ userArticles, setUserArticles ] = useState();
   
     const history = useHistory();
   
@@ -19,26 +19,26 @@ const SavedArticles = () => {
     }
 
     useEffect(() => {
-        getArticles();
+        getUserArticles();
     }, []);
 
-    const getArticles = async () => {
-        const res = await api.get(`/article/saved`, { headers: { "auth-token": user.user_token }});
+    const getUserArticles = async () => {
+        const res = await api.get(`/article/of-user`, { headers: { "auth-token": user.user_token }});
         if (res.data.status === 1 && res.data.data)
-            setSavedArticles(res.data.data.articles);
+            setUserArticles(res.data.data.articles);
     };
 
     return (
         <div>
-        {
-            savedArticles ? 
-            <div>
-                <h2>Your Saved Articles</h2>
-                <ArticleList articles={savedArticles} />
-            </div>
-            : 
-            <h2>You do not have any saved article</h2>
-        }
+            {
+                userArticles ? 
+                <div>
+                    <h2>Your Articles</h2>
+                    <ArticleList articles={userArticles} /> 
+                </div>
+                : 
+                <h2>You have not submitted any article</h2>
+            }
         </div>
     )
 }

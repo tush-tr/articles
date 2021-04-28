@@ -1,9 +1,10 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useRef, useReducer } from 'react'
 import EditorJs from "react-editor-js";
 import Paragraph from "@editorjs/paragraph"
 import Image from "@editorjs/image";
 import Header from "@editorjs/header"
 import {ArticleContext} from "../contexts/ArticleContext";
+import _ from "lodash";
 
 // currently we are using Paragraph, Image and Header tools
 // we can add more later
@@ -51,30 +52,31 @@ const Editor = ({data}) => {
 
     const [article, setArticle] = useContext(ArticleContext);
   
-    const editorInstanceRef = useRef(null)
-  
-    const onChange = async () => {
-      try {
-        const outputData = await editorInstanceRef.current.save();
-        // console.log('Article data: ', outputData);
-        setArticle({
-            title: article.title,
-            text: outputData,
-            tags: article.tags
-        });
-      } catch (e) {
-        // console.log('Saving failed: ', e);
-      }
+    const editorInstanceRef = useRef(null);
+
+    const onReady = () => {
+      if (data)
+        editorInstanceRef.current.blocks.render(data);
     }
+  
+    const onChange = (api, newData) => {
+      setArticle({
+          title: article.title,
+          text: newData,
+          tags: article.tags
+      });
+    }
+
     return (
         <div>
             <EditorJs 
-            enableReInitialize
-            data={data}
-            placeholder="Tell your story..." 
-            tools={ EDITOR_JS_TOOLS }
-            onChange={onChange}
-            instanceRef={instance => editorInstanceRef.current = instance}
+              data={data}
+              placeholder="Tell your story..." 
+              tools={ EDITOR_JS_TOOLS }
+              onChange={(api, newData) => onChange(api, newData)}
+              instanceRef={instance => editorInstanceRef.current = instance}
+              onReady={onReady}
+              autofocus={true}
             />
         </div>
     )

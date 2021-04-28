@@ -17,9 +17,20 @@ const ArticleListItem = ({article}) => {
             <div className="card-body">
                 <img className="card-img-top" src="https://picsum.photos/200/200" alt="Random pic" onClick={openArticle} />
                 {
+                    article.status && 
+                    <span className="article-status">
+                        {
+                            article.status === "unpublished" 
+                            ? 
+                            <span className="color-blue">Submitted</span>
+                            :
+                            "Published"
+                        }
+                    </span>
+                }
+                {
                     location.pathname === "/saved-articles" ? <Link to={`/article-edit/${article._id}`}><i className="edit-btn fa fa-edit"></i></Link> : ''
                 }
-                
                 <div className="card-content">
                     <span className="tags">
                         {

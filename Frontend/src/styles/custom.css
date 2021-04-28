@@ -610,3 +610,19 @@ footer .copyright {
   font-size: 2em;
   color: black;
 }
+
+.article-status {
+  position: absolute;
+  margin-left: -90px;
+  margin-top: 5px;
+  border: 1px solid black;
+  color: green;
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 3px;
+  font-weight: 600;
+  padding: 2px;
+}
+
+.color-blue {
+  color: blue;;
+}

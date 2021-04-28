@@ -14,17 +14,16 @@ function ArticleCreate() {
 
   const [user, ] = useContext(UserContext);
 
-  const [, forceUpdate] = useReducer(x => x + 1, 0);
-
   const history = useHistory();
 
+  // reinitialize state to clear previous data
+  // previous data need to be cleared as edit article is using the same context
   useEffect(() => {
     setArticle({
       title: "",
       text: "",
       tags: []
     });
-    forceUpdate();
   }, []);
 
   if (!user.isUserLoggedIn) {

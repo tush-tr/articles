@@ -20,6 +20,7 @@ import { ArticleProvider } from "./contexts/ArticleContext";
 import Admin from "./components/Admin";
 import SavedArticles from "./components/SavedArticles";
 import ArticleEdit from "./components/ArticleEdit";
+import UserArticles from "./components/UserArticles";
 
 function App(props) {
   return (
@@ -27,6 +28,7 @@ function App(props) {
       <UserProvider>
         <BrowserRouter>
           <Switch>
+            <React.Fragment>
             <Route exact path="/admin/login" component={AdminLogin} />
             <Route path="/admin">
               <Admin />
@@ -41,6 +43,7 @@ function App(props) {
                 </ArticleProvider>
                 <Route path="/login" component={Login} />
                 <Route path="/saved-articles" component={SavedArticles} />
+                <Route path="/user-articles" component={UserArticles} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/contact" component={Contact} />
                 <Route path="/settings" component={Settings} />
@@ -50,6 +53,7 @@ function App(props) {
               </div>
               <Footer />
             </div>
+            </React.Fragment>
           </Switch>
         </BrowserRouter>
         <ToastContainer />
