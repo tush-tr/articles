@@ -90,3 +90,6 @@
 ## 27, APR, 2021
 * Added route /article/edit to save the edited articles
 * Added ArticleEdit Component to edit the articles
+
+## 28 APR, 2021
+* Added route /article/of-user to get articles submitted or posted by user

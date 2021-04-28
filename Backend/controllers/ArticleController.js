@@ -130,7 +130,10 @@ const getOne = async (req, res) => {
     const articleId = req.params.id;
 
     try {
-        const article = await Article.find({_id: articleId}).populate('author', '_id name pic').populate('comments.postedBy', '_id name pic');
+        const article = await Article
+        .find({_id: articleId})
+        .populate('author', '_id name pic')
+        .populate('comments.postedBy', '_id name pic');
         if (article.length == 0) {
             apiResponse.successResponse(res, "Article not found");
         } else {
@@ -216,12 +219,11 @@ const report = async (req, res) => {
 const getRecent = async (req, res) => {
 
     try {
-        const articles = await Article.find()
-        .select('_id title text tags readTime likes comments publishDate', )
+        const articles = await Article.find({ status: "published" })
+        .select('_id title tags readTime publishDate')
         .sort({ publishDate: -1 })
         .limit(10)
         .populate('author', '_id name pic')
-        .populate('comments.postedBy', '_id name')
         if (articles.length == 0) {
             apiResponse.successResponse(res, "Articles not found");
         } else {
@@ -239,7 +241,33 @@ const saved = async (req, res) => {
     const userId = req.userId;
 
     try {
-        const articles = await Article.find({author: userId, status: "draft"}).populate('author', '_id name pic');
+        const articles = await Article
+        .find({author: userId, status: "draft"})
+        .select('_id title tags readTime publishDate')
+        .sort({ submissionDate: -1 })
+        .populate('author', '_id name pic');
+        if (articles.length == 0) {
+            apiResponse.successResponse(res, "Articles not found");
+        } else {
+            apiResponse.successResponseWithData(res, "Articles found", {articles});
+        }
+    } catch (err) {
+        apiResponse.errorResponse(res, err);
+        console.log(err);
+    }
+
+}
+
+const ofUser = async (req, res) => {
+
+    const userId = req.userId;
+
+    try {
+        const articles = await Article
+        .find({author: userId, status: { $in: ["unpublished", "published"]}})
+        .select('_id title tags readTime status publishDate')
+        .sort({ submissionDate: -1 })
+        .populate('author', '_id name pic');
         if (articles.length == 0) {
             apiResponse.successResponse(res, "Articles not found");
         } else {
@@ -260,4 +288,5 @@ module.exports.getOne = getOne;
 module.exports.getRecent = getRecent;
 module.exports.saved = saved;
 module.exports.edit = edit;
+module.exports.ofUser = ofUser;
 
