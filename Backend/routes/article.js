@@ -11,4 +11,5 @@ router.get("/recent", ArticleController.getRecent);
 router.get("/saved", verifyToken, ArticleController.saved);
 router.get("/of-user", verifyToken, ArticleController.ofUser);
 router.get("/:id", ArticleController.getOne);
+router.delete("/:id", verifyToken, ArticleController.deleteOne);
 module.exports = router;

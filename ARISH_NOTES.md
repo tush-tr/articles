@@ -94,3 +94,6 @@
 ## 28 APR, 2021
 * Added route /article/of-user to get articles submitted or posted by user
 * Added UserArticles component to show articles of a user
+
+## 06 MAY, 2021
+* Added route /article/:id in backend to delete the article

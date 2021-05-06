@@ -78,8 +78,8 @@ const edit = async (req, res) => {
                 await article.save();
                 apiResponse.successResponseWithData(res, "Article saved.", { article_id: article._id });
             } else {
-                await article.save();
                 article.status = "unpublished";
+                await article.save();
                 apiResponse.successResponseWithData(res, "Article submitted for verification.", { article_id: article._id });
             }
         }
@@ -280,6 +280,24 @@ const ofUser = async (req, res) => {
 
 }
 
+const deleteOne = async (req, res) => {
+    const articleId = req.params.id;
+    const userId = req.userId;
+
+    try {
+        const deleted = await Article.deleteOne({_id: articleId, author: userId});
+        if (deleted.n == 1) {
+            apiResponse.successResponse(res, "Article deleted");
+        } else {
+            apiResponse.errorResponse(res, "Some error occurred");
+        }
+
+    } catch (err) {
+        apiResponse.errorResponse(res, err);
+        console.log(err);
+    }
+}
+
 module.exports.save = save;
 module.exports.likeUnlike = likeUnlike;
 module.exports.comment = comment;
@@ -289,4 +307,5 @@ module.exports.getRecent = getRecent;
 module.exports.saved = saved;
 module.exports.edit = edit;
 module.exports.ofUser = ofUser;
+module.exports.deleteOne = deleteOne;
 
