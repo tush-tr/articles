@@ -56,7 +56,7 @@ function Header() {
                                 </div>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <Link className="dropdown-item" to="/saved-articles">Saved Articles</Link>
-                                    <Link className="dropdown-item" to="/user-articles">Your Articles</Link>
+                                    <Link className="dropdown-item" to="/user-articles">My Articles</Link>
                                     <Link className="dropdown-item" to="/profile">Profile</Link>
                                     <Link className="dropdown-item" to="/settings">Settings</Link>
                                     <button className="dropdown-item" onClick={logout}>Logout</button>

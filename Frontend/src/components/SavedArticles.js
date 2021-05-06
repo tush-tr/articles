@@ -28,16 +28,23 @@ const SavedArticles = () => {
             setSavedArticles(res.data.data.articles);
     };
 
+    const deleteArticleFromArray = (articleId) => {
+        const articles = savedArticles.filter((article) => {
+            return article._id !== articleId
+        });
+        setSavedArticles(articles)
+    }
+
     return (
         <div>
         {
             savedArticles ? 
             <div>
                 <h2>Your Saved Articles</h2>
-                <ArticleList articles={savedArticles} />
+                <ArticleList articles={savedArticles} deleteArticleFromArray={deleteArticleFromArray} />
             </div>
             : 
-            <h2>You do not have any saved article</h2>
+            <h2>You do not have any saved articles</h2>
         }
         </div>
     )

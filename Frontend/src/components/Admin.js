@@ -9,7 +9,7 @@ import AdminToBeVerifiedArticles from "./AdminToBeVerifiedArticles";
 
 const AdminDashboard = () => {
 
-    const [ user, setUser ] = useContext(UserContext);
+    const [ user, ] = useContext(UserContext);
 
     const history = useHistory();
 

@@ -97,3 +97,4 @@
 
 ## 06 MAY, 2021
 * Added route /article/:id in backend to delete the article
+* Added Buttons to delete articles in SavedArticles and UserArticles components

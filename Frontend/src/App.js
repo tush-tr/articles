@@ -28,31 +28,31 @@ function App(props) {
       <UserProvider>
         <BrowserRouter>
           <Switch>
+              <Route exact path="/admin/login" component={AdminLogin} />
+              <Route path="/admin">
+                <Admin />
+              </Route>
             <React.Fragment>
-            <Route exact path="/admin/login" component={AdminLogin} />
-            <Route path="/admin">
-              <Admin />
-            </Route>
-            <div>
-              <div className="container main-container">
-                <Header />
-                <Route exact path="/" component={Home} />
-                <ArticleProvider>
-                  <Route path="/article-create" component={ArticleCreate} />
-                  <Route path="/article-edit/:id" component={ArticleEdit} />
-                </ArticleProvider>
-                <Route path="/login" component={Login} />
-                <Route path="/saved-articles" component={SavedArticles} />
-                <Route path="/user-articles" component={UserArticles} />
-                <Route path="/profile" component={Profile} />
-                <Route path="/contact" component={Contact} />
-                <Route path="/settings" component={Settings} />
-                <Route path="/signup" component={Signup} />
-                <Route path="/about" component={About} />
-                <Route path="/article/:id" component={Article} />
+              <div>
+                <div className="container main-container">
+                  <Header />
+                  <Route exact path="/" component={Home} />
+                  <ArticleProvider>
+                    <Route path="/article-create" component={ArticleCreate} />
+                    <Route path="/article-edit/:id" component={ArticleEdit} />
+                  </ArticleProvider>
+                  <Route path="/login" component={Login} />
+                  <Route path="/saved-articles" component={SavedArticles} />
+                  <Route path="/user-articles" component={UserArticles} />
+                  <Route path="/profile" component={Profile} />
+                  <Route path="/contact" component={Contact} />
+                  <Route path="/settings" component={Settings} />
+                  <Route path="/signup" component={Signup} />
+                  <Route path="/about" component={About} />
+                  <Route path="/article/:id" component={Article} />
+                </div>
+                <Footer />
               </div>
-              <Footer />
-            </div>
             </React.Fragment>
           </Switch>
         </BrowserRouter>

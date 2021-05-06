@@ -605,16 +605,24 @@ footer .copyright {
 
 .edit-btn {
   position: absolute;
+  margin-left: -80px;
+  margin-top: 6px;
+  font-size: 1.8em;
+  color: black;
+}
+
+.delete-btn {
+  position: absolute;
   margin-left: -40px;
-  margin-top: 4px;
-  font-size: 2em;
+  margin-top: 6px;
+  font-size: 1.8em;
   color: black;
 }
 
 .article-status {
   position: absolute;
-  margin-left: -90px;
-  margin-top: 5px;
+  margin-left: -125px;
+  margin-top: 6px;
   border: 1px solid black;
   color: green;
   background-color: rgba(255,255,255,0.5);

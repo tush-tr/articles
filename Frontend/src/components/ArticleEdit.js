@@ -15,7 +15,7 @@ function ArticleEdit() {
 
   const [article, setArticle] = useContext(ArticleContext);
 
-  const [user, setUser] = useContext(UserContext);
+  const [user, ] = useContext(UserContext);
 
   const history = useHistory();
 
