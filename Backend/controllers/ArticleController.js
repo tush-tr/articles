@@ -166,8 +166,6 @@ const getOne = async (req, res) => {
 
             article.isBookmarked = isBookmarked;
 
-            console.log(article);
-
             apiResponse.successResponseWithData(res, "Article found", article);
         }
     } catch (err) {
@@ -337,9 +335,16 @@ const bookmark = async (req, res) => {
         const article = await Article.findOne({_id: articleId});
         if (article) {
             var user = await User.findOne({_id: userId});
-            user.bookmarks.push(article._id);
-            user.save();
-            apiResponse.successResponse(res, "Article Bookmarked")
+            
+            if (user.bookmarks.includes(article._id)) {
+                user.bookmarks = user.bookmarks.filter(item => item != articleId);
+                user.save();
+                apiResponse.successResponse(res, "Bookmark Removed");
+            } else {
+                user.bookmarks.push(article._id);
+                user.save();
+                apiResponse.successResponse(res, "Bookmarked");
+            }
         } else {
             apiResponse.errorResponse(res, "Something went wrong");
         }
@@ -348,6 +353,31 @@ const bookmark = async (req, res) => {
         apiResponse.errorResponse(res, err);
         console.log(err);
     }
+}
+
+const bookmarked = async (req, res) => {
+    const userId = req.userId;
+
+    try {
+
+        const { bookmarks } = await User.findOne({_id: userId});
+        const articles = await Article
+        .find({_id: { $in: bookmarks } })
+        .select('_id title tags readTime status publishDate')
+        .sort({ publishDate: -1 })
+        .populate('author', '_id name pic');
+
+        if (articles.length == 0) {
+            apiResponse.successResponse(res, "Articles not found");
+        } else {
+            apiResponse.successResponseWithData(res, "Articles found", {articles});
+        }
+
+    } catch (err) {
+        apiResponse.errorResponse(res, err);
+        console.log(err);
+    }
+
 }
 
 module.exports.save = save;
@@ -361,4 +391,5 @@ module.exports.edit = edit;
 module.exports.ofUser = ofUser;
 module.exports.deleteOne = deleteOne;
 module.exports.bookmark = bookmark;
+module.exports.bookmarked = bookmarked;
 
