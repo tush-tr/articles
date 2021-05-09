@@ -329,6 +329,27 @@ const deleteOne = async (req, res) => {
     }
 }
 
+const bookmark = async (req, res) => {
+    const articleId = req.body.articleId;
+    const userId = req.userId;
+
+    try {
+        const article = await Article.findOne({_id: articleId});
+        if (article) {
+            var user = await User.findOne({_id: userId});
+            user.bookmarks.push(article._id);
+            user.save();
+            apiResponse.successResponse(res, "Article Bookmarked")
+        } else {
+            apiResponse.errorResponse(res, "Something went wrong");
+        }
+
+    } catch (err) {
+        apiResponse.errorResponse(res, err);
+        console.log(err);
+    }
+}
+
 module.exports.save = save;
 module.exports.likeUnlike = likeUnlike;
 module.exports.comment = comment;
@@ -339,4 +360,5 @@ module.exports.saved = saved;
 module.exports.edit = edit;
 module.exports.ofUser = ofUser;
 module.exports.deleteOne = deleteOne;
+module.exports.bookmark = bookmark;
 

@@ -98,3 +98,7 @@
 ## 06 MAY, 2021
 * Added route /article/:id in backend to delete the article
 * Added Buttons to delete articles in SavedArticles and UserArticles components
+
+## 10 MAY, 2021
+* Added isBookmarked field to article object returned in getOne article controller
+* Added route /article/bookmark in backend while adds the article id to user bookmarks field
