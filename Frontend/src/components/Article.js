@@ -66,10 +66,17 @@ const Article = () => {
             }
             api.post("/article/bookmark", body, { headers: { "auth-token": user.user_token }})
             .then((res) => {
-                setArticle({
-                    ...article,
-                    isBookmarked: true
-                })
+                if (res.data.message === "Bookmarked") {
+                    setArticle({
+                        ...article,
+                        isBookmarked: true
+                    });
+                } else {
+                    setArticle({
+                        ...article,
+                        isBookmarked: false
+                    });
+                }
             });
         } else {
             toast("Log in to bookmark the article.")
@@ -86,12 +93,12 @@ const Article = () => {
             <span class="author-name"> <b> By { article && article.author && article.author.name } </b> </span> &#183;
             <span> <Moment fromNow>{ article && article.publishDate }</Moment> </span> &#183;
             <span> { article && article.readTime } </span>
-            <span className="bookmark-icon"> 
+            <span onClick={bookmarkArticle} className="bookmark-icon"> 
                 {
                     article.isBookmarked ? 
                     <i className="fas fa-bookmark"></i> 
                     :
-                    <i onClick={bookmarkArticle} className="far fa-bookmark"></i> 
+                    <i className="far fa-bookmark"></i> 
                 }
             </span>
             <div> <Output data={ article && article.text} /> </div>

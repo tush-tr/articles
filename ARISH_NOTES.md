@@ -104,3 +104,4 @@
 * Added route /article/bookmark in backend which adds the article id to user bookmarks field
 * Added bookmark button in Article component
 * Added route /article/bookmarked in backend to get bookmarked article of a user
+* Added BookmarkedArticles component in frontend

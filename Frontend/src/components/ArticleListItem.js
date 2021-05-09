@@ -35,7 +35,7 @@ const ArticleListItem = ({article, deleteArticleFromArray}) => {
             <div className="card-body">
                 <img className="card-img-top" src="https://picsum.photos/200/200" alt="Random pic" onClick={openArticle} />
                 {
-                    article.status && 
+                    location.pathname !== "/bookmarked-articles" && article.status && 
                     <span className="article-status">
                         {
                             article.status === "unpublished" 

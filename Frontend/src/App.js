@@ -21,6 +21,7 @@ import Admin from "./components/Admin";
 import SavedArticles from "./components/SavedArticles";
 import ArticleEdit from "./components/ArticleEdit";
 import UserArticles from "./components/UserArticles";
+import BookmarkedArticles from "./components/BookmarkedArticles";
 
 function App(props) {
   return (
@@ -44,6 +45,7 @@ function App(props) {
                   <Route path="/login" component={Login} />
                   <Route path="/saved-articles" component={SavedArticles} />
                   <Route path="/user-articles" component={UserArticles} />
+                  <Route path="/bookmarked-articles" component={BookmarkedArticles} />
                   <Route path="/profile" component={Profile} />
                   <Route path="/contact" component={Contact} />
                   <Route path="/settings" component={Settings} />

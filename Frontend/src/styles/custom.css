@@ -638,4 +638,5 @@ footer .copyright {
 .bookmark-icon {
   float: right;
   font-size: 25px;
+  cursor: pointer;
 }
