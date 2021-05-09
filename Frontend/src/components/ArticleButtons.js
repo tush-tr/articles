@@ -37,7 +37,7 @@ function ArticleButtons({edit, id}) {
                 ...body,
                 articleId: id
             }
-            await api.post("/article/edit", body, { headers: { "auth-token": user.user_token }})
+            await api.put("/article/edit", body, { headers: { "auth-token": user.user_token }})
             .then((res) => {
                 const status = res.data.status;
                 if (status === 0) {

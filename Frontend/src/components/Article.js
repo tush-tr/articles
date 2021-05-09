@@ -25,9 +25,9 @@ const Article = () => {
     }, []);
 
     const getArticle = async () => {
-        api.get(`/article/${id}`)
+        api.get(`/article/${id}`, { headers: { "auth-token": user.user_token }})
         .then((res) => {
-            const articleFromResponse = res.data.data && res.data.data.article[0];
+            const articleFromResponse = res.data.data && res.data.data;
             if (articleFromResponse) {
                 console.log(articleFromResponse);
                 setArticle(articleFromResponse);
@@ -58,6 +58,27 @@ const Article = () => {
 
     }
 
+    const bookmarkArticle = () => {
+
+        if (user.isUserLoggedIn) {
+            const body = {
+                articleId: article._id
+            }
+            api.post("/article/bookmark", body, { headers: { "auth-token": user.user_token }})
+            .then((res) => {
+                setArticle({
+                    ...article,
+                    isBookmarked: true
+                })
+            });
+        } else {
+            toast("Log in to bookmark the article.")
+        }
+
+    }
+
+
+
     return (
         <div className="article">
             <h1> { article && article.title } </h1>
@@ -65,6 +86,14 @@ const Article = () => {
             <span class="author-name"> <b> By { article && article.author && article.author.name } </b> </span> &#183;
             <span> <Moment fromNow>{ article && article.publishDate }</Moment> </span> &#183;
             <span> { article && article.readTime } </span>
+            <span className="bookmark-icon"> 
+                {
+                    article.isBookmarked ? 
+                    <i className="fas fa-bookmark"></i> 
+                    :
+                    <i onClick={bookmarkArticle} className="far fa-bookmark"></i> 
+                }
+            </span>
             <div> <Output data={ article && article.text} /> </div>
             <div className="tags">
                 {article && article.tags && article.tags.map((tag) => {

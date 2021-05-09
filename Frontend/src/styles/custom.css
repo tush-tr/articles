@@ -634,3 +634,8 @@ footer .copyright {
 .color-blue {
   color: blue;;
 }
+
+.bookmark-icon {
+  float: right;
+  font-size: 25px;
+}
