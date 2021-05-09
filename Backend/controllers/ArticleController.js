@@ -4,6 +4,7 @@ const readingTime = require("reading-time");
 const apiResponse = require("../helpers/apiResponse");
 // const { articleValidation } = require("../helpers/validation");
 const articleValidation = require("../helpers/validation");
+const jwt = require("jsonwebtoken");
 
 const save = async (req, res) => {
 
@@ -129,15 +130,45 @@ const getOne = async (req, res) => {
 
     const articleId = req.params.id;
 
+    const token = req.header('auth-token');
+
+    var userId = null;
+
+    if (token) {
+
+        try {
+            const { _id } = jwt.verify(token, process.env.TOKEN_SECRET);
+            userId = _id;
+        } catch(err) {
+            console.log(err);
+        }
+
+    }
+
     try {
-        const article = await Article
-        .find({_id: articleId})
+        var article = await Article
+        .findOne({_id: articleId})
         .populate('author', '_id name pic')
-        .populate('comments.postedBy', '_id name pic');
+        .populate('comments.postedBy', '_id name pic')
+        .lean();
+
         if (article.length == 0) {
             apiResponse.successResponse(res, "Article not found");
         } else {
-            apiResponse.successResponseWithData(res, "Article found", {article});
+
+            var isBookmarked = false;
+    
+            if (userId) {
+                const { bookmarks } = await User.findOne({ "_id": userId}).select("bookmarks");
+                if (bookmarks.includes(article._id))
+                    isBookmarked = true;
+            }
+
+            article.isBookmarked = isBookmarked;
+
+            console.log(article);
+
+            apiResponse.successResponseWithData(res, "Article found", article);
         }
     } catch (err) {
         apiResponse.errorResponse(res, err);
@@ -289,7 +320,7 @@ const deleteOne = async (req, res) => {
         if (deleted.n == 1) {
             apiResponse.successResponse(res, "Article deleted");
         } else {
-            apiResponse.errorResponse(res, "Some error occurred");
+            apiResponse.errorResponse(res, "Something went wrong");
         }
 
     } catch (err) {
