@@ -640,3 +640,50 @@ footer .copyright {
   font-size: 25px;
   cursor: pointer;
 }
+
+.carousel-slide {
+  padding: 1em;
+}
+
+.carousel-slide img {
+  width: 100%;
+}
+
+.carousel-slide .image-wrapper {
+  padding: 2em;
+}
+
+.carousel-slide .content-wrapper {
+  align-self: center;
+}
+
+.carousel-slide .content-wrapper .tag {
+  color: #222;
+  font-weight: 600;
+}
+
+.carousel-slide .content-wrapper .tag:not(:last-child):after {
+  content: ", ";
+}
+
+.carousel-slide .content-wrapper .title {
+  font-weight: 700;
+}
+
+.carousel-slide .content-wrapper .author-pic {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 1px solid black;
+  margin-right: 5px;
+  cursor: pointer;
+  display: inline;
+}
+
+.carousel-slide .content-wrapper .author-name {
+  cursor: pointer;
+}
+
+.recent-articles {
+  margin-top: 2em;
+}

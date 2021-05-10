@@ -63,7 +63,7 @@ const ArticleListItem = ({article, deleteArticleFromArray}) => {
                     <span className="date"> - <Moment format="MMM DD, YYYY">{ article.publishDate }</Moment> </span>
                     <h5 className="card-title" onClick={openArticle}>{article.title}</h5>
                     <img className="author-pic" src={ article && article.author && article.author.pic } alt="author pic" />
-                    <span className="card-text"> By {article && article.author && article.author.name}</span>
+                    <span className="author-name"> By {article && article.author && article.author.name}</span>
                 </div>
             </div>
         </div>
