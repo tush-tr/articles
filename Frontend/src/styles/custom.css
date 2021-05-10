@@ -558,8 +558,8 @@ footer .copyright {
   cursor: pointer;
 }
 
-.article-list-item img {
-  border-radius: 10px;
+.article-list-item .author-pic {
+  border-radius: 50%;
 }
 
 .article-list-item .card-content {
@@ -643,6 +643,7 @@ footer .copyright {
 
 .carousel-slide {
   padding: 1em;
+  cursor: pointer;
 }
 
 .carousel-slide img {
@@ -650,7 +651,7 @@ footer .copyright {
 }
 
 .carousel-slide .image-wrapper {
-  padding: 2em;
+  padding: 1em;
 }
 
 .carousel-slide .content-wrapper {
@@ -686,4 +687,11 @@ footer .copyright {
 
 .recent-articles {
   margin-top: 2em;
+}
+
+.carousel-title {
+  font-size: 40px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 100px;
 }

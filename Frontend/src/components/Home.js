@@ -2,139 +2,90 @@ import React, { useState, useEffect } from "react";
 import ArticleList from "./ArticleList";
 import api from "../helpers/api";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Moment from "react-moment";
+import { useHistory } from 'react-router';
 
 function Home() {
+
+    const history = useHistory();
+
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 400,
     slidesToShow: 1,
     slidesToScroll: 1,
   };
 
-  const [articles, setArticles] = useState();
+  const [recentArticles, setRecentArticles] = useState([]);
+  const [trendingArticles, setTrendingArticles] = useState([]);
 
   useEffect(() => {
-    getArticles();
+    getTrendingArticles();
+    getRecentArticles();
   }, []);
 
-  const getArticles = async () => {
+  const getRecentArticles = async () => {
     const res = await api.get(`/article/recent`);
     if (res.data.status === 1 && res.data.data)
-      setArticles(res.data.data.articles);
+      setRecentArticles(res.data.data.articles);
   };
+
+  const getTrendingArticles = async () => {
+    const res = await api.get(`/article/trending`);
+    if (res.data.status === 1 && res.data.data)
+      setTrendingArticles(res.data.data.articles);
+  };
+
+  const openArticle = (articleId) => {
+    history.push("/article/" + articleId);
+}
 
   return (
     <div>
+      <h2 className="carousel-title">Trending</h2>
       <Slider {...settings}>
-        <div>
+        {trendingArticles.map((article) => (
+          <div key={article._id} onClick={() => openArticle(article._id)}>
             <div className="row carousel-slide">
-                <div className="col-md-5 image-wrapper">
-                    <img src="https://picsum.photos/600/500" alt="d" />
-                </div>
-                <div className="col-md-7 content-wrapper">
-                    <span className="tags">
-                        <span className="tag">Tag1</span>
-                        <span className="tag">Tag2</span>
-                    </span>
-                    <span className="date"> - <Moment format="MMM DD, YYYY"> May 10, 2021 </Moment> </span>
-                    <h1 className="title">Your most unhappy customers are your greatest source of learning.</h1>
-                    <img className="author-pic" src="http://localhost:5000/uploads/images/profile/default.png" alt="author pic" />
-                    <span className="author-name"> By Arish Rehman Khan</span>
-                </div>
+              <div className="col-md-5 image-wrapper">
+                <img src="https://picsum.photos/600/400" alt="dlide" />
+              </div>
+              <div className="col-md-7 content-wrapper">
+                <span className="tags">
+                  {article.tags.map((tag) => {
+                    return (
+                      <span key={tag} className="tag">
+                        {tag}
+                      </span>
+                    );
+                  })}
+                </span>
+                <span className="date">
+                  {" "}
+                  - <Moment format="MMM DD, YYYY">
+                    {article.publishDate}
+                  </Moment>{" "}
+                </span>
+                <h1 className="title">{article.title}</h1>
+                <img
+                  className="author-pic"
+                  src={article && article.author && article.author.pic}
+                  alt="author pic"
+                />
+                <span className="author-name">
+                  {" "}
+                  By {article && article.author && article.author.name}
+                </span>
+              </div>
             </div>
-        </div>
-        <div>
-            <div className="row carousel-slide">
-                <div className="col-md-5 image-wrapper">
-                    <img src="https://picsum.photos/600/500" alt="d" />
-                </div>
-                <div className="col-md-7 content-wrapper">
-                    <span className="tags">
-                        <span className="tag">Tag1</span>
-                        <span className="tag">Tag2</span>
-                    </span>
-                    <span className="date"> - <Moment format="MMM DD, YYYY"> May 10, 2021 </Moment> </span>
-                    <h1 className="title">Your most unhappy customers are your greatest source of learning.</h1>
-                    <img className="author-pic" src="http://localhost:5000/uploads/images/profile/default.png" alt="author pic" />
-                    <span className="author-name"> By Arish Rehman Khan</span>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div className="row carousel-slide">
-                <div className="col-md-5 image-wrapper">
-                    <img src="https://picsum.photos/600/500" alt="d" />
-                </div>
-                <div className="col-md-7 content-wrapper">
-                    <span className="tags">
-                        <span className="tag">Tag1</span>
-                        <span className="tag">Tag2</span>
-                    </span>
-                    <span className="date"> - <Moment format="MMM DD, YYYY"> May 10, 2021 </Moment> </span>
-                    <h1 className="title">Your most unhappy customers are your greatest source of learning.</h1>
-                    <img className="author-pic" src="http://localhost:5000/uploads/images/profile/default.png" alt="author pic" />
-                    <span className="author-name"> By Arish Rehman Khan</span>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div className="row carousel-slide">
-                <div className="col-md-5 image-wrapper">
-                    <img src="https://picsum.photos/600/500" alt="d" />
-                </div>
-                <div className="col-md-7 content-wrapper">
-                    <span className="tags">
-                        <span className="tag">Tag1</span>
-                        <span className="tag">Tag2</span>
-                    </span>
-                    <span className="date"> - <Moment format="MMM DD, YYYY"> May 10, 2021 </Moment> </span>
-                    <h1 className="title">Your most unhappy customers are your greatest source of learning.</h1>
-                    <img className="author-pic" src="http://localhost:5000/uploads/images/profile/default.png" alt="author pic" />
-                    <span className="author-name"> By Arish Rehman Khan</span>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div className="row carousel-slide">
-                <div className="col-md-5 image-wrapper">
-                    <img src="https://picsum.photos/600/500" alt="d" />
-                </div>
-                <div className="col-md-7 content-wrapper">
-                    <span className="tags">
-                        <span className="tag">Tag1</span>
-                        <span className="tag">Tag2</span>
-                    </span>
-                    <span className="date"> - <Moment format="MMM DD, YYYY"> May 10, 2021 </Moment> </span>
-                    <h1 className="title">Your most unhappy customers are your greatest source of learning.</h1>
-                    <img className="author-pic" src="http://localhost:5000/uploads/images/profile/default.png" alt="author pic" />
-                    <span className="author-name"> By Arish Rehman Khan</span>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div className="row carousel-slide">
-                <div className="col-md-5 image-wrapper">
-                    <img src="https://picsum.photos/600/500" alt="d" />
-                </div>
-                <div className="col-md-7 content-wrapper">
-                    <span className="tags">
-                        <span className="tag">Tag1</span>
-                        <span className="tag">Tag2</span>
-                    </span>
-                    <span className="date"> - <Moment format="MMM DD, YYYY"> May 10, 2021 </Moment> </span>
-                    <h1 className="title">Your most unhappy customers are your greatest source of learning.</h1>
-                    <img className="author-pic" src="http://localhost:5000/uploads/images/profile/default.png" alt="author pic" />
-                    <span className="author-name"> By Arish Rehman Khan</span>
-                </div>
-            </div>
-        </div>
+          </div>
+        ))}
       </Slider>
       <h2 className="recent-articles">Recent Articles</h2>
-      <ArticleList articles={articles} />
+      <ArticleList articles={recentArticles} />
     </div>
   );
 }
