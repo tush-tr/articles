@@ -152,6 +152,9 @@ const getOne = async (req, res) => {
         .populate('comments.postedBy', '_id name pic')
         .lean();
 
+        // increment viewCounter
+        await Article.updateOne({_id: articleId}, {$inc : {'viewCounter' : 1}});
+
         if (article.length == 0) {
             apiResponse.successResponse(res, "Article not found");
         } else {
@@ -251,7 +254,7 @@ const getRecent = async (req, res) => {
         const articles = await Article.find({ status: "published" })
         .select('_id title tags readTime publishDate')
         .sort({ publishDate: -1 })
-        .limit(10)
+        .limit(9)
         .populate('author', '_id name pic')
         if (articles.length == 0) {
             apiResponse.successResponse(res, "Articles not found");
@@ -380,6 +383,24 @@ const bookmarked = async (req, res) => {
 
 }
 
+const trending = async (req, res) => {
+    try {
+        const articles = await Article.find({ status: "published" })
+        .select('_id title tags readTime publishDate')
+        .sort({ viewCounter: -1 })
+        .limit(6)
+        .populate('author', '_id name pic')
+        if (articles.length == 0) {
+            apiResponse.successResponse(res, "Articles not found");
+        } else {
+            apiResponse.successResponseWithData(res, "Articles found", {articles});
+        }
+    } catch (err) {
+        apiResponse.errorResponse(res, err);
+        console.log(err);
+    }
+}
+
 module.exports.save = save;
 module.exports.likeUnlike = likeUnlike;
 module.exports.comment = comment;
@@ -392,4 +413,5 @@ module.exports.ofUser = ofUser;
 module.exports.deleteOne = deleteOne;
 module.exports.bookmark = bookmark;
 module.exports.bookmarked = bookmarked;
+module.exports.trending = trending;
 

@@ -107,3 +107,5 @@
 * Added BookmarkedArticles component in frontend
 * Added a carousel with fake data in Home component using react-slick module
 * Added viewCounter field in Article model to keep track of view count (used to find trending articles)
+* Added code to increment the viewCounter when article is accessed from getOne Article Controller
+* Added route /article/trending which sends to 6 trending artiles
