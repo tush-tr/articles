@@ -65,6 +65,10 @@ const articleSchema = new Schema({
         },
         ref: "User"
     }],
+    viewCounter: {
+        type: Number,
+        default: 0
+    }
 }, {timestamps: true});
 
 module.exports = mongoose.model('Article', articleSchema);

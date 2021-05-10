@@ -106,3 +106,4 @@
 * Added route /article/bookmarked in backend to get bookmarked article of a user
 * Added BookmarkedArticles component in frontend
 * Added a carousel with fake data in Home component using react-slick module
+* Added viewCounter field in Article model to keep track of view count (used to find trending articles)
