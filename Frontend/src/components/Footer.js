@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import '../styles/custom.css'
 
 function Footer () {
@@ -10,19 +11,25 @@ function Footer () {
           <div className="row">
             <div className="col-sm-4">
               <div className="footer-pad">
-                <h3>About Us</h3>
+                <h4>About Us</h4>
                 <p>A platform for digital publishing of articles. It’s an environment where everyone can contribute their thoughts and ideas.</p>
               </div>
             </div>
             <div className="col-sm-4">
               <div className="footer-pad">
-                <h4>Contact Us</h4>
-                <form>
+                <h4 className="useful-links-heading">Useful Links</h4>
+                <ul className="useful-links-list">
+                  <li><Link className="useful-links-item" to="/about">About Us</Link></li>
+                  <li><Link className="useful-links-item" to="/contact">Contact Us</Link></li>
+                  <li><Link className="useful-links-item" to="/">Terms & Conditions</Link></li>
+                  <li><Link className="useful-links-item" to="/">Privacy Policy</Link></li>
+                </ul>
+                {/* <form>
                   <p>Send us a message</p>
                   <input type="text" name="name" placeholder="Name"/>
                   <textarea name="message" placeholder="Message"></textarea><br></br>
                   <button>Send</button>
-                </form>
+                </form> */}
               </div>
             </div>
             <div className="col-sm-4">

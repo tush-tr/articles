@@ -682,3 +682,15 @@ footer .copyright {
 .slick-next:before {
   color: black !important;
 }
+
+.useful-links-heading {
+  padding-inline-start: 40px;
+}
+
+.useful-links-list {
+  list-style-type: none;
+}
+
+.useful-links-item {
+  color: white !important;
+}
