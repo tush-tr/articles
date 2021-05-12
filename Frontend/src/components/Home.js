@@ -17,6 +17,9 @@ function Home() {
     speed: 400,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: true
   };
 
   const [recentArticles, setRecentArticles] = useState([]);
@@ -84,7 +87,7 @@ function Home() {
           </div>
         ))}
       </Slider>
-      <h2 className="recent-articles">Recent Articles</h2>
+      <h2 className="recent-articles"><b>Recent Articles</b></h2>
       <ArticleList articles={recentArticles} />
     </div>
   );

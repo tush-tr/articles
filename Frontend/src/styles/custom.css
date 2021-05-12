@@ -7,6 +7,7 @@
 body {
   color: #212529;
   font-family: 'Lora', 'Times New Roman', serif;
+  min-height: 100vh;
 }
 
 p {
@@ -112,27 +113,6 @@ img::-moz-selection {
   letter-spacing: 1px;
   text-transform: uppercase;
 }
-
-/* @media only screen and (min-width: 992px) {
-  #mainNav {
-    border-bottom: 1px solid transparent;
-    background: transparent;
-  }
-  #mainNav .navbar-brand {
-    padding: 10px 20px;
-    color: #fff;
-  }
-  #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
-    color: rgba(255, 255, 255, 0.8);
-  }
-  #mainNav .navbar-nav > li.nav-item > a {
-    padding: 10px 20px;
-    color: #fff;
-  }
-  #mainNav .navbar-nav > li.nav-item > a:focus, #mainNav .navbar-nav > li.nav-item > a:hover {
-    color: rgba(255, 255, 255, 0.8);
-  }
-} */
 
 @media only screen and (min-width: 992px) {
   #mainNav {
@@ -371,10 +351,8 @@ form .form-group:first-child .floating-label-form-group {
 
 footer {
   background: #16222A;
-  
   color: white;
-  margin-top:100px;
-  bottom: 0px;
+  width: 100%;
 }
 
 
@@ -440,6 +418,7 @@ footer .copyright {
 
 .main-container {
   margin-top: 60px;
+  min-height: 80vh;
 }
 
 #editor #title {
@@ -694,4 +673,12 @@ footer .copyright {
   font-weight: 700;
   text-align: center;
   margin-top: 100px;
+}
+
+.slick-prev:before {
+  color: black !important;
+}
+
+.slick-next:before {
+  color: black !important;
 }
