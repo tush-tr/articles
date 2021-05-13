@@ -110,3 +110,6 @@
 * Added code to increment the viewCounter when article is accessed from getOne Article Controller
 * Added route /article/trending which sends to 6 trending artiles
 * Connected Home carousel with backend to show trending articles
+
+## 12 MAY, 2021
+* Added ContactMessage Schema in backend to store contact messages
