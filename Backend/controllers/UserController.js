@@ -1,7 +1,8 @@
 const User = require("../models/User");
+const ContactMessage = require("../models/ContactMessage");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const {registerValidation, loginValidation} = require("../helpers/validation");
+const {registerValidation, loginValidation, contactMessageValidation} = require("../helpers/validation");
 const apiResponse = require("../helpers/apiResponse");
 
 const register = async (req, res) => {
@@ -84,6 +85,30 @@ const savedetails = async (req, res) => {
 
 }
 
+const contactMessage = async (req, res) => {
+
+    // Validate data
+    const validationError = contactMessageValidation(req.body);
+
+    if (validationError) {
+        return apiResponse.validationErrorWithData(res, "Validation error!", validationError);
+    }
+
+    const contactMessage = ContactMessage({
+        name: req.body.name,
+        email: req.body.email,
+        message: req.body.message
+    });
+
+    try {
+        await contactMessage.save();
+        apiResponse.successResponse(res, "Thanks, We will contact you soon.");
+    } catch (err) {
+        apiResponse.errorResponse(res, err);
+    }
+}
+
 module.exports.register = register;
 module.exports.login = login;
 module.exports.savedetails = savedetails;
+module.exports.contactMessage = contactMessage;

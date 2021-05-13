@@ -111,5 +111,6 @@
 * Added route /article/trending which sends to 6 trending artiles
 * Connected Home carousel with backend to show trending articles
 
-## 12 MAY, 2021
+## 13 MAY, 2021
 * Added ContactMessage Schema in backend to store contact messages
+* Added contactMessage controller which stores contact messages

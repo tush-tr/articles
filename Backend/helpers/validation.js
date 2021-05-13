@@ -105,6 +105,21 @@ const adminLoginValidation = (data) => {
     return;
 }
 
+const contactMessageValidation = (data) => {
+    const schema = Joi.object({
+        name: Joi.string().required(),
+        email: Joi.string().required(),
+        message: Joi.string().required()
+    });
+
+    const { error } = schema.validate(data);
+
+    if (error) {
+        return error.details[0].message;
+    }
+    return;
+}
+
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
 module.exports.articleValidation = articleValidation;
@@ -112,3 +127,4 @@ module.exports.validateLikeData = validateLikeData;
 module.exports.validateCommentData = validateCommentData;
 module.exports.validateReportData = validateReportData;
 module.exports.adminLoginValidation = adminLoginValidation;
+module.exports.contactMessageValidation = contactMessageValidation;
