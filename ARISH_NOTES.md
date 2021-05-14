@@ -120,3 +120,4 @@
 * Added UserImageUploadController in backend which updates user profile pic
 * Added updateProfile controller in backend
 * Connect Settings Component to backend
+* Added profile controller which responds profile of a user

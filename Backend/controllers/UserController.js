@@ -123,7 +123,21 @@ const contactMessage = async (req, res) => {
     }
 }
 
+const profile = async (req, res) => {
+    const userId = req.params.userId;
+    try {
+        const profile = await User.findOne({_id: userId}).select("name email bio pic createdAt");
+        if (profile)
+            apiResponse.successResponseWithData(res, "Profile Found", profile);
+        else
+            apiResponse.successResponse(res, "Profile not found");
+    } catch (err) {
+        apiResponse.errorResponse(res, err);
+    }
+}
+
 module.exports.register = register;
 module.exports.login = login;
 module.exports.updateProfile = updateProfile;
 module.exports.contactMessage = contactMessage;
+module.exports.profile = profile;
