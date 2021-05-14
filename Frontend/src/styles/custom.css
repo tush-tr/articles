@@ -694,3 +694,22 @@ footer .copyright {
 .useful-links-item {
   color: white !important;
 }
+
+.user-profile {
+  margin-top: 100px;
+}
+
+.user-profile-pic {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+}
+
+.user-profile-data {
+  align-self: center;
+}
+
+.member-since {
+  color: rgb(0, 0, 0, 0.5)
+}

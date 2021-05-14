@@ -46,12 +46,12 @@ function App(props) {
                   <Route path="/saved-articles" component={SavedArticles} />
                   <Route path="/user-articles" component={UserArticles} />
                   <Route path="/bookmarked-articles" component={BookmarkedArticles} />
-                  <Route path="/profile" component={Profile} />
                   <Route path="/contact" component={Contact} />
                   <Route path="/settings" component={Settings} />
                   <Route path="/signup" component={Signup} />
                   <Route path="/about" component={About} />
                   <Route path="/article/:id" component={Article} />
+                  <Route path="/profile/:id" component={Profile} />
                 </div>
                 <Footer />
               </div>

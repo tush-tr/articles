@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router'
+import { useParams, useHistory } from 'react-router'
 import api from "../helpers/api";
 import Moment from "react-moment";
 import Output from 'editorjs-react-renderer';
@@ -19,6 +19,8 @@ const Article = () => {
     var [likesCount, setLikesCount] = useState(0);
 
     const [user, setUser] = useContext(UserContext);
+
+    const history = useHistory();
 
     useEffect(() => {
         getArticle();
@@ -84,13 +86,15 @@ const Article = () => {
 
     }
 
-
+    const openProfile = (authorId) => {
+      history.push(`/profile/${authorId}`);
+    }
 
     return (
         <div className="article">
             <h1> { article && article.title } </h1>
-            <img class="author-pic" src={ article && article.author.pic } alt="author pic" />
-            <span class="author-name"> <b> By { article && article.author && article.author.name } </b> </span> &#183;
+            <img onClick={() => openProfile(article.author._id)} class="author-pic" src={ article && article.author.pic } alt="author pic" />
+            <span onClick={() => openProfile(article.author._id)} class="author-name"> <b> By { article && article.author && article.author.name } </b> </span> &#183;
             <span> <Moment fromNow>{ article && article.publishDate }</Moment> </span> &#183;
             <span> { article && article.readTime } </span>
             <span onClick={bookmarkArticle} className="bookmark-icon"> 

@@ -121,3 +121,4 @@
 * Added updateProfile controller in backend
 * Connect Settings Component to backend
 * Added profile controller which responds profile of a user
+* Added UI in profile component and connected it with backend
