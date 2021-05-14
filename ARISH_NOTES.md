@@ -122,3 +122,4 @@
 * Connect Settings Component to backend
 * Added profile controller which responds profile of a user
 * Added UI in profile component and connected it with backend
+* Added publishedArticles controller to get published article of a user

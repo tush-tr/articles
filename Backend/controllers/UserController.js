@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Article = require("../models/Article");
 const ContactMessage = require("../models/ContactMessage");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -136,8 +137,26 @@ const profile = async (req, res) => {
     }
 }
 
+const publishedArticles = async (req, res) => {
+    const userId = req.params.userId;
+    try {
+        const articles = await Article
+        .find({author: userId, status: "published"})
+        .select('_id title tags publishDate')
+        .sort({ submissionDate: -1 })
+        .populate('author', '_id name pic');
+        if (articles)
+            apiResponse.successResponseWithData(res, "Articles found", {articles});
+        else
+            apiResponse.successResponse(res, "Articles not found");
+    } catch (err) {
+        apiResponse.errorResponse(res, err);
+    }
+}
+
 module.exports.register = register;
 module.exports.login = login;
 module.exports.updateProfile = updateProfile;
 module.exports.contactMessage = contactMessage;
 module.exports.profile = profile;
+module.exports.publishedArticles = publishedArticles;
