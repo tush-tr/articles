@@ -3,7 +3,7 @@ const Article = require("../models/Article");
 const ContactMessage = require("../models/ContactMessage");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const {registerValidation, loginValidation, contactMessageValidation} = require("../helpers/validation");
+const {registerValidation, loginValidation, contactMessageValidation, updateProfileValidation} = require("../helpers/validation");
 const apiResponse = require("../helpers/apiResponse");
 
 const register = async (req, res) => {
@@ -84,6 +84,14 @@ const login = async (req, res) => {
 }
 
 const updateProfile = async (req, res) => {
+
+    // Validate data
+    const validationError = updateProfileValidation(req.body);
+
+    if (validationError) {
+        return apiResponse.validationErrorWithData(res, "Validation error!", validationError);
+    }
+
     const userId = req.userId;
     const name = req.body.name;
     const email = req.body.email;

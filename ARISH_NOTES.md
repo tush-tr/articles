@@ -124,3 +124,6 @@
 * Added UI in profile component and connected it with backend
 * Added publishedArticles controller to get published article of a user
 * Added Published articles list in profile componenet
+
+## 15 MAY, 2021
+* Added ArticleHeaderImageUploadController in backend

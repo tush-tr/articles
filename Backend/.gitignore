@@ -2,5 +2,6 @@
 .env
 /public/uploads/images/*
 /public/uploads/images/profile/*
-!/public/uploads/images/.gitkeep
+/public/uploads/images/article_headers/*
 !/public/uploads/images/profile/default.png
+!/public/uploads/images/article_headers/default.png

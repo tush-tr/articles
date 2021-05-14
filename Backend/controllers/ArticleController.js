@@ -2,14 +2,13 @@ const User = require("../models/User");
 const Article = require("../models/Article");
 const readingTime = require("reading-time");
 const apiResponse = require("../helpers/apiResponse");
-// const { articleValidation } = require("../helpers/validation");
-const articleValidation = require("../helpers/validation");
+const { articleValidation } = require("../helpers/validation");
 const jwt = require("jsonwebtoken");
 
 const save = async (req, res) => {
 
     // Validate article
-    const validationError = articleValidation.articleValidation(req.body.article);
+    const validationError = articleValidation(req.body.article);
 
     if (validationError) {
         return apiResponse.validationErrorWithData(res, "Validation error!", validationError);
@@ -25,6 +24,7 @@ const save = async (req, res) => {
         text: req.body.article.text,
         readTime: readTimeText,
         tags: req.body.article.tags,
+        headerImage: req.body.article.headerImage,
         author: req.userId
     });
 
@@ -53,7 +53,7 @@ const save = async (req, res) => {
 const edit = async (req, res) => {
 
     // Validate article
-    const validationError = articleValidation.articleValidation(req.body.article);
+    const validationError = articleValidation(req.body.article);
 
     if (validationError) {
         return apiResponse.validationErrorWithData(res, "Validation error!", validationError);
@@ -73,6 +73,7 @@ const edit = async (req, res) => {
             article.text = req.body.article.text,
             article.readTime = readTimeText,
             article.tags = req.body.article.tags
+            article.headerImage = req.body.article.headerImage
 
             if (req.body.action == "save") {
                 article.status = "draft";
@@ -252,7 +253,7 @@ const getRecent = async (req, res) => {
 
     try {
         const articles = await Article.find({ status: "published" })
-        .select('_id title tags readTime publishDate')
+        .select('_id title tags readTime headerImage publishDate')
         .sort({ publishDate: -1 })
         .limit(9)
         .populate('author', '_id name pic')
@@ -275,7 +276,7 @@ const saved = async (req, res) => {
     try {
         const articles = await Article
         .find({author: userId, status: "draft"})
-        .select('_id title tags readTime publishDate')
+        .select('_id title tags readTime headerImage publishDate')
         .sort({ submissionDate: -1 })
         .populate('author', '_id name pic');
         if (articles.length == 0) {
@@ -297,7 +298,7 @@ const ofUser = async (req, res) => {
     try {
         const articles = await Article
         .find({author: userId, status: { $in: ["unpublished", "published"]}})
-        .select('_id title tags readTime status publishDate')
+        .select('_id title tags readTime headerImage status publishDate')
         .sort({ submissionDate: -1 })
         .populate('author', '_id name pic');
         if (articles.length == 0) {
@@ -366,7 +367,7 @@ const bookmarked = async (req, res) => {
         const { bookmarks } = await User.findOne({_id: userId});
         const articles = await Article
         .find({_id: { $in: bookmarks } })
-        .select('_id title tags readTime status publishDate')
+        .select('_id title tags readTime headerImage status publishDate')
         .sort({ publishDate: -1 })
         .populate('author', '_id name pic');
 
@@ -386,7 +387,7 @@ const bookmarked = async (req, res) => {
 const trending = async (req, res) => {
     try {
         const articles = await Article.find({ status: "published" })
-        .select('_id title tags readTime publishDate')
+        .select('_id title tags readTime headerImage publishDate')
         .sort({ viewCounter: -1 })
         .limit(6)
         .populate('author', '_id name pic')

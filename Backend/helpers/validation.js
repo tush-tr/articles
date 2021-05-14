@@ -80,7 +80,8 @@ const articleValidation = (data) => {
     const schema = Joi.object({
         title: Joi.string().required(),
         text: Joi.required(),
-        tags: Joi.array().items(Joi.string())
+        tags: Joi.array().items(Joi.string()),
+        headerImage: Joi.string()
     });
 
     const { error } = schema.validate(data);
@@ -120,6 +121,21 @@ const contactMessageValidation = (data) => {
     return;
 }
 
+const updateProfileValidation = (data) => {
+    const schema = Joi.object({
+        name: Joi.string().required(),
+        email: Joi.string().min(6).required().email(),
+        bio: Joi.string().required()
+    });
+
+    const { error } = schema.validate(data);
+
+    if (error) {
+        return error.details[0].message;
+    }
+    return;
+}
+
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
 module.exports.articleValidation = articleValidation;
@@ -128,3 +144,4 @@ module.exports.validateCommentData = validateCommentData;
 module.exports.validateReportData = validateReportData;
 module.exports.adminLoginValidation = adminLoginValidation;
 module.exports.contactMessageValidation = contactMessageValidation;
+module.exports.updateProfileValidation = updateProfileValidation;

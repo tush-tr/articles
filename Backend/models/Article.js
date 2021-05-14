@@ -14,6 +14,10 @@ const articleSchema = new Schema({
         type: String,
         default: "unpublished"
     },
+    headerImage: {
+        type: String,
+        default: "http://localhost:5000/uploads/images/article_headers/default.png"
+    },
     readTime: {
         type: String
     },
