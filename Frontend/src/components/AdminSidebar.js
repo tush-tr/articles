@@ -26,12 +26,12 @@ const AdminSidebar = () => {
       >
         <Link
           className="sidebar-brand d-flex align-items-center justify-content-center"
-          to="/admin/dashboard"
+          to="/"
         >
           <div className="sidebar-brand-icon">
             <i className="fas fa-users-cog"></i>
           </div>
-          <div className="sidebar-brand-text mx-3">ReaderSpot Admin</div>
+          <div className="sidebar-brand-text mx-3">ReaderSpot</div>
         </Link>
         <hr className="sidebar-divider my-0" />
         <li className="nav-item active">
@@ -54,12 +54,12 @@ const AdminSidebar = () => {
             <span>To be verified</span>
           </Link>
         </li>
-        {/* <li className="nav-item">
-          <Link className="nav-link" to="/admin/reports">
+        <li className="nav-item">
+          <Link className="nav-link" to="/admin/contact-messages">
             <i className="fas fa-fw fa-flag"></i>
-            <span>Reports</span>
+            <span>Contact Messages</span>
           </Link>
-        </li> */}
+        </li>
         <li className="nav-item">
           <div className="nav-link" to="/admin/reports" onClick={logout}>
             <i className="fas fa-fw fa-sign-out-alt"></i>

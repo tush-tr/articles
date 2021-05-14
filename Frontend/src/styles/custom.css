@@ -774,3 +774,7 @@ footer .copyright {
   text-align: center;
   margin: 0 auto;
 }
+
+.carousel-image {
+  height: 300px;
+}

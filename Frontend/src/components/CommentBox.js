@@ -3,8 +3,10 @@ import Moment from "react-moment";
 import { UserContext } from "../contexts/UserContext";
 import api from "../helpers/api";
 import { toast } from 'react-toastify';
+import { useHistory } from "react-router";
 
 const CommentBox = ({ articleId, comments }) => {
+    const history = useHistory();
 
     const [ newComment, setNewComment ] = useState();
     const [ user, setUser ] = useContext(UserContext);
@@ -33,8 +35,10 @@ const CommentBox = ({ articleId, comments }) => {
             } else {
                 toast("Log in to comment")
             }
+    }
 
-        // console.log(comments, articleId, user.id);
+    const openProfile = (authorId) => {
+      history.push(`/profile/${authorId}`);
     }
 
     return (
@@ -51,8 +55,8 @@ const CommentBox = ({ articleId, comments }) => {
                 comments && comments.slice(0).reverse().map((comment) => {
                     return (
                         <div className="comment" key={comment._id}>
-                            <img className="author-pic" src={ comment && comment.postedBy.pic } alt="author pic" />
-                            <span className="author-name"><b>{comment.postedBy.name}</b></span>
+                            <img onClick={(e) => openProfile(comment.postedBy._id)} className="author-pic" src={ comment && comment.postedBy.pic } alt="author pic" />
+                            <span onClick={(e) => openProfile(comment.postedBy._id)} className="author-name"><b>{comment.postedBy.name}</b></span>
                             <span className="time"><Moment fromNow>{comment.time}</Moment></span>
                             <p className="comment-text">{comment.comment}</p>
                             <hr></hr>
