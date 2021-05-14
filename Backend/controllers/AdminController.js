@@ -2,98 +2,137 @@ const jwt = require("jsonwebtoken");
 const apiResponse = require("../helpers/apiResponse");
 const { adminLoginValidation } = require("../helpers/validation");
 const Article = require("../models/Article.js");
+const ContactMessage = require("../models/ContactMessage");
 
 const login = (req, res) => {
+  // Validate data
+  const validationError = adminLoginValidation(req.body);
 
-    // Validate data
-    const validationError = adminLoginValidation(req.body);
+  if (validationError) {
+    return apiResponse.validationErrorWithData(
+      res,
+      "Validation error!",
+      validationError
+    );
+  }
 
-    if (validationError) {
-        return apiResponse.validationErrorWithData(res, "Validation error!", validationError);
-    }
+  const { username, password } = req.body;
 
-    const { username, password } = req.body;
+  if (
+    username !== process.env.ADMIN_USERNAME ||
+    password !== process.env.ADMIN_PASSWORD
+  ) {
+    return apiResponse.validationErrorWithData(
+      res,
+      "Validation error!",
+      "Username or password is wrong!"
+    );
+  }
 
-    if (username !== process.env.ADMIN_USERNAME || password !== process.env.ADMIN_PASSWORD) {
-        return apiResponse.validationErrorWithData(res, "Validation error!", "Username or password is wrong!");
-    }
+  // create token
+  const token = jwt.sign({ _id: "admin" }, process.env.TOKEN_SECRET);
+  res.header("auth-token", token);
 
-    // create token
-    const token = jwt.sign({_id: 'admin'}, process.env.TOKEN_SECRET);
-    res.header("auth-token", token)
-
-    apiResponse.successResponseWithData(res, "You are now logged in.", {token: token});
-}
+  apiResponse.successResponseWithData(res, "You are now logged in.", {
+    token: token,
+  });
+};
 
 const dashboard = async (req, res) => {
-    try {
-        const totalPublished = await Article.find({status: "published"}).countDocuments();
-        const toBeVerified = await Article.find({status: "unpublished"}).countDocuments();
+  try {
+    const totalPublished = await Article.find({
+      status: "published",
+    }).countDocuments();
+    const toBeVerified = await Article.find({
+      status: "unpublished",
+    }).countDocuments();
+    const totalMessages = await ContactMessage.find({}).countDocuments();
 
-        const response = {
-            totalPublished: totalPublished,
-            toBeVerified: toBeVerified
-        }
+    const response = {
+      totalPublished,
+      toBeVerified,
+      totalMessages,
+    };
 
-        apiResponse.successResponseWithData(res, "Success", response);
-    } catch (err){
-        console.log(err);
-        apiResponse.errorResponse(res, err);
-    }
-}
+    apiResponse.successResponseWithData(res, "Success", response);
+  } catch (err) {
+    console.log(err);
+    apiResponse.errorResponse(res, err);
+  }
+};
 
 const publishedArticles = async (req, res) => {
-    try {
-        const published_articles = await Article.find({status: "published"});
+  try {
+    const published_articles = await Article.find({ status: "published" });
 
-        apiResponse.successResponseWithData(res, "Success", published_articles);
-    } catch (err){
-        console.log(err);
-        apiResponse.errorResponse(res, err);
-    }
-}
+    apiResponse.successResponseWithData(res, "Success", published_articles);
+  } catch (err) {
+    console.log(err);
+    apiResponse.errorResponse(res, err);
+  }
+};
 
 const toBeVerifiedArticles = async (req, res) => {
-    try {
-        const to_be_verified_articles = await Article.find({status: "unpublished"});
+  try {
+    const to_be_verified_articles = await Article.find({
+      status: "unpublished",
+    });
 
-        apiResponse.successResponseWithData(res, "Success", to_be_verified_articles);
-    } catch (err){
-        console.log(err);
-        apiResponse.errorResponse(res, err);
-    }
-}
+    apiResponse.successResponseWithData(
+      res,
+      "Success",
+      to_be_verified_articles
+    );
+  } catch (err) {
+    console.log(err);
+    apiResponse.errorResponse(res, err);
+  }
+};
 
 const changeArticleStatus = async (req, res) => {
-    const articleId = req.body.articleId;
-    const newStatus = req.body.newStatus;
-    try {
-        const modified = await Article.updateOne({_id: articleId}, {status: newStatus});
-        if (modified.n == 1) {
-            apiResponse.successResponse(res, "Status changed");
-        } else {
-            apiResponse.errorResponse(res, "Some error occurred");
-        }
-    } catch(err) {
-        console.log(err);
-        apiResponse.errorResponse(res, err);
+  const articleId = req.body.articleId;
+  const newStatus = req.body.newStatus;
+  try {
+    const modified = await Article.updateOne(
+      { _id: articleId },
+      { status: newStatus }
+    );
+    if (modified.n == 1) {
+      apiResponse.successResponse(res, "Status changed");
+    } else {
+      apiResponse.errorResponse(res, "Some error occurred");
     }
-}
+  } catch (err) {
+    console.log(err);
+    apiResponse.errorResponse(res, err);
+  }
+};
 
 const deleteArticle = async (req, res) => {
-    const articleId = req.body.articleId;
-    try {
-        const deleted = await Article.deleteOne({_id: articleId});
-        if (deleted.n == 1) {
-            apiResponse.successResponse(res, "Article deleted");
-        } else {
-            apiResponse.errorResponse(res, "Some error occurred");
-        }
-    } catch(err) {
-        console.log(err);
-        apiResponse.errorResponse(res, err);
+  const articleId = req.body.articleId;
+  try {
+    const deleted = await Article.deleteOne({ _id: articleId });
+    if (deleted.n == 1) {
+      apiResponse.successResponse(res, "Article deleted");
+    } else {
+      apiResponse.errorResponse(res, "Some error occurred");
     }
-}
+  } catch (err) {
+    console.log(err);
+    apiResponse.errorResponse(res, err);
+  }
+};
+
+const contactMessages = async (req, res) => {
+  try {
+    const messages = await ContactMessage.find({});
+
+    apiResponse.successResponseWithData(res, "Success", messages);
+  } catch (err) {
+    console.log(err);
+    apiResponse.errorResponse(res, err);
+  }
+};
 
 module.exports.login = login;
 module.exports.dashboard = dashboard;
@@ -101,3 +140,4 @@ module.exports.publishedArticles = publishedArticles;
 module.exports.toBeVerifiedArticles = toBeVerifiedArticles;
 module.exports.changeArticleStatus = changeArticleStatus;
 module.exports.deleteArticle = deleteArticle;
+module.exports.contactMessages = contactMessages;

@@ -2,7 +2,7 @@ const User = require("../models/User");
 const Article = require("../models/Article");
 const readingTime = require("reading-time");
 const apiResponse = require("../helpers/apiResponse");
-const { articleValidation } = require("../helpers/validation");
+const { articleValidation, validateLikeData, validateCommentData, validateReportData } = require("../helpers/validation");
 const jwt = require("jsonwebtoken");
 
 const save = async (req, res) => {
@@ -95,7 +95,7 @@ const edit = async (req, res) => {
 const likeUnlike = async (req, res) => {
 
     // Validate data
-    const validationError = articleValidation.validateLikeData(req.body);
+    const validationError = validateLikeData(req.body);
 
     if (validationError) {
         apiResponse.validationErrorWithData(res, "Validation error!", validationError);
@@ -182,7 +182,7 @@ const getOne = async (req, res) => {
 const comment = async (req, res) => {
 
     // Validate data
-    const validationError = articleValidation.validateCommentData(req.body);
+    const validationError = validateCommentData(req.body);
 
     if (validationError) {
         apiResponse.validationErrorWithData(res, "Validation error!", validationError);
@@ -213,7 +213,7 @@ const comment = async (req, res) => {
 const report = async (req, res) => {
 
     // Validate data
-    const validationError = articleValidation.validateReportData(req.body);
+    const validationError = validateReportData(req.body);
 
     if (validationError) {
         apiResponse.validationErrorWithData(res, "Validation error!", validationError);

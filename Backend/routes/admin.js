@@ -8,5 +8,6 @@ router.get("/published-articles", verifyAdmin, AdminController.publishedArticles
 router.get("/to-be-verified-articles", verifyAdmin, AdminController.toBeVerifiedArticles);
 router.post("/change-article-status", verifyAdmin, AdminController.changeArticleStatus);
 router.post("/delete-article", verifyAdmin, AdminController.deleteArticle);
+router.get("/contact-messages", verifyAdmin, AdminController.contactMessages);
 
 module.exports = router;

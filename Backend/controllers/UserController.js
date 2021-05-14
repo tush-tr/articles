@@ -150,7 +150,7 @@ const publishedArticles = async (req, res) => {
     try {
         const articles = await Article
         .find({author: userId, status: "published"})
-        .select('_id title tags publishDate')
+        .select('_id title tags headerImage publishDate')
         .sort({ submissionDate: -1 })
         .populate('author', '_id name pic');
         if (articles)
