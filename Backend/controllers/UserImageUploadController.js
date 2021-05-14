@@ -1,12 +1,13 @@
 const multer = require("multer");
 const apiResponse = require("../helpers/apiResponse");
 const path = require("path");
+const User = require("../models/User");
 
 // Set storage for image upload
 var storage = multer.diskStorage({
     // destination where image will be saved: /public/uploads/images
     destination: (req, file, cb) => {
-      cb(null, 'public/uploads/images')
+      cb(null, 'public/uploads/images/profile')
     },
     // name of file: Date.now()
     filename: (req, file, cb) => {
@@ -42,19 +43,25 @@ const upload = multer({
     fileFilter: (req, file, cb) => {
         checkFileType(file, cb);
     }
-}).single("image");
+}).single("file");
 
 const saveImage = (req, res) => {
     upload(req, res, (err) => {
         if (err) {
+            console.log(err);
             apiResponse.errorResponse(res, "Some error occurred");
         } else {
             var filePath = req.file.path;
             // remove public from the file path
-            filePath = filePath.substring(6);
-            // url of image returned to EditorJs
-            const url = "http://localhost:5000/" + filePath;
-            apiResponse.imageUploadResponse(res, url);
+            filePath = filePath.replace(/\\/g, "/").substring("public".length);
+            const url = "http://localhost:5000" + filePath;
+
+            try {
+                User.updateOne({_id: req.userId}, {pic: url}).exec();
+                apiResponse.imageUploadResponse(res, url);
+            } catch (err) {
+                apiResponse.errorResponse(res, err);
+            }
         }
     });
 }

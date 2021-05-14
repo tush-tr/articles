@@ -115,3 +115,6 @@
 * Added ContactMessage Schema in backend to store contact messages
 * Added contactMessage controller which stores contact messages
 * Connected Contact component to backend api
+
+## 14 MAY, 2021
+* Added UserImageUploadController in backend which updates user profile pic

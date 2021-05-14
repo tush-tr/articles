@@ -2,15 +2,18 @@ const app = require("express")();
 const userRouter = require("./user");
 const adminRouter = require("./admin");
 const articleRouter = require("./article");
-const ImageUploadController = require("../controllers/ImageUploadController");
+const ArticleImageUploadController = require("../controllers/ArticleImageUploadController");
+const UserImageUploadController = require("../controllers/UserImageUploadController");
 const UserController = require("../controllers/UserController");
+const verifyToken = require("../middlewares/verifyToken.js");
 
 app.use("/user", userRouter);
 app.use("/admin", adminRouter);
 app.use("/article", articleRouter);
 
 // For EditorJs image upload
-app.post("/image-upload", ImageUploadController.saveImage);
+app.post("/article-image-upload", ArticleImageUploadController.saveImage);
+app.post("/user-image-upload", verifyToken, UserImageUploadController.saveImage);
 app.post("/contact-message", UserController.contactMessage);
 
 module.exports = app;
