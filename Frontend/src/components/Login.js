@@ -42,13 +42,15 @@ function Login() {
             name: res.data.data.user.name,
             email: res.data.data.user.email,
             user_token: res.data.data.token,
-            pic: res.data.data.user.pic
+            pic: res.data.data.user.pic,
+            bio: res.data.data.user.bio
           });
           localStorage.setItem("user_token", res.data.data.token);
           localStorage.setItem("id", res.data.data.user.id);
           localStorage.setItem("name", res.data.data.user.name);
           localStorage.setItem("email", res.data.data.user.email);
           localStorage.setItem("pic", res.data.data.user.pic);
+          localStorage.setItem("bio", res.data.data.user.bio);
           history.goBack();
         }
       }).catch((err) => {

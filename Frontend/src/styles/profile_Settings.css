@@ -1,12 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&display=swap");
 
-/* Styles should not be applied to whole website, it messes the current website styles */
-* {
-  /* box-sizing: border-box;
-  font-family: 'Quicksand', sans-serif;
-  align-items: center;
-  align-content: center; */
-}
 .full-screen {
   background-image: url("Images/1.png");
   width: 100%;
@@ -25,10 +18,8 @@
 .full-screen-1 {
   padding-top: 30px;
   background-color: hsla(61, 62%, 81%, 0.6);
-
-  min-width: 400px;
-  max-width: 600px;
-  margin-top: 80px;
+  text-align: center;
+  width: 45%;
   padding-bottom: 30px;
   border: 2px solid black;
   align-content: center;
@@ -75,19 +66,93 @@
   outline: none;
   border-radius: 5px;
   color: black;
-  margin: 0 auto;
-  width: 400px;
+  margin: 0 15px;
 }
+
+.input-group-settings textarea {
+  padding: 0.1em 0.25em;
+  background-color: white;
+  border: 1px solid hsl(201, 100%, 6%);
+  outline: none;
+  border-radius: 5px;
+  color: black;
+  margin: 0 15px;
+}
+
 .details-button {
   padding: 10px 30px;
-
-  width: 400px;
   border-radius: 5px;
   background: hsla(201, 100%, 50%, 0.1);
   border: 1px solid black;
   outline: none;
   color: black;
-
   margin-top: 20px;
   cursor: pointer;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  padding: 6px;
+  cursor: pointer;
+  background: linear-gradient(270deg, #3fa1a9, #79f1a4);
+}
+
+.img-wrap{
+  position: relative;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.img-upload:before{
+  content: "\f093";
+  font-family: "Font Awesome 5 Free";
+  font-size: 60px;
+  position: absolute;
+  padding-top: 80px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #63d3a6;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #fff;
+}
+.img-upload:hover:before{
+ opacity: 1;
+}
+img {
+  width: auto;
+  height: 100%;
+}
+
+label{
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #676767;
+}
+
+input{
+  border-radius: 15px;
+  border: 1px solid #b7b7b7;
+  padding: 5px 5px 5px 10px;
+  font-size: 18px;
+  transition: 0.2s;
+}
+input:focus{
+  outline: none;
+  border: 1px solid #64d488;
+}
+input::placeholder{
+  color: #bebebe;
 }

@@ -10,6 +10,7 @@ export const UserProvider = (props) => {
     const email = localStorage.getItem("email");
     const id = localStorage.getItem("id");
     const pic = localStorage.getItem("pic");
+    const bio = localStorage.getItem("bio");
 
     const [user, setUser] = useState({
         isUserLoggedIn: user_token ? true : false,
@@ -18,6 +19,7 @@ export const UserProvider = (props) => {
         name: name,
         email: email,
         pic: pic,
+        bio: bio,
         user_token: user_token,
         admin_token: admin_token
     });

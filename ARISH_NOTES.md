@@ -119,3 +119,4 @@
 ## 14 MAY, 2021
 * Added UserImageUploadController in backend which updates user profile pic
 * Added updateProfile controller in backend
+* Connect Settings Component to backend

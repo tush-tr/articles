@@ -1,100 +1,115 @@
 import React, { useContext, useState } from "react";
 import "../styles/profile_Settings.css";
 import { UserContext } from "../contexts/UserContext";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import api from "../helpers/api";
 import { useHistory } from "react-router-dom";
 
 function Settings() {
-    const [ user, setUser ] = useContext(UserContext);
-    // const [ email, setEmail ] = useState('');
-    // const [ password, setPassword ] = useState('');
-    // const [ name, setName ] = useState('');
-    // const [ bio, setBio ] = useState('');
 
-    // const savedetails = (e) => {
-    //   e.preventDefault();
+  const [ user, setUser ] = useContext(UserContext);
+  const [ email, setEmail ] = useState(user.email);
+  const [ name, setName ] = useState(user.name);
+  const [ bio, setBio ] = useState(user.bio);
+
+  const history = useHistory();
   
-    //   if (password.length < 6) {
-    //     toast.warning("Password length must be greater than 5 characters.");
-    //     return;
-    //   }
-  
-    //   api.post("/user/savedetails", { name ,email, password ,bio})
-    //     .then((res) => {
-    //       const status = res.data.status;
-    //       // if there is some error in validation
-    //       if (status === 0) {
-    //         toast.warning(res.data.data);
-    //       } else {
-    //         toast.success(res.data.message);
-    //         setUser({
-    //           isLoggedIn: true,
-    //           name: res.data.data.user.name,
-    //           email: res.data.data.user.email,
-    //           token: res.data.data.token
-    //         });
-    //         localStorage.setItem("token", res.data.data.token);
-    //         localStorage.setItem("name", res.data.data.user.name);
-    //         localStorage.setItem("email", res.data.data.user.email);
-    //         history.push("/");
-    //       }
-    //     }).catch((err) => {
-    //       console.log(err.message);
-    //     });
-    // }
+    if (!user.isUserLoggedIn) {
+      toast.warning("Please login to access settings.");
+      history.push("/login");
+    }
+
+  const updateProfile = (e) => {
+    e.preventDefault();
+
+    api.patch("/user/update-profile", {name, email, bio}, { headers: { "auth-token": user.user_token }})
+      .then((res) => {
+        console.log(res.data);
+        const status = res.data.status;
+        // if there is some error in validation
+        if (status === 0) {
+          toast.warning(res.data.message);
+        } else {
+          toast.success(res.data.message);
+          setUser({
+            ...user,
+            name: name,
+            email: email,
+            bio: bio
+          });
+          localStorage.setItem("bio", name);
+          localStorage.setItem("name", email);
+          localStorage.setItem("email", bio);
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+  const uploadImage = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append(
+      "file",
+      file,
+      file.name
+    );
+    await api.post("/user-image-upload", formData, { headers: { "auth-token": user.user_token }})
+    .then((res) => {
+      setUser({
+        ...user,
+        pic: res.data.file.url
+      });
+      localStorage.setItem("pic", res.data.file.url);
+      toast.success("Profile picture updated");
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
 
   return (
     <div className="full-screen">
       <div className="full-screen-1">
         <h3 className="settings-title">Personal Information</h3>
-        <img src={user.pic} className="user-image" alt="user profile" />
-        <div className="image-button">
-          <br></br>
-          <form>
-            <label for="img">Select image : </label>
-            <input
-              type="file"
-              id="img"
-              name="img"
-              accept="image/*"
-              className="choose-file"
-            />
-            <button type="submit" className="details-button">
-              Change Image
-            </button>
-          </form>
-        </div>
+        <label htmlFor="photo-upload" className="custom-file-upload fas">
+          <div className="img-wrap img-upload">
+            <img for="photo-upload" src={user.pic} alt="profile"/>
+          </div>
+          <input id="photo-upload" type="file" onChange={e => uploadImage(e)} accept="image/*"/>
+        </label>
         <hr className="hr-rule"></hr>
         <div className="detail-container">
-          <form>
+          <form onSubmit={updateProfile}>
             <div className="input-group-settings">
               <label>Name</label>
               <input
                 type="text"
-                /*onChange={e => setName(e.target.value) }*/ required
+                value={name}
+                onChange={e => setName(e.target.value) } required
               />
             </div>
             <div className="input-group-settings">
               <label>Email</label>
               <input
                 type="email"
-                /* onChange={e => setEmail(e.target.value)} */ required
+                value={email}
+                onChange={e => setEmail(e.target.value)} required
               />
             </div>
-            <div className="input-group-settings">
+            {/* <div className="input-group-settings">
               <label>Password</label>
               <input
                 type="password"
-                /* onChange={e => setPassword(e.target.value)}*/ required
+                onChange={e => setPassword(e.target.value)} required
               />
-            </div>
+            </div> */}
             <div className="input-group-settings">
               <label>Bio</label>
-              <input
+              <textarea
                 type="text"
-                /*onChange={e => setBio(e.target.value)}*/ required
+                value={bio}
+                onChange={e => setBio(e.target.value)}
               />
             </div>
             <button type="submit" className="details-button">

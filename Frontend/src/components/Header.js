@@ -17,13 +17,15 @@ function Header() {
             name: "",
             email: "",
             user_token: "",
-            pic: ""
+            pic: "",
+            bio: ""
         });
         localStorage.removeItem("user_token");
         localStorage.removeItem("id");
         localStorage.removeItem("name");
         localStorage.removeItem("email");
         localStorage.removeItem("pic");
+        localStorage.removeItem("bio");
         history.push("/");
     }
 

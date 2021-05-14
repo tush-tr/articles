@@ -18,7 +18,7 @@ const EDITOR_JS_TOOLS = {
       inlineToolbar: true,
       config: {
         endpoints: {
-          byFile: 'http://localhost:5000/api/image-upload', // backend file uploader endpoint
+          byFile: 'http://localhost:5000/api/article-image-upload', // backend file uploader endpoint
         }
       }
     },
