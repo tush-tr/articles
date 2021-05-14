@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router';
 import api from "../helpers/api";
 import Moment from "react-moment";
+import ArticleList from "./ArticleList";
 
 function Profile() {
 
@@ -13,8 +14,11 @@ function Profile() {
     const [pic, setPic] = useState(''); 
     const [memberSince, setMemberSince] = useState('');
 
+    const [articles, setArticles] = useState('');
+
     useEffect(() => {
         getProfile();
+        getUserArticles();
     }, []);
 
     const getProfile = () => {
@@ -31,6 +35,13 @@ function Profile() {
             console.log(err);
         })
     }
+
+    const getUserArticles = async () => {
+        const res = await api.get(`/user/published-articles/${id}`);
+        console.log(res.data)
+        if (res.data.status === 1 && res.data.data)
+            setArticles(res.data.data.articles);
+    };
 
     return (
         <div>
@@ -49,6 +60,14 @@ function Profile() {
             <br />
             <h3>{name}'s Articles</h3>
             <hr />
+            {
+                articles ? 
+                <div>
+                    <ArticleList articles={articles} /> 
+                </div>
+                : 
+                <h2>This user has not published any article</h2>
+            }
         </div>
     );
 }
