@@ -72,7 +72,8 @@ const login = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
-        pic: user.pic
+        pic: user.pic,
+        bio: user.bio
     }
 
     // remove password from user object before sending response
@@ -80,9 +81,23 @@ const login = async (req, res) => {
 
     apiResponse.successResponseWithData(res, "Login successful.", {user: userDetails, token: token});
 }
-//save details of user(Settings)
-const savedetails = async (req, res) => {
 
+const updateProfile = async (req, res) => {
+    const userId = req.userId;
+    const name = req.body.name;
+    const email = req.body.email;
+    const bio = req.body.bio;
+
+    try {
+        const result = await User.updateOne({_id: userId}, {name, email, bio});
+        if (result.nModified == 1) {
+            apiResponse.successResponse(res, "Profile Updated");
+        } else {
+            apiResponse.successResponse(res, "Something went wrong!");
+        }
+    } catch (err) {
+        apiResponse.errorResponse(res, err);
+    }
 }
 
 const contactMessage = async (req, res) => {
@@ -110,5 +125,5 @@ const contactMessage = async (req, res) => {
 
 module.exports.register = register;
 module.exports.login = login;
-module.exports.savedetails = savedetails;
+module.exports.updateProfile = updateProfile;
 module.exports.contactMessage = contactMessage;
