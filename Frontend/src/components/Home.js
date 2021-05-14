@@ -54,7 +54,7 @@ function Home() {
           <div key={article._id} onClick={() => openArticle(article._id)}>
             <div className="row carousel-slide">
               <div className="col-md-5 image-wrapper">
-                <img src="https://picsum.photos/600/400" alt="dlide" />
+                <img src={article.headerImage} alt="dlide" />
               </div>
               <div className="col-md-7 content-wrapper">
                 <span className="tags">

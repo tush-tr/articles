@@ -529,6 +529,11 @@ footer .copyright {
   margin: 1rem;
 }
 
+.card-img-top {
+  height: 250px;
+}
+
+
 .article-list-item .card-body {
   padding: 0px;
 }
@@ -712,4 +717,60 @@ footer .copyright {
 
 .member-since {
   color: rgb(0, 0, 0, 0.5)
+}
+
+.article-header-wrapper {
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.article-header-image {
+  width: 500px !important;
+  height: 250px !important;
+}
+
+.custom-article-header-file-upload {
+  display: inline-block;
+  position: relative;
+  padding: 6px;
+  cursor: pointer;
+  background: linear-gradient(270deg, #3fa1a9, #79f1a4);
+}
+
+.-article-header-img-wrap{
+  position: relative;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
+}
+.img-upload:before{
+  content: "\f093";
+  font-family: "Font Awesome 5 Free";
+  font-size: 60px;
+  position: absolute;
+  padding-top: 80px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #63d3a6;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #fff;
+}
+.img-upload:hover:before{
+ opacity: 1;
+}
+
+
+.article-header-wrapper-read {
+  text-align: center;
+  margin: 0 auto;
 }

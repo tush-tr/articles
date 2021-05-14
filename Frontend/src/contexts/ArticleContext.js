@@ -7,7 +7,8 @@ export const ArticleProvider = (props) => {
     const [article, setArticle] = useState({
         title: "",
         text: "",
-        tags: []
+        tags: [],
+        headerImage: "http://localhost:5000/uploads/images/article_headers/default.png"
     });
 
     return (

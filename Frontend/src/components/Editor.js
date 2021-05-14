@@ -63,7 +63,8 @@ const Editor = ({data}) => {
       setArticle({
           title: article.title,
           text: newData,
-          tags: article.tags
+          tags: article.tags,
+          headerImage: article.headerImage
       });
     }
 

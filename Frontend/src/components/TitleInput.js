@@ -9,7 +9,8 @@ function TitleInput() {
         setArticle({
             title: e.target.value,
             text: article.text,
-            tags: article.tags
+            tags: article.tags,
+            headerImage: article.headerImage
         });
     }
 

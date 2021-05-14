@@ -16,7 +16,8 @@ const Tags = () => {
         setArticle({
             title: article.title,
             text: article.text,
-            tags: tags
+            tags: tags,
+            headerImage: article.headerImage
         });
     }
 

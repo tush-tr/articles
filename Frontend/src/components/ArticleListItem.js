@@ -42,7 +42,7 @@ const ArticleListItem = ({ article, deleteArticleFromArray }) => {
       <div className="card-body">
         <img
           className="card-img-top"
-          src="https://picsum.photos/200/200"
+          src={article.headerImage}
           alt="Random pic"
           onClick={openArticle}
         />

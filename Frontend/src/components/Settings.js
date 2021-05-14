@@ -37,9 +37,9 @@ function Settings() {
             email: email,
             bio: bio
           });
-          localStorage.setItem("bio", name);
-          localStorage.setItem("name", email);
-          localStorage.setItem("email", bio);
+          localStorage.setItem("bio", bio);
+          localStorage.setItem("name", name);
+          localStorage.setItem("email", email);
         }
       })
       .catch((err) => {

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from "react";
+import React, { useContext, useEffect } from "react";
 import TitleInput from "./TitleInput";
 import ArticleButtons from "./ArticleButtons";
 import Editor from "./Editor";
@@ -7,10 +7,11 @@ import Tags from "./Tags";
 import { UserContext } from "../contexts/UserContext";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import ArticleHeaderImage from "./ArticleHeaderImage";
 
 function ArticleCreate() {
 
-  const [ , setArticle ] = useContext(ArticleContext);
+  const [ article, setArticle ] = useContext(ArticleContext);
 
   const [user, ] = useContext(UserContext);
 
@@ -22,7 +23,8 @@ function ArticleCreate() {
     setArticle({
       title: "",
       text: "",
-      tags: []
+      tags: [],
+      headerImage: "http://localhost:5000/uploads/images/article_headers/default.png"
     });
   }, []);
 
@@ -35,6 +37,7 @@ function ArticleCreate() {
     <div id="editor">
       <Tags />
       <ArticleButtons edit={false}/>
+      <ArticleHeaderImage />
       <TitleInput />
       <Editor />
     </div>

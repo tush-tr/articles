@@ -29,7 +29,7 @@ const Article = () => {
     const getArticle = async () => {
         api.get(`/article/${id}`, { headers: { "auth-token": user.user_token }})
         .then((res) => {
-            const articleFromResponse = res.data.data && res.data.data;
+            const articleFromResponse = res.data && res.data.data;
             if (articleFromResponse) {
                 console.log(articleFromResponse);
                 setArticle(articleFromResponse);
@@ -105,6 +105,7 @@ const Article = () => {
                     <i className="far fa-bookmark"></i> 
                 }
             </span>
+            <div className="article-header-wrapper-read"> <img className="article-header-image" src={article.headerImage} alt="article header" /></div>
             <div> <Output data={ article && article.text} /> </div>
             <div className="tags">
                 {article && article.tags && article.tags.map((tag) => {

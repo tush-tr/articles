@@ -127,3 +127,4 @@
 
 ## 15 MAY, 2021
 * Added ArticleHeaderImageUploadController in backend
+* Added HeaderImage in Article, ArticleCreate and ArticleEdit components

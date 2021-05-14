@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useParams } from "react-router";
 import api from "../helpers/api";
+import ArticleHeaderImage from "./ArticleHeaderImage";
 
 function ArticleEdit() {
   const { id } = useParams();
@@ -31,12 +32,13 @@ function ArticleEdit() {
   const getArticle = async () => {
       await api.get(`/article/${id}`)
       .then((res) => {
-          const articleFromResponse = res.data.data && res.data.data.article[0];
+          const articleFromResponse = res.data.data;
           if (articleFromResponse) {
               setArticle({
                   title: articleFromResponse.title,
                   text: articleFromResponse.text,
-                  tags: articleFromResponse.tags
+                  tags: articleFromResponse.tags,
+                  headerImage: articleFromResponse.headerImage
               });
           }
       })
@@ -46,6 +48,7 @@ function ArticleEdit() {
       <div id="editor">
         <Tags />
         <ArticleButtons edit={true} id={id}/>
+        <ArticleHeaderImage />
         <TitleInput />
         <Editor data={article.text} />
       </div>
