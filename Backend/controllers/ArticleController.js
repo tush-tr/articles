@@ -255,7 +255,7 @@ const getRecent = async (req, res) => {
         const articles = await Article.find({ status: "published" })
         .select('_id title tags readTime headerImage publishDate')
         .sort({ publishDate: -1 })
-        .limit(9)
+        // .limit(15)
         .populate('author', '_id name pic')
         if (articles.length == 0) {
             apiResponse.successResponse(res, "Articles not found");

@@ -56,7 +56,7 @@ const AdminSidebar = () => {
         </li>
         <li className="nav-item">
           <Link className="nav-link" to="/admin/contact-messages">
-            <i className="fas fa-fw fa-flag"></i>
+            <i className="fas fa-fw fa-envelope"></i>
             <span>Contact Messages</span>
           </Link>
         </li>

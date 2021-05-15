@@ -87,7 +87,7 @@ function Home() {
           </div>
         ))}
       </Slider>
-      <h2 className="recent-articles"><b>Recent Articles</b></h2>
+      <h2 className="recent-articles"><b>All Articles</b></h2>
       <ArticleList articles={recentArticles} />
     </div>
   );
