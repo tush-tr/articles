@@ -129,3 +129,6 @@
 * Added ArticleHeaderImageUploadController in backend
 * Added HeaderImage in Article, ArticleCreate and ArticleEdit components
 * Added a controller to get all contact messages 
+
+## 16 MAY, 2021
+* Refactor code of report function in ArticleController

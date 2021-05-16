@@ -219,52 +219,27 @@ const report = async (req, res) => {
         apiResponse.validationErrorWithData(res, "Validation error!", validationError);
     }
 
-    // incomming datas
-    var articleId = req.body.articleId;
-    var userId = req.userId;
-    var message = req.body.message;
+    const articleId = req.body.articleId;
+    const userId = req.userId;
+    const message = req.body.message;
 
-    // fetching particular article by id
-    Article.findOne({ '_id': articleId }, function (errors, result) {
-        // checking if there is error in fetching data to database
-        if (errors) {
-            apiResponse.errorResponse(res, "Error in fetching data to the database!");
+    try {
+        var article = await Article.findOne({_id: articleId});
+        
+        if (article.reports.find((report) => report.reportedBy == userId)) {
+            apiResponse.successResponse(res, "Your report is already submitted");
+        } else {
+            article.reports.push({
+                reportedBy: userId,
+                message: message
+            })
+            await article.save();
+            apiResponse.successResponse(res, "Your report is submitted");
         }
-        // if everything ok
-        if (result == null) {
-            apiResponse.errorResponse(res, "Data not found with this article id to the database!");
-        }
-        var flag = false;
-        if (result.reports != null) {
-            // checks if user reported the to the article
-            // result.reports.forEach((item) => {
-            //     if (item.reportedBy == userId && item.message == message) {
-            //         apiResponse.successResponse(res, "Already Reported previously.");
-            //     }
-            // });
-            for (var i = 0; i < result.reports.length; i++) {
-                if (result.reports[i].reportedBy == userId && result.reports[i].message == message) {
-                    flag = true;
-                    break;
-                }
-            }
-        }
-        if (flag) {
-            apiResponse.successResponse(res, "Already Reported previously.");
-        }
-        // here inserting comment to  the particular article
-        result.reports.push({
-            'reportedBy': userId,
-            'message': message,
-        });
 
-        result.save().then(function (result) {
-            apiResponse.successResponse(res, "Reported successfully.");
-        }).catch(function (error) {
-            apiResponse.errorResponse(res, "error occured while storing data to database!");
-        });
-
-    });
+    } catch (err) {
+        apiResponse.errorResponse(res, err);
+    }
 
 }
 
