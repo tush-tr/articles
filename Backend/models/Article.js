@@ -57,7 +57,6 @@ const articleSchema = new Schema({
         }
     }],
     reports: [{
-        type: Schema.Types.ObjectId,
         message: {
             type: String,
             required: true,
@@ -67,12 +66,15 @@ const articleSchema = new Schema({
             type: Date,
             default: Date.now,
         },
-        ref: "User"
+        reportedBy: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        }
     }],
     viewCounter: {
         type: Number,
         default: 0
     }
-}, {timestamps: true});
+}, { timestamps: true });
 
 module.exports = mongoose.model('Article', articleSchema);
