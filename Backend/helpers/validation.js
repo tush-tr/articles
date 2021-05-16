@@ -32,7 +32,6 @@ const validateCommentData = (data) => {
 const validateReportData = (data) => {
     const schema = Joi.object({
         articleId: Joi.string().required(),
-        userId: Joi.string().required(),
         message: Joi.string().required()
     });
 
