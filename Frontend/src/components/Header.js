@@ -29,10 +29,6 @@ function Header() {
         history.push("/");
     }
 
-    const openProfile = () => {
-        history.push(`/profile/${user.id}`)
-    }
-
     return (
         <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div className="container">
@@ -64,7 +60,7 @@ function Header() {
                                     <Link className="dropdown-item" to="/saved-articles">Saved Articles</Link>
                                     <Link className="dropdown-item" to="/user-articles">My Articles</Link>
                                     <Link className="dropdown-item" to="/bookmarked-articles">Bookmarked Articles</Link>
-                                    <Link className="dropdown-item" onClick={openProfile}>Profile</Link>
+                                    <Link className="dropdown-item" to={`/profile/${user.id}`}>Profile</Link>
                                     <Link className="dropdown-item" to="/settings">Settings</Link>
                                     <button className="dropdown-item" onClick={logout}>Logout</button>
                                 </div>

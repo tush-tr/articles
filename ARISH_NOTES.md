@@ -131,4 +131,5 @@
 * Added a controller to get all contact messages 
 
 ## 16 MAY, 2021
-* Refactor code of report function in ArticleController
+* Refactored code of report function in ArticleController
+* Made reportArticle function in Article Component to show toast instead of alert
