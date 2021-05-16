@@ -66,13 +66,13 @@ const edit = async (req, res) => {
 
     try {
 
-        const article = await Article.findOne({_id: req.body.articleId, author: req.userId});
-    
+        const article = await Article.findOne({ _id: req.body.articleId, author: req.userId });
+
         if (article) {
             article.title = req.body.article.title
             article.text = req.body.article.text,
-            article.readTime = readTimeText,
-            article.tags = req.body.article.tags
+                article.readTime = readTimeText,
+                article.tags = req.body.article.tags
             article.headerImage = req.body.article.headerImage
 
             if (req.body.action == "save") {
@@ -105,7 +105,7 @@ const likeUnlike = async (req, res) => {
     var userId = req.userId;
 
     try {
-        var article = await Article.findOne({'_id': articleId});
+        var article = await Article.findOne({ '_id': articleId });
         // check if the user has already liked the article, unlike it
         if (article.likes.includes(userId)) {
             // remove the userId from like array
@@ -114,15 +114,15 @@ const likeUnlike = async (req, res) => {
             article.likes.push(userId);
         }
 
-        const {likes} = await article.save();
+        const { likes } = await article.save();
 
-        apiResponse.successResponseWithData(res, "Article Liked", { likes:likes} );
+        apiResponse.successResponseWithData(res, "Article Liked", { likes: likes });
 
-    } catch(err) {
+    } catch (err) {
         apiResponse.errorResponse(res, err);
         console.log(err);
     }
-    
+
 
 
 }
@@ -140,7 +140,7 @@ const getOne = async (req, res) => {
         try {
             const { _id } = jwt.verify(token, process.env.TOKEN_SECRET);
             userId = _id;
-        } catch(err) {
+        } catch (err) {
             console.log(err);
         }
 
@@ -148,22 +148,22 @@ const getOne = async (req, res) => {
 
     try {
         var article = await Article
-        .findOne({_id: articleId})
-        .populate('author', '_id name pic')
-        .populate('comments.postedBy', '_id name pic')
-        .lean();
+            .findOne({ _id: articleId })
+            .populate('author', '_id name pic')
+            .populate('comments.postedBy', '_id name pic')
+            .lean();
 
         // increment viewCounter
-        await Article.updateOne({_id: articleId}, {$inc : {'viewCounter' : 1}});
+        await Article.updateOne({ _id: articleId }, { $inc: { 'viewCounter': 1 } });
 
         if (article.length == 0) {
             apiResponse.successResponse(res, "Article not found");
         } else {
 
             var isBookmarked = false;
-    
+
             if (userId) {
-                const { bookmarks } = await User.findOne({ "_id": userId}).select("bookmarks");
+                const { bookmarks } = await User.findOne({ "_id": userId }).select("bookmarks");
                 if (bookmarks.includes(article._id))
                     isBookmarked = true;
             }
@@ -194,16 +194,16 @@ const comment = async (req, res) => {
     var comment = req.body.comment;
 
     try {
-        var article = await Article.findOne({_id: articleId});
-        
-        article.comments.push({
-           comment:  comment,
-           postedBy: userId
-        });
-        const {comments} = await article.save();
+        var article = await Article.findOne({ _id: articleId });
 
-        apiResponse.successResponseWithData(res, "Comment successful", { lastComment: comments[comments.length - 1]} );
-    } catch(err) {
+        article.comments.push({
+            comment: comment,
+            postedBy: userId
+        });
+        const { comments } = await article.save();
+
+        apiResponse.successResponseWithData(res, "Comment successful", { lastComment: comments[comments.length - 1] });
+    } catch (err) {
         apiResponse.errorResponse(res, err);
         console.log(err);
     }
@@ -220,9 +220,9 @@ const report = async (req, res) => {
     }
 
     // incomming datas
-    var articleId = req.body._id;
-    var userid = req.body.userid;
-    var problem = req.body.problem;
+    var articleId = req.body.articleId;
+    var userId = req.userId;
+    var message = req.body.message;
 
     // fetching particular article by id
     Article.findOne({ '_id': articleId }, function (errors, result) {
@@ -234,10 +234,28 @@ const report = async (req, res) => {
         if (result == null) {
             apiResponse.errorResponse(res, "Data not found with this article id to the database!");
         }
+        var flag = false;
+        if (result.reports != null) {
+            // checks if user reported the to the article
+            // result.reports.forEach((item) => {
+            //     if (item.reportedBy == userId && item.message == message) {
+            //         apiResponse.successResponse(res, "Already Reported previously.");
+            //     }
+            // });
+            for (var i = 0; i < result.reports.length; i++) {
+                if (result.reports[i].reportedBy == userId && result.reports[i].message == message) {
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        if (flag) {
+            apiResponse.successResponse(res, "Already Reported previously.");
+        }
         // here inserting comment to  the particular article
-        result.report.push({
-            'userid': userid,
-            'problem': problem,
+        result.reports.push({
+            'reportedBy': userId,
+            'message': message,
         });
 
         result.save().then(function (result) {
@@ -245,6 +263,7 @@ const report = async (req, res) => {
         }).catch(function (error) {
             apiResponse.errorResponse(res, "error occured while storing data to database!");
         });
+
     });
 
 }
@@ -253,14 +272,14 @@ const getRecent = async (req, res) => {
 
     try {
         const articles = await Article.find({ status: "published" })
-        .select('_id title tags readTime headerImage publishDate')
-        .sort({ publishDate: -1 })
-        // .limit(15)
-        .populate('author', '_id name pic')
+            .select('_id title tags readTime headerImage publishDate')
+            .sort({ publishDate: -1 })
+            // .limit(15)
+            .populate('author', '_id name pic')
         if (articles.length == 0) {
             apiResponse.successResponse(res, "Articles not found");
         } else {
-            apiResponse.successResponseWithData(res, "Articles found", {articles});
+            apiResponse.successResponseWithData(res, "Articles found", { articles });
         }
     } catch (err) {
         apiResponse.errorResponse(res, err);
@@ -275,14 +294,14 @@ const saved = async (req, res) => {
 
     try {
         const articles = await Article
-        .find({author: userId, status: "draft"})
-        .select('_id title tags readTime headerImage publishDate')
-        .sort({ submissionDate: -1 })
-        .populate('author', '_id name pic');
+            .find({ author: userId, status: "draft" })
+            .select('_id title tags readTime headerImage publishDate')
+            .sort({ submissionDate: -1 })
+            .populate('author', '_id name pic');
         if (articles.length == 0) {
             apiResponse.successResponse(res, "Articles not found");
         } else {
-            apiResponse.successResponseWithData(res, "Articles found", {articles});
+            apiResponse.successResponseWithData(res, "Articles found", { articles });
         }
     } catch (err) {
         apiResponse.errorResponse(res, err);
@@ -297,14 +316,14 @@ const ofUser = async (req, res) => {
 
     try {
         const articles = await Article
-        .find({author: userId, status: { $in: ["unpublished", "published"]}})
-        .select('_id title tags readTime headerImage status publishDate')
-        .sort({ submissionDate: -1 })
-        .populate('author', '_id name pic');
+            .find({ author: userId, status: { $in: ["unpublished", "published"] } })
+            .select('_id title tags readTime headerImage status publishDate')
+            .sort({ submissionDate: -1 })
+            .populate('author', '_id name pic');
         if (articles.length == 0) {
             apiResponse.successResponse(res, "Articles not found");
         } else {
-            apiResponse.successResponseWithData(res, "Articles found", {articles});
+            apiResponse.successResponseWithData(res, "Articles found", { articles });
         }
     } catch (err) {
         apiResponse.errorResponse(res, err);
@@ -318,7 +337,7 @@ const deleteOne = async (req, res) => {
     const userId = req.userId;
 
     try {
-        const deleted = await Article.deleteOne({_id: articleId, author: userId});
+        const deleted = await Article.deleteOne({ _id: articleId, author: userId });
         if (deleted.n == 1) {
             apiResponse.successResponse(res, "Article deleted");
         } else {
@@ -336,10 +355,10 @@ const bookmark = async (req, res) => {
     const userId = req.userId;
 
     try {
-        const article = await Article.findOne({_id: articleId});
+        const article = await Article.findOne({ _id: articleId });
         if (article) {
-            var user = await User.findOne({_id: userId});
-            
+            var user = await User.findOne({ _id: userId });
+
             if (user.bookmarks.includes(article._id)) {
                 user.bookmarks = user.bookmarks.filter(item => item != articleId);
                 user.save();
@@ -364,17 +383,17 @@ const bookmarked = async (req, res) => {
 
     try {
 
-        const { bookmarks } = await User.findOne({_id: userId});
+        const { bookmarks } = await User.findOne({ _id: userId });
         const articles = await Article
-        .find({_id: { $in: bookmarks } })
-        .select('_id title tags readTime headerImage status publishDate')
-        .sort({ publishDate: -1 })
-        .populate('author', '_id name pic');
+            .find({ _id: { $in: bookmarks } })
+            .select('_id title tags readTime headerImage status publishDate')
+            .sort({ publishDate: -1 })
+            .populate('author', '_id name pic');
 
         if (articles.length == 0) {
             apiResponse.successResponse(res, "Articles not found");
         } else {
-            apiResponse.successResponseWithData(res, "Articles found", {articles});
+            apiResponse.successResponseWithData(res, "Articles found", { articles });
         }
 
     } catch (err) {
@@ -387,14 +406,14 @@ const bookmarked = async (req, res) => {
 const trending = async (req, res) => {
     try {
         const articles = await Article.find({ status: "published" })
-        .select('_id title tags readTime headerImage publishDate')
-        .sort({ viewCounter: -1 })
-        .limit(6)
-        .populate('author', '_id name pic')
+            .select('_id title tags readTime headerImage publishDate')
+            .sort({ viewCounter: -1 })
+            .limit(6)
+            .populate('author', '_id name pic')
         if (articles.length == 0) {
             apiResponse.successResponse(res, "Articles not found");
         } else {
-            apiResponse.successResponseWithData(res, "Articles found", {articles});
+            apiResponse.successResponseWithData(res, "Articles found", { articles });
         }
     } catch (err) {
         apiResponse.errorResponse(res, err);
