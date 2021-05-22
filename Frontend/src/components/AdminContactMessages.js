@@ -1,7 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import api from "../helpers/api";
 import { UserContext } from "../contexts/UserContext";
-import { useHistory } from "react-router";
 import Moment from "react-moment";
 
 const AdminContactMessages = () => {
@@ -13,8 +12,6 @@ const AdminContactMessages = () => {
   useEffect(() => {
     getContactMessages();
   }, []);
-
-  const history = useHistory();
 
   const getContactMessages = async () => {
     const res = await api.get(`/admin/contact-messages`, {

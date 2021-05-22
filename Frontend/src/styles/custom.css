@@ -779,3 +779,12 @@ footer .copyright {
 .carousel-image {
   height: 300px;
 }
+
+.close-btn {
+  float: right;
+  cursor: pointer;
+}
+
+.stats .card {
+  cursor: pointer;
+}

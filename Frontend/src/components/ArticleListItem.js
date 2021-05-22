@@ -43,7 +43,7 @@ const ArticleListItem = ({ article, deleteArticleFromArray }) => {
         <img
           className="card-img-top"
           src={article.headerImage}
-          alt="Random pic"
+          alt="article pic"
           onClick={openArticle}
         />
         {location.pathname !== "/bookmarked-articles" && article.status && (

@@ -61,6 +61,12 @@ const AdminSidebar = () => {
           </Link>
         </li>
         <li className="nav-item">
+          <Link className="nav-link" to="/admin/reports">
+            <i className="fas fa-fw fa-flag"></i>
+            <span>Reports</span>
+          </Link>
+        </li>
+        <li className="nav-item">
           <div className="nav-link" to="/admin/reports" onClick={logout}>
             <i className="fas fa-fw fa-sign-out-alt"></i>
             <span>Logout</span>

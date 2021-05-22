@@ -136,3 +136,4 @@
 
 ## 22 MAY, 2021
 * Added reports in AdminController in backend to send report to admin
+* Added AdminReports component in frontend to show reports to admin 

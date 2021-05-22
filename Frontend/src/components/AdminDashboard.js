@@ -1,13 +1,17 @@
 import React, { useEffect, useContext, useState } from "react";
 import api from "../helpers/api";
 import { UserContext } from "../contexts/UserContext";
+import { useHistory } from "react-router";
 
 const AdminDashboard = () => {
-  const [user, setUser] = useContext(UserContext);
 
+  const [user, setUser] = useContext(UserContext);
   const [totalPublished, setTotalPublished] = useState(0);
   const [toBeVerified, setToBeVerified] = useState(0);
   const [totalMessages, setTotalMessages] = useState(0);
+  const [totalReportedArticles, setTotalReportedArticles] = useState(0);
+
+  const history = useHistory();
 
   useEffect(() => {
     getDashboardData();
@@ -21,6 +25,7 @@ const AdminDashboard = () => {
       setTotalPublished(res.data.data.totalPublished);
       setToBeVerified(res.data.data.toBeVerified);
       setTotalMessages(res.data.data.totalMessages);
+      setTotalReportedArticles(res.data.data.totalReportedArticles);
     }
   };
 
@@ -31,9 +36,9 @@ const AdminDashboard = () => {
           <div className="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
           </div>
-          <div className="row">
+          <div className="stats row">
             <div className="col-xl-3 col-md-6 mb-4">
-              <div className="card border-left-primary shadow h-100 py-2">
+              <div onClick={() => history.push("/admin/published-articles")} className="card border-left-primary shadow h-100 py-2">
                 <div className="card-body">
                   <div className="row no-gutters align-items-center">
                     <div className="col mr-2">
@@ -51,7 +56,7 @@ const AdminDashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="col-xl-3 col-md-6 mb-4">
+            <div onClick={() => history.push("/admin/to-be-verified-articles")} className="col-xl-3 col-md-6 mb-4">
               <div className="card border-left-success shadow h-100 py-2">
                 <div className="card-body">
                   <div className="row no-gutters align-items-center">
@@ -70,7 +75,7 @@ const AdminDashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="col-xl-3 col-md-6 mb-4">
+            <div onClick={() => history.push("/admin/contact-messages")} className="col-xl-3 col-md-6 mb-4">
               <div className="card border-left-info shadow h-100 py-2">
                 <div className="card-body">
                   <div className="row no-gutters align-items-center">
@@ -93,7 +98,7 @@ const AdminDashboard = () => {
                 </div>
               </div>
             </div>
-            {/* <div className="col-xl-3 col-md-6 mb-4">
+            <div onClick={() => history.push("/admin/reports")} className="col-xl-3 col-md-6 mb-4">
               <div className="card border-left-warning shadow h-100 py-2">
                 <div className="card-body">
                   <div className="row no-gutters align-items-center">
@@ -102,7 +107,7 @@ const AdminDashboard = () => {
                         Pending reports
                       </div>
                       <div className="h5 mb-0 font-weight-bold text-gray-800">
-                        18
+                        {totalReportedArticles}
                       </div>
                     </div>
                     <div className="col-auto">
@@ -111,7 +116,7 @@ const AdminDashboard = () => {
                   </div>
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

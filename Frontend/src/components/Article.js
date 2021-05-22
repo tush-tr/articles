@@ -95,7 +95,7 @@ const Article = () => {
     history.push(`/profile/${authorId}`);
   };
 
-  // modal code functions
+  // modal config
   const customStyles = {
     content: {
       top: "50%",
@@ -106,8 +106,6 @@ const Article = () => {
       transform: "translate(-50%, -50%)",
     },
   };
-
-  function closeModal() {}
 
   // radio button function
   const handleChange = (e) => {

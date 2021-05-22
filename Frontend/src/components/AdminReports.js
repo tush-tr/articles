@@ -1,0 +1,152 @@
+import React, { useEffect, useContext, useState } from "react";
+import api from "../helpers/api";
+import { UserContext } from "../contexts/UserContext";
+import Moment from "react-moment";
+import { useHistory } from "react-router";
+import { toast } from "react-toastify";
+import Modal from "react-modal";
+
+const AdminReports = () => {
+  const [user, setUser] = useContext(UserContext);
+  const [reportedArticles, setReportedArticles] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [reports, setReports] = useState([]);
+
+  const history = useHistory();
+
+  // modal config
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+    },
+  };
+
+  useEffect(() => {
+    getReports();
+  }, []);
+
+  const getReports = async () => {
+    const res = await api.get(`/admin/reports`, {
+      headers: { "auth-token": user.admin_token },
+    });
+    console.log(res.data.data);
+    if (res.data.status === 1) {
+      setReportedArticles(res.data.data);
+    }
+  };
+
+  const openArticle = (articleId) => {
+    history.push(`/article/${articleId}`);
+  };
+
+  const deleteArticle = async (articleId) => {
+    const body = {
+      articleId: articleId,
+    };
+    const res = await api.post(`/admin/delete-article`, body, {
+      headers: { "auth-token": user.admin_token },
+    });
+    if (res.data.status === 1) {
+      toast.success(res.data.message);
+      getReports();
+    } else {
+      toast.warning("Some error occurred");
+    }
+  };
+
+  const openReports = (articleId) => {
+    const article = reportedArticles.filter((reportedArticle) => reportedArticle._id === articleId);
+    console.log(article);
+    setReports(article[0].reports);
+    setIsModalOpen(true);
+  }
+
+  return (
+    <div id="content-wrapper" className="d-flex flex-column">
+      <div className="content">
+        <div className="container-fluid">
+          <div className="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 className="h3 mb-0 text-gray-800">Contact Messages</h1>
+          </div>
+          <table className="table">
+            <thead className="thead-dark">
+              <tr>
+                <th scope="col">Article Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Reports Count</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {reportedArticles &&
+                reportedArticles.map((reportedArticle) => {
+                  return [
+                    <tr key={reportedArticle._id} onClick={() => {openReports(reportedArticle._id)}}>
+                      <td>{reportedArticle._id}</td>
+                      <td>{reportedArticle.title}</td>
+                      <td>{reportedArticle.reports.length}</td>
+                      <td>
+                        <button
+                          onClick={() => openArticle(reportedArticle._id)}
+                          className="btn btn-primary btn-sm rounded-0"
+                          type="button"
+                          title="Open"
+                        >
+                          <i className="fa fa-eye"></i>
+                        </button>
+                        <button
+                          onClick={() => deleteArticle(reportedArticle._id)}
+                          className="btn btn-danger btn-sm rounded-0"
+                          type="button"
+                          title="Delete"
+                        >
+                          <i className="fa fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>,
+                  ];
+                })}
+            </tbody>
+          </table>
+          <Modal
+            isOpen={isModalOpen}
+            onRequestClose={() => setIsModalOpen(false)}
+            style={customStyles}
+            contentLabel="Modal"
+            ariaHideApp={false}
+          >
+            <i onClick={() => setIsModalOpen(false)} className="close-btn fa fa-times"></i>
+            <table className="table">
+              <thead className="thead">
+                <tr>
+                  <th scope="col">User Id</th>
+                  <th scope="col">Message</th>
+                  <th scope="col">Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {reports &&
+                  reports.map((report) => {
+                    return [
+                      <tr key={report._id}>
+                        <td>{report.reportedBy}</td>
+                        <td>{report.message}</td>
+                        <td><Moment fromNow>{report.time}</Moment></td>
+                      </tr>,
+                    ];
+                  })}
+              </tbody>
+            </table>
+          </Modal>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AdminReports;

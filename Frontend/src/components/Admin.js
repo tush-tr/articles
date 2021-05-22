@@ -7,6 +7,7 @@ import AdminDashbaord from "./AdminDashboard";
 import AdminPublishedArticles from "./AdminPublishedArticles";
 import AdminToBeVerifiedArticles from "./AdminToBeVerifiedArticles";
 import AdminContactMessages from "./AdminContactMessages";
+import AdminReports from "./AdminReports";
 
 const AdminDashboard = () => {
 
@@ -28,6 +29,7 @@ const AdminDashboard = () => {
                 <Route exact path={`${path}/published-articles`} component={ AdminPublishedArticles } />
                 <Route exact path={`${path}/to-be-verified-articles`} component={ AdminToBeVerifiedArticles } />
                 <Route exact path={`${path}/contact-messages`} component={ AdminContactMessages } />
+                <Route exact path={`${path}/reports`} component={ AdminReports } />
             </Switch>
         </div>
     )
