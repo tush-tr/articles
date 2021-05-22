@@ -47,11 +47,13 @@ const dashboard = async (req, res) => {
       status: "unpublished",
     }).countDocuments();
     const totalMessages = await ContactMessage.find({}).countDocuments();
+    const totalReportedArticles = await Article.find({reports: { $exists: true, $ne: [] }}).countDocuments();
 
     const response = {
       totalPublished,
       toBeVerified,
       totalMessages,
+      totalReportedArticles
     };
 
     apiResponse.successResponseWithData(res, "Success", response);
@@ -134,6 +136,22 @@ const contactMessages = async (req, res) => {
   }
 };
 
+const reports = async (req, res) => {
+  try {
+    const reports = await Article.find({
+      reports: { $exists: true, $ne: [] }
+    }).select("id title reports");
+    if (reports) {
+      apiResponse.successResponseWithData(res, "Reports Found", reports);
+    } else {
+      apiResponse.successResponse(res, "Reports not found");
+    }
+  } catch (err) {
+    console.log(err);
+    apiResponse.errorResponse(res, err);
+  }
+};
+
 module.exports.login = login;
 module.exports.dashboard = dashboard;
 module.exports.publishedArticles = publishedArticles;
@@ -141,3 +159,4 @@ module.exports.toBeVerifiedArticles = toBeVerifiedArticles;
 module.exports.changeArticleStatus = changeArticleStatus;
 module.exports.deleteArticle = deleteArticle;
 module.exports.contactMessages = contactMessages;
+module.exports.reports = reports;

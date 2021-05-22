@@ -133,3 +133,6 @@
 ## 16 MAY, 2021
 * Refactored code of report function in ArticleController
 * Made reportArticle function in Article Component to show toast instead of alert
+
+## 22 MAY, 2021
+* Added reports in AdminController in backend to send report to admin
