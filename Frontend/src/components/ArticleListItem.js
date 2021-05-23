@@ -63,7 +63,7 @@ const ArticleListItem = ({ article, deleteArticleFromArray }) => {
           ""
         )}
         {location.pathname === "/saved-articles" ||
-        location.pathname === "/user-articles" ? (
+          location.pathname === "/user-articles" ? (
           <span onClick={deleteArticle}>
             <i className="delete-btn fa fa-trash"></i>
           </span>
