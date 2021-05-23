@@ -5,7 +5,7 @@ import api from "../helpers/api";
 
 const ArticleHeaderImage = () => {
 
-    const [ user, setUser ] = useContext(UserContext);
+  const [user, setUser] = useContext(UserContext);
   const [article, setArticle] = useContext(ArticleContext);
 
   const uploadHeaderImage = async (e) => {
@@ -13,15 +13,15 @@ const ArticleHeaderImage = () => {
     const formData = new FormData();
     formData.append("file", file, file.name);
     await api.post("/article-header-image-upload", formData, {
-        headers: { "auth-token": user.user_token },
-      })
+      headers: { "auth-token": user.user_token },
+    })
       .then((res) => {
-          console.log(res.data);
+        console.log(res.data);
         setArticle({
-            title: article.title,
-            text: article.text,
-            tags: article.tags,
-            headerImage: res.data.file.url
+          title: article.title,
+          text: article.text,
+          tags: article.tags,
+          headerImage: res.data.file.url
         });
       })
       .catch((err) => {
