@@ -156,7 +156,7 @@ const getOne = async (req, res) => {
         // increment viewCounter
         await Article.updateOne({ _id: articleId }, { $inc: { 'viewCounter': 1 } });
 
-        if (article.length == 0) {
+        if (article == null) {
             apiResponse.successResponse(res, "Article not found");
         } else {
 
