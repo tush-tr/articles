@@ -2,6 +2,7 @@ const multer = require("multer");
 const apiResponse = require("../helpers/apiResponse");
 const path = require("path");
 const User = require("../models/User");
+require("dotenv").config();
 
 // Set storage for image upload
 var storage = multer.diskStorage({
@@ -54,7 +55,7 @@ const saveImage = (req, res) => {
             var filePath = req.file.path;
             // remove public from the file path
             filePath = filePath.replace(/\\/g, "/").substring("public".length);
-            const url = "http://localhost:5000" + filePath;
+            const url = process.env.BASE_URL + filePath;
 
             try {
                 User.updateOne({_id: req.userId}, {pic: url}).exec();
