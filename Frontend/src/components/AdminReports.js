@@ -135,7 +135,6 @@ const AdminReports = () => {
                   <th scope="col">User Id</th>
                   <th scope="col">Message</th>
                   <th scope="col">Time</th>
-                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -146,21 +145,19 @@ const AdminReports = () => {
                         <td>{report.reportedBy}</td>
                         <td>{report.message}</td>
                         <td><Moment fromNow>{report.time}</Moment></td>
-                        <td>
-                          <button
-                            onClick={() => deleteArticle(articleToBeDeleted)}
-                            className="btn btn-danger btn-sm rounded-0"
-                            type="button"
-                            title="Delete"
-                          >
-                            <i className="fa fa-trash"></i>
-                          </button>
-                        </td>
                       </tr>,
                     ];
                   })}
               </tbody>
             </table>
+            <button
+              onClick={() => deleteArticle(articleToBeDeleted)}
+              className="btn btn-danger btn-sm rounded-0 float-right"
+              type="button"
+              title="Delete"
+            >
+              Delete
+            </button>
           </Modal>
         </div>
       </div>
