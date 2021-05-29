@@ -1,11 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-require("dotenv").config();
-
 const apiRouter = require("./routes/api");
 const apiResponse = require("./helpers/apiResponse");
-require('dotenv').config({ path: '.env.example' });
+require("dotenv").config();
 
 // Connect to DB
 mongoose.connect(process.env.MONGODB_URL,
