@@ -16,7 +16,7 @@ const articleSchema = new Schema({
     },
     headerImage: {
         type: String,
-        default: "http://localhost:5000/uploads/images/article_headers/default.png"
+        default: process.env.BASE_URL + "/uploads/images/article_headers/default.png"
     },
     readTime: {
         type: String

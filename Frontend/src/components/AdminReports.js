@@ -64,7 +64,6 @@ const AdminReports = () => {
 
   const openReports = (articleId) => {
     const article = reportedArticles.filter((reportedArticle) => reportedArticle._id === articleId);
-    console.log(article);
     setReports(article[0].reports);
     setIsModalOpen(true);
   }

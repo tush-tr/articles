@@ -23,7 +23,7 @@ const userSchema = new Schema({
     },
     pic: {
         type: String,
-        default: "http://localhost:5000/uploads/images/profile/default.png"
+        default: process.env.BASE_URL + "/uploads/images/profile/default.png"
     },
     bookmarks: [{
         type: Schema.Types.ObjectId,
