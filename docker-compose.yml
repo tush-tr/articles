@@ -1,0 +1,39 @@
+version: '3'
+services:
+  backend:
+    image: <BACKEND_DOCKER_IMAGE_URL>
+    container_name: backend
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: production
+      MONGODB_URL: mongodb://<MONGO_USERNAME>:<MONGO_PWD>@mongodb:27017/<DB_NAME>
+      TOKEN_SECRET: <TOKEN_SECRET>
+      ADMIN_USERNAME: <ADMIN_USERNAME>
+      ADMIN_PASSWORD: <ADMIN_PASSWORD>
+    networks:
+      - mynetwork
+  frontend:
+    image: <FRONTEND_DOCKER_IMAGE_URL>
+    ports:
+      - "80:80"
+    environment:
+      NODE_ENV: production
+      REACT_APP_BASE_URL_SERVER: backend:3001
+    networks:
+      - mynetwork
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: <MONGO_USERNAME>
+      MONGO_INITDB_ROOT_PASSWORD: <MONGO_PWD>
+      MONGO_INITDB_DATABASE: <DB_NAME>
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
