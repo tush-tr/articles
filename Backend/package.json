@@ -4,7 +4,8 @@
   "description": "Backend of ReaderSpot",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "start:prod": "node server.js"
   },
   "keywords": [
     "ReaderSpot",
